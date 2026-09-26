@@ -18,7 +18,7 @@ export const carousels = [
       lede: 'Seis pasos. Sin audiencia previa. Sin experiencia.', art: 'hexRoute', gx: '86%', gy: '88%' },
 
     { t: 'statement', h: ['No te falta talento.', 'Te falta <em>método</em>.'],
-      lede: 'El 90% no fracasa por no saber. Fracasa por hacer los pasos en el orden equivocado.',
+      lede: 'La mayoría no fracasa por no saber. Fracasa por hacer los pasos en el orden equivocado.',
       art: 'shortcut' },
 
     { t: 'step', n: 1, titulo: 'Elegí un dolor, no un tema',
@@ -198,7 +198,7 @@ export const stories = [
     lede: 'Respondé con una palabra. Leemos todas.', art: 'mindset',
     cta: 'Deslizá hacia arriba', gx: '18%', gy: '82%' },
 
-  { id: 's3', eyebrow: 'Dato', h: ['Con <em>300</em>', 'personas', 'correctas', 'alcanza.'],
+  { id: 's3', eyebrow: 'Perspectiva', h: ['Con <em>300</em>', 'personas', 'correctas', 'alcanza.'],
     lede: 'La audiencia masiva es una consecuencia, no un requisito.', art: 'magnet', gx: '86%', gy: '20%' },
 
   { id: 's4', eyebrow: 'Hoy', h: ['Validá antes', 'de producir.'],

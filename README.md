@@ -1,102 +1,145 @@
-# Productos Digitales — piezas de contenido
+# Productos Digitales — sistema de contenido
 
-Sistema de piezas para redes de **Productos Digitales**, construido sobre el
-Manual de Identidad de la marca. Todo lo que hay acá se genera por código: se
-edita el copy, se vuelve a correr y salen los PNG listos para publicar.
+Piezas fijas, video, sonido y un kit de edición para **Productos Digitales**,
+construidos sobre el Manual de Identidad y el logo vectorial oficial. Todo se
+genera por código: se edita el copy, se vuelve a correr y salen los archivos
+listos para publicar.
 
 ---
 
 ## Qué hay
 
+### Audiovisual — `out/video/`
+
+| Pieza | Medida | Cantidad | Carpeta |
+|---|---|---|---|
+| Reels con música y sonido | 1080 × 1920 | 7 | `reels/` |
+| Manifiesto de marca horizontal | 1920 × 1080 | 1 | `reels/` |
+| Logo animado con logo sonoro | 16:9 · 9:16 · 1:1 | 3 | `logo/` |
+| Historias animadas | 1080 × 1920 · 7 s | 6 | `historias/` |
+| Portadas de carrusel en movimiento | 1080 × 1350 · 6 s | 5 | `portadas/` |
+| Portadas 16:9 en movimiento | 1920 × 1080 · 6 s | 4 | `portadas/` |
+| Ilustraciones en loop | 1080 × 1080 · 4,5 s | 16 | `loops/` |
+
+Todos en H.264 + AAC, 30 fps, audio a −14 LUFS (el nivel que normalizan
+Instagram, TikTok y YouTube). Cada video tiene su póster `.jpg` al lado.
+
+Los Reels:
+
+0. **Manifiesto** — con las frases del manual: "No hace falta experiencia… Lo que hace falta es método."
+1. **No te falta talento** — el orden correcto de los 6 pasos
+2. **5 mentiras sobre vivir de Internet** — cada mito se tacha con glitch
+3. **De cero a tu primer producto** — los 6 pasos, uno por escena
+4. **Oferta antes que audiencia** — cifra animada + los dos caminos
+5. **La IA acelera, no reemplaza**
+6. **El dolor que la gente paga**
+
+### Kit de edición — `out/video/kit/`
+
+Overlays con **fondo transparente** para poner encima de videos filmados:
+logo animado, zócalo de nombre (16:9 y 9:16), transición glitch (16:9 y
+9:16), cierre "Seguinos" y "Guardá este video".
+
+- `.mov` — PNG con alfa y con su sonido. Para Premiere, After Effects,
+  DaVinci Resolve y Final Cut.
+- `.webm` — VP9 con alfa. Para web y editores de celular.
+
+El zócalo dice "Nombre Apellido / Fundador": se cambia en
+`src/motion/specs/kit.mjs` y se regenera.
+
+### Sonido — `out/audio/`
+
+Todo sintetizado desde cero (osciladores, ruido y filtros): **no hay
+licencias que pagar ni reclamos de copyright** en ninguna plataforma.
+
+- **Logo sonoro** — impacto grave + tres campanas La · Mi · La. Cierra cada pieza.
+- **4 bases musicales** de 64 s en loop exacto: calma, pulso, groove y una
+  subida que recorre las cuatro intensidades. La menor, 120 BPM,
+  progresión Am9 · Fmaj7 · Cmaj7 · G6.
+- **10 efectos**: whooshes, risers, impacto, ticks y glitches.
+
+### Piezas fijas — `out/`
+
 | Formato | Medida | Cantidad | Carpeta |
 |---|---|---|---|
-| Carruseles (4:5) | 1080 × 1350 | 5 carruseles · 37 placas | `out/carruseles/` |
-| Historias (9:16) | 1080 × 1920 | 6 | `out/historias/` |
-| Cuadradas / citas (1:1) | 1080 × 1080 | 5 | `out/cuadradas/` |
-| Portadas y miniaturas (16:9) | 1920 × 1080 | 4 | `out/portadas/` |
-
-**52 piezas.** Además, una tira de revisión por carrusel en
-`out/hojas-de-contacto/` para verlos en orden de deslizamiento.
-
-### Los cinco carruseles
-
-1. **`c1-metodo`** — De cero a tu primer producto digital (el método en 6 pasos)
-2. **`c2-mentiras`** — 5 mentiras sobre vivir de Internet
-3. **`c3-oferta`** — No necesitás audiencia. Necesitás oferta.
-4. **`c4-dolor`** — Encontrá el dolor que la gente paga por resolver
-5. **`c5-ia`** — La IA no reemplaza el camino. Lo acelera.
+| Carruseles (4:5) | 1080 × 1350 | 5 carruseles · 37 placas | `carruseles/` |
+| Historias (9:16) | 1080 × 1920 | 6 | `historias/` |
+| Cuadradas / citas (1:1) | 1080 × 1080 | 5 | `cuadradas/` |
+| Portadas y miniaturas (16:9) | 1920 × 1080 | 4 | `portadas/` |
 
 ---
 
 ## Decisiones de marca
 
-Todo sale del manual. Lo que tuve que resolver y conviene que revisen:
+**Logo.** Sale en vectores del `LogosVectorizados.ai` (que es un PDF de 9
+páginas). El hexágono, las dos mitades del monograma y las 149 franjas
+verticales del glitch se animan por separado: el glitch que el manual
+describe "sobre el cruce" del isotipo es el gesto central del movimiento.
+El degradado metálico del hexágono está muestreado del original
+(`#AF7C38` → `#EAD77A` → `#DAAE4A`).
 
-**Color.** La paleta oficial completa: `#12171E` negro profundo, `#A37B3C`
-dorado, `#F0E281` dorado claro, `#F2F2F2` neutro. El fondo de pantalla usa
-`#0E0E0E`, que es el negro exacto muestreado de las portadas oficiales del
-Drive, un punto por debajo del `#12171E` de imprenta.
+**Color.** La paleta oficial: `#12171E`, `#A37B3C`, `#F0E281`, `#F2F2F2`.
+El fondo de pantalla usa `#0E0E0E`, el negro exacto de las portadas del Drive.
 
-**Tipografía.** El manual pide *Neue Haas Grotesk Display Pro* (Bold para
-titulares, Regular para texto), que es una licencia paga. Las piezas usan
-**Inter** — la grotesca neutra libre más cercana — con el interletrado cerrado
-para imitar el color tipográfico de la Neue Haas. Si compran la licencia, se
-cambia en un solo lugar: `src/brand.css`. Nada más se toca.
+**Tipografía.** El manual pide *Neue Haas Grotesk Display Pro*, que es de
+licencia paga. Se usa **Inter** con el interletrado cerrado. Si compran la
+licencia se cambia en un solo lugar: `src/brand.css`.
 
-**Logo.** El Drive trae el lockup en negro y el avatar en blanco sobre
-hexágono oscuro, pero no la versión para fondo negro que usan las portadas
-(hexágono dorado + texto claro). La reconstruí en `brand/logo/` respetando las
-proporciones exactas del archivo original: hexágono de 267 × 241, texto de
-862 × 242, separación de 40 px.
+**Ilustración.** 16 dibujos vectoriales originales, trazo dorado sobre negro,
+todos levantados sobre la geometría del isotipo.
 
-**Ilustración.** Esto es lo que más se despega de lo que había. Las portadas
-oficiales usan fotografía y render 3D; acá hay **16 ilustraciones originales
-dibujadas en vectores**, trazo dorado sobre negro, todas construidas sobre la
-misma geometría que arma el isotipo: hexágono regular de vértices a 0°, 60°,
-120°… y esquinas redondeadas. El hexágono vuelve como nodo, como sello y como
-retícula de fondo. Se ven todas juntas en `build/sheet.png`.
+**Movimiento.** Todo corre sobre una grilla de 120 BPM: los cortes caen en el
+tiempo fuerte y el audio se genera con las mismas marcas de tiempo, así que
+música y animación calzan al frame.
 
-**Tono.** El del manual: transparente y directo, sin humo, cercano, profesional
-y motivador. Español rioplatense, que es como habla la marca.
+**Zonas seguras.** En los Reels el texto evita el 14% superior, el 22%
+inferior y los 120 px de la derecha, donde Instagram y TikTok ponen su interfaz.
+
+**Tono.** El del manual: transparente, directo, sin humo. El copy no usa
+cifras inventadas.
 
 ---
 
-## Para cambiar algo
+## Cómo se regenera
 
 ```bash
-npm run build          # render + reducción a tamaño de entrega
-npm run sheet          # hoja de contacto de las ilustraciones
+npm run build           # piezas fijas
+npm run video           # todo lo audiovisual (logo, reels, historias, portadas, loops, kit)
+npm run audio           # biblioteca de música y efectos
+npm run gallery         # galería de revisión
 ```
 
-- **Copy** → `src/content.mjs`. Está todo ahí, separado del diseño.
-- **Color, tipografía, espaciado** → `src/brand.css`.
-- **Ilustraciones** → `src/illus.mjs`.
-- **Composición de cada tipo de placa** → `scripts/render.mjs`.
+Para un solo grupo: `node scripts/video/build.mjs reels` (o `logo`,
+`historias`, `portadas`, `loops`, `kit`).
 
-Los titulares se componen en líneas fijas y un script reduce el cuerpo hasta
-que la línea más ancha entra en la caja: se puede reescribir el copy sin que
-se rompa ninguna pieza.
+- **Copy de las piezas fijas** → `src/content.mjs`
+- **Guiones de los Reels** → `src/motion/specs/reels.mjs`
+- **Escenas y compositor** → `src/motion/scenes.mjs`
+- **Motor de animación** → `src/motion/engine.js`
+- **Síntesis de sonido** → `scripts/audio/synth.py`
+- **Color y tipografía** → `src/brand.css`
+
+Requiere Node 22 con Playwright, Python 3 con `numpy scipy pyloudnorm
+pillow pymupdf imageio-ffmpeg`, y ffmpeg.
 
 ---
 
 ## Pendiente de ustedes
 
 - **El usuario de Instagram.** Las piezas llevan `@productosdigitales` como
-  marcador. Está en una sola constante, arriba de `src/content.mjs`.
-- **La licencia de Neue Haas Grotesk**, si quieren la tipografía exacta del
-  manual.
+  marcador, en una constante arriba de `src/content.mjs`.
+- **El nombre del zócalo** del kit de edición.
+- **La licencia de Neue Haas Grotesk**, si quieren la tipografía exacta.
+- **Voz en off.** Los Reels están hechos para verse sin sonido y la música
+  los sostiene, pero si alguien de la marca graba la voz, entra encima sin
+  tocar nada.
 
 ---
 
 ## Origen de los materiales
 
 `assets-drive/` es la descarga de la carpeta *Productos Digitales* de Google
-Drive: las cuatro portadas, el avatar, el logo sin fondo y los logos
-vectorizados. `LogosVectorizados.ai` es en realidad un PDF de 9 páginas, así
-que va también copiado como `.pdf` para poder abrirlo sin Illustrator.
-
-Falta un archivo: **`ManualDeIdentidad-PD.pdf` (42,6 MB)**. El conector de
-Drive corta las descargas en 10 MB y la política de red del entorno bloquea
-`drive.google.com`, así que el binario no se pudo traer. Sí se leyó completo:
-todas las decisiones de este repo —paleta, tipografía, construcción del
-isotipo, tono— salen de sus 30 páginas. Queda en el Drive.
+Drive: portadas, avatar, logo sin fondo y logos vectorizados. Falta
+`ManualDeIdentidad-PD.pdf` (42,6 MB): el conector de Drive corta en 10 MB y
+la red del entorno bloquea `drive.google.com`. Se leyó completo y queda en el
+Drive.

@@ -2,11 +2,14 @@
   "name": "productos-digitales-contenido",
   "private": true,
   "type": "module",
-  "description": "Piezas de contenido para redes de Productos Digitales, generadas por código",
+  "description": "Sistema de contenido de Productos Digitales: piezas fijas, video y sonido generados por código",
   "scripts": {
     "render": "node scripts/render.mjs",
     "finish": "python3 scripts/finish.py",
     "build": "npm run render && npm run finish",
-    "sheet": "node scripts/sheet.mjs"
+    "sheet": "node scripts/sheet.mjs",
+    "video": "node scripts/video/build.mjs",
+    "audio": "python3 scripts/audio/library.py",
+    "gallery": "node scripts/gallery.mjs"
   }
 }

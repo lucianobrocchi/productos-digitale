@@ -1,3 +1,7 @@
 node_modules/
 build/pages/
+build/video/
+build/audio/
 build/galeria-archivos.json
+*.silent.mp4
+build/*.log

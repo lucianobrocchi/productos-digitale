@@ -1,0 +1,61 @@
+/* Capas y utilidades para las piezas en movimiento. */
+
+html,body{margin:0;background:transparent;overflow:hidden}
+
+.stage{position:relative;overflow:hidden;background:var(--bg);color:var(--paper)}
+.stage--alpha{background:transparent}
+.stage--alpha .atmo,.stage--alpha .vignette,.stage--alpha .grain{display:none}
+
+.scene{position:absolute;inset:0;opacity:0}
+.cam{position:absolute;inset:0;transform-origin:50% 50%}
+
+/* lo que se anima dentro de un SVG gira y escala sobre sí mismo. Se excluye
+   lo que trae su propio atributo transform (los vectores del .ai vienen con
+   matrix(1,0,0,-1,…)): con fill-box ese espejo se aplicaría sobre el centro
+   del elemento y lo mandaría fuera de cuadro. */
+svg *:not([transform]){transform-box:fill-box;transform-origin:center}
+
+/* línea de titular con máscara: el texto sube desde abajo */
+.mask{display:block;overflow:hidden;padding-bottom:.08em;margin-bottom:-.08em}
+.mask > .line{will-change:transform}
+
+.dust{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;mix-blend-mode:screen}
+
+.center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.abs{position:absolute}
+
+/* golpe de luz dorada en los cortes */
+.flash{position:absolute;inset:0;pointer-events:none;opacity:0;
+  background:radial-gradient(70% 55% at 50% 50%,rgba(240,226,129,.55),rgba(163,123,60,.18) 45%,transparent 75%);
+  mix-blend-mode:screen}
+
+/* barras de progreso tipo historia */
+.bars{position:absolute;left:40px;right:40px;top:48px;display:flex;gap:8px}
+.bars i{flex:1;height:5px;border-radius:3px;background:rgba(242,242,242,.22);overflow:hidden;position:relative}
+.bars i b{position:absolute;inset:0;background:var(--gold-hi);transform-origin:0 50%;transform:scaleX(0)}
+
+.hexnum{
+  width:150px;height:134px;display:grid;place-items:center;position:relative;
+  font-weight:900;font-size:74px;color:var(--ink);letter-spacing:-.03em;
+}
+.hexnum svg{position:absolute;inset:0;width:100%;height:100%}
+.hexnum span{position:relative}
+
+.strike{position:absolute;left:-2%;top:54%;height:7px;width:104%;border-radius:4px;
+  background:linear-gradient(90deg,var(--gold),var(--gold-hi));transform-origin:0 50%;
+  box-shadow:0 0 24px rgba(240,226,129,.5)}
+
+.pill{display:inline-flex;align-items:center;gap:16px;padding:26px 44px;border-radius:999px;
+  font-weight:800;font-size:40px;letter-spacing:-.01em;color:var(--ink);
+  background:linear-gradient(140deg,var(--gold-hi),var(--gold));
+  box-shadow:0 0 60px rgba(240,226,129,.38)}
+
+.handle{font-weight:600;font-size:34px;color:rgba(242,242,242,.62);letter-spacing:.01em}
+.kicker{font-weight:700;font-size:30px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-hi)}
+
+/* desgarro de los cortes: franjas de 1 px que se escalan en alto */
+.tear{position:absolute;inset:0;pointer-events:none;z-index:20;mix-blend-mode:screen}
+.tear i{position:absolute;left:-10%;width:120%;height:1px;top:0;transform-origin:0 0;opacity:0;
+  background:linear-gradient(90deg,transparent,rgba(240,226,129,.9) 20%,rgba(242,242,242,.85) 55%,rgba(240,226,129,.7) 80%,transparent)}
+.tear i:nth-child(3n){background:linear-gradient(90deg,transparent,rgba(163,123,60,.9) 30%,rgba(240,226,129,.6) 70%,transparent)}
+.flash{z-index:19}

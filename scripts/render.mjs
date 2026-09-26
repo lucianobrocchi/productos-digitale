@@ -294,7 +294,9 @@ covers.forEach(s => jobs.push({ name: `portadas/${s.id}`, kind: '169', html: pag
 
 const SIZE = { '45': [1080, 1350], '11': [1080, 1080], '916': [1080, 1920], '169': [1920, 1080] };
 
-rmSync(OUT, { recursive: true, force: true });
+// solo las carpetas de las piezas fijas: out/ también guarda video y audio
+for (const d of ['carruseles', 'historias', 'cuadradas', 'portadas', 'hojas-de-contacto'])
+  rmSync(resolve(OUT, d), { recursive: true, force: true });
 
 const browser = await chromium.launch();
 for (const j of jobs) {
