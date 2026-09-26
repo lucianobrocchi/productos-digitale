@@ -285,7 +285,7 @@ function odo(s, c) {
   tw(S+' .dk',{opacity:[${c.instant ? 1 : 0},1]},T0,.3,'out');
   tw(S+' .fill',{sx:[${f0},${f1}]},T0+.05,${roll || .3},'expoInOut');
   tw(S+' .mk',{x:[${f0 * BOX},${f1 * BOX}]},T0+.05,${roll || .3},'expoInOut');
-  ${cap.map((l, i) => revealJs(`#${c.sid} .b${i} .kc`, `T0+${(c.instant ? 0 : .15) + roll * .6 + i * .16}`)).join('')}
+  ${cap.map((l, i) => revealJs(`#${c.sid} .b${i} .kc`, `T0+${(c.instant ? 0 : .1) + Math.min(roll * .25, .2) + i * .12}`)).join('')}
   ${s.fig ? figJs(s.fig, `${c.sid}-f`, { instant: c.instant, len: s.len }) : ''}`;
   const cues = [{ t: 0, type: 'tick', level: .6, freq: 1700 }];
   const nt = Math.min(14, b - a);
