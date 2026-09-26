@@ -125,13 +125,15 @@ const KIT = {
   'kit-seguinos-9x16': ['Cierre “Seguinos”', '9:16 · 4 s'],
   'kit-guardalo-9x16': ['“Guardá este video”', '9:16 · 3,5 s'],
 };
-const kitV = ls('video/kit', '.webm').map(f => {
+const kitCard = f => {
   const k = f.replace('.webm', '');
   const [t, m] = KIT[k] || [k, ''];
   archivos.add(`video/kit/${k}.mov`.replace('video/kit/', 'video/kit/'));   // el .mov no se publica: pesa
   archivos.delete(`video/kit/${k}.mov`);
   return loop(`video/kit/${f}`, `${t} <span>· ${m}</span>`, k.includes('16x9') ? '16 / 9' : '9 / 16', true);
-}).join('');
+};
+const kitH = ls('video/kit', '.webm').filter(f => f.includes('16x9')).map(kitCard).join('');
+const kitVt = ls('video/kit', '.webm').filter(f => f.includes('9x16')).map(kitCard).join('');
 
 /* -------------------------------- sonido -------------------------------- */
 const musica = ls('audio/musica', '.mp3').map(f => aud(`audio/musica/${f}`,
@@ -338,7 +340,7 @@ const html = `<title>Piezas Productos Digitales</title>
 
 <main><div class="env">
   <h2 id="audiovisual">Audiovisual</h2>
-  ${bloque(hex, 'Reels', `${reelFiles.filter(f => !f.includes('16x9')).length} piezas · 1080 × 1920 · música y sonido originales, sincronizados al pulso`, reelsV, 'rejilla', '170px')}
+  ${bloque(hex, 'Reels', `${reelFiles.filter(f => !f.includes('16x9')).length} piezas · 1080 × 1920 · música y sonido originales, sincronizados al pulso`, reelsV, 'tira')}
   ${bloque(hex, 'Logo animado', 'El logo oficial: el hexágono se traza, el glitch barre el monograma, suena la firma', logos, 'rejilla', '220px')}
   ${bloque(hex, 'Historias animadas', '1080 × 1920 · 7 s', historiasV, 'rejilla', '150px')}
   ${bloque(hex, 'Portadas de carrusel en movimiento', '1080 × 1350 · la placa 1 de cada carrusel', port45, 'rejilla', '190px')}
@@ -347,7 +349,8 @@ const html = `<title>Piezas Productos Digitales</title>
   ${bloque(hex, 'Ilustraciones en loop', '1080 × 1080 · se trazan solas y vuelven a empezar', loopsV, 'rejilla', '150px')}
 
   <h2 id="kit">Kit de edición</h2>
-  ${bloque(hex, 'Overlays con fondo transparente', 'Para poner encima de videos filmados. Van en .mov (PNG con alfa, con sonido) para Premiere, After Effects, DaVinci y Final Cut, y en .webm para web y CapCut.', kitV, 'rejilla', '220px')}
+  ${bloque(hex, 'Overlays horizontales', 'Para poner encima de videos filmados. Van en .mov (PNG con alfa, con sonido) para Premiere, After Effects, DaVinci y Final Cut, y en .webm para web y editores de celular.', kitH, 'rejilla', '300px')}
+  ${bloque(hex, 'Overlays verticales', 'Los mismos, para Reels, TikTok e historias.', kitVt, 'rejilla', '170px')}
 
   <h2 id="sonido">Sonido</h2>
   <section class="bloque">
