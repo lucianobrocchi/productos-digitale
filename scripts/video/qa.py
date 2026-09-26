@@ -45,7 +45,10 @@ if __name__ == '__main__':
         filas.append((rel, r, lu, pk, size))
         if r['fps'] and abs(r['fps'] - 30) > .01:
             problemas.append(f'{rel}: {r["fps"]} fps')
-        if r['audio'] and lu is not None and not (-16.5 <= lu <= -13):
+        # las piezas para publicar van a -14 LUFS; los overlays del kit, más bajos a
+        # propósito (-16), porque suenan debajo de la voz de quien filma
+        lo, hi = (-19, -14) if rel.startswith('kit/') else (-16.5, -13)
+        if r['audio'] and lu is not None and not (lo <= lu <= hi):
             problemas.append(f'{rel}: sonoridad {lu} LUFS')
         if r['audio'] and pk is not None and pk > -0.5:
             problemas.append(f'{rel}: pico {pk} dBFS')
