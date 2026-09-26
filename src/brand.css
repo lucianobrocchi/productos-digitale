@@ -1,0 +1,197 @@
+/* ------------------------------------------------------------------
+   Productos Digitales — sistema de piezas de contenido
+   Derivado del Manual de Identidad (paleta, tipografía, construcción)
+   ------------------------------------------------------------------ */
+
+@import url('../brand/fonts.css');
+
+:root{
+  /* Paleta oficial del manual */
+  --ink:        #12171E;   /* negro profundo   */
+  --gold:       #A37B3C;   /* dorado           */
+  --gold-hi:    #F0E281;   /* dorado claro     */
+  --paper:      #F2F2F2;   /* neutro claro     */
+
+  /* Derivados para pantalla (muestreados de las portadas oficiales) */
+  --bg:         #0E0E0E;
+  --bg-2:       #14120C;
+  --muted:      rgba(242,242,242,.62);
+  --hair:       rgba(240,226,129,.22);
+
+  --glow-warm:  rgba(240,226,129,.20);
+  --glow-deep:  rgba(163,123,60,.26);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+html,body{background:var(--bg)}
+
+body{
+  font-family:'Inter',system-ui,sans-serif;   /* stand-in libre de Neue Haas Grotesk Display Pro */
+  -webkit-font-smoothing:antialiased;
+  text-rendering:geometricPrecision;
+  font-feature-settings:'ss01','cv05';
+}
+
+/* ---------------------------- lienzo ---------------------------- */
+
+.piece{
+  position:relative;
+  overflow:hidden;
+  background:var(--bg);
+  color:var(--paper);
+  display:flex;
+  flex-direction:column;
+}
+.piece--45{width:1080px;height:1350px}   /* carrusel / post vertical */
+.piece--11{width:1080px;height:1080px}   /* post cuadrado            */
+.piece--916{width:1080px;height:1920px}  /* historia                 */
+.piece--169{width:1920px;height:1080px}  /* portada / miniatura      */
+
+/* --------------------------- atmósfera --------------------------- */
+/* El fondo de marca: negro profundo con una fuga de luz dorada.      */
+
+.atmo{position:absolute;inset:0;pointer-events:none}
+
+.atmo::before{           /* fuga principal */
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(120% 90% at var(--gx,88%) var(--gy,96%),
+    var(--glow-warm) 0%, var(--glow-deep) 26%, rgba(163,123,60,.06) 52%, transparent 74%);
+}
+.atmo::after{            /* rebote suave del lado opuesto */
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(90% 70% at var(--gx2,2%) var(--gy2,52%),
+    rgba(240,226,129,.10) 0%, rgba(163,123,60,.05) 40%, transparent 70%);
+}
+
+/* viñeta que cierra los bordes, como en las portadas */
+.vignette{
+  position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(130% 100% at 50% 45%, transparent 42%, rgba(0,0,0,.55) 100%);
+}
+
+/* grano fino: evita que los degradados se vean bandeados */
+.grain{position:absolute;inset:0;pointer-events:none;opacity:.055;mix-blend-mode:overlay}
+
+/* retícula hexagonal muy tenue — guiño a la construcción del isotipo */
+.mesh{position:absolute;inset:0;pointer-events:none;opacity:.14}
+
+/* ----------------------------- logo ----------------------------- */
+
+.logo{position:absolute;display:block;height:64px;width:auto}
+.piece--45  .logo{top:62px;left:72px}
+.piece--11  .logo{top:62px;left:72px}
+.piece--916 .logo{top:110px;left:72px}
+.piece--169 .logo{top:64px;left:72px;height:62px}
+
+/* ---------------------------- tipografía ---------------------------- */
+
+.eyebrow{
+  font-weight:700;font-size:23px;letter-spacing:.20em;text-transform:uppercase;
+  color:var(--gold-hi);display:flex;align-items:center;gap:16px;
+}
+.eyebrow::before{content:'';width:34px;height:3px;border-radius:2px;
+  background:linear-gradient(90deg,var(--gold-hi),rgba(240,226,129,0))}
+
+h1,h2,h3{font-weight:800;letter-spacing:-.022em;line-height:.96;text-transform:uppercase}
+
+/* Cada línea del titular se compone en una sola línea: el script de ajuste
+   reduce el cuerpo hasta que la más ancha entra en la caja. Así ningún
+   titular se parte en un salto no previsto por el copy. */
+/* width:max-content es lo que hace medible la línea: con display:block a secas
+   la caja mide el ancho del contenedor y el desborde queda invisible al script. */
+.line{display:block;white-space:nowrap;width:max-content;max-width:none}
+
+.h1{font-size:104px}
+.h2{font-size:78px}
+.h3{font-size:58px}
+
+.gold{
+  color:var(--gold-hi);
+  text-shadow:0 0 38px rgba(240,226,129,.42), 0 0 92px rgba(240,226,129,.16);
+}
+
+/* subrayado dorado con desvanecido — firma de las portadas */
+.rule{
+  height:6px;border-radius:4px;margin-top:30px;
+  background:linear-gradient(90deg,var(--gold) 0%,var(--gold-hi) 34%,rgba(240,226,129,.08) 100%);
+  box-shadow:0 0 34px rgba(240,226,129,.34);
+}
+.rule--short{width:280px}
+
+.lede{
+  font-weight:400;font-size:33px;line-height:1.46;color:var(--muted);
+  letter-spacing:-.004em;max-width:24ch;
+}
+.lede strong{color:var(--paper);font-weight:600}
+
+/* ---------------------------- bloques ---------------------------- */
+
+.stack{position:relative;z-index:2;display:flex;flex-direction:column}
+.pad{padding:72px}
+
+/* tarjeta de paso / dato */
+.card{
+  position:relative;border-radius:22px;padding:34px 36px;
+  background:linear-gradient(180deg,rgba(242,242,242,.055),rgba(242,242,242,.02));
+  border:1px solid rgba(242,242,242,.10);
+  display:flex;gap:26px;align-items:flex-start;
+}
+.card__n{
+  flex:0 0 auto;width:56px;height:56px;border-radius:14px;
+  display:grid;place-items:center;
+  font-weight:800;font-size:26px;color:var(--ink);
+  background:linear-gradient(160deg,var(--gold-hi),var(--gold));
+  box-shadow:0 0 30px rgba(240,226,129,.30);
+}
+.card__t{font-weight:700;font-size:34px;letter-spacing:-.01em;line-height:1.16}
+.card__d{font-weight:400;font-size:26px;line-height:1.42;color:var(--muted);margin-top:8px}
+
+/* lista mito / verdad */
+.tf{display:flex;gap:22px;align-items:flex-start;padding:26px 0;border-top:1px solid rgba(242,242,242,.10)}
+.tf:first-child{border-top:0}
+.tf__i{flex:0 0 auto;width:46px;height:46px;margin-top:2px}
+.tf__t{font-weight:600;font-size:31px;line-height:1.30}
+.tf__t b{font-weight:800;color:var(--gold-hi)}
+
+/* cita */
+.quote{font-weight:800;font-size:74px;line-height:1.04;letter-spacing:-.025em}
+.quote em{font-style:normal;color:var(--gold-hi);
+  text-shadow:0 0 40px rgba(240,226,129,.40)}
+
+/* ------------------------------ pie ------------------------------ */
+
+.foot{
+  position:absolute;left:72px;right:72px;bottom:62px;z-index:3;
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:24px;font-weight:500;color:rgba(242,242,242,.46);letter-spacing:.02em;
+}
+.piece--916 .foot{bottom:120px}
+
+.swipe{display:flex;align-items:center;gap:12px;color:var(--gold-hi);font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;font-size:22px}
+
+.pager{
+  font-variant-numeric:tabular-nums;font-weight:700;color:rgba(242,242,242,.40);
+}
+.pager b{color:var(--gold-hi)}
+
+/* píldora de CTA */
+.cta{
+  display:inline-flex;align-items:center;gap:14px;align-self:flex-start;
+  padding:22px 34px;border-radius:999px;
+  font-weight:800;font-size:28px;letter-spacing:-.01em;color:var(--ink);
+  background:linear-gradient(140deg,var(--gold-hi),var(--gold));
+  box-shadow:0 0 46px rgba(240,226,129,.34);
+}
+.cta--ghost{
+  color:var(--gold-hi);background:transparent;
+  border:2px solid rgba(240,226,129,.42);box-shadow:none;
+}
+
+/* ------------------------- ilustración ------------------------- */
+
+.art{position:absolute;z-index:1;pointer-events:none}
+.art svg{display:block;overflow:visible}
+
+.u{display:inline-block}

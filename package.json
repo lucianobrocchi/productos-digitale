@@ -1,0 +1,12 @@
+{
+  "name": "productos-digitales-contenido",
+  "private": true,
+  "type": "module",
+  "description": "Piezas de contenido para redes de Productos Digitales, generadas por código",
+  "scripts": {
+    "render": "node scripts/render.mjs",
+    "finish": "python3 scripts/finish.py",
+    "build": "npm run render && npm run finish",
+    "sheet": "node scripts/sheet.mjs"
+  }
+}

@@ -1,0 +1,814 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../src/brand.css">
+<style>
+  body{background:#0E0E0E;padding:48px}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:36px}
+  .box{width:100%;aspect-ratio:1;display:grid;place-items:center;
+       background:radial-gradient(70% 70% at 50% 50%,#141310,#0E0E0E);
+       border:1px solid rgba(240,226,129,.14);border-radius:20px;padding:22px}
+  .box svg{width:100%;height:100%}
+  figcaption{margin-top:12px;font:600 20px Inter,sans-serif;color:#F0E281;text-align:center}
+</style></head><body><div class="grid">
+  <figure>
+    <div class="box"><svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  
+  <defs>
+    <linearGradient id="g-hexRoute" gradientUnits="userSpaceOnUse" x1="90" y1="30" x2="230" y2="380">
+      <stop offset="0"   stop-color="#F0E281"/>
+      <stop offset=".55" stop-color="#D8BC66"/>
+      <stop offset="1"   stop-color="#A37B3C"/>
+    </linearGradient>
+    <!-- userSpaceOnUse: un degradado objectBoundingBox degenera en trazos
+         de ancho o alto cero (líneas rectas) y no pinta nada. -->
+    <linearGradient id="gh-hexRoute" gradientUnits="userSpaceOnUse" x1="40" y1="40" x2="360" y2="360">
+      <stop offset="0" stop-color="#F6EFB4"/>
+      <stop offset="1" stop-color="#A37B3C"/>
+    </linearGradient>
+    <linearGradient id="fade-hexRoute" gradientUnits="userSpaceOnUse" x1="0" y1="80" x2="0" y2="340">
+      <stop offset="0"   stop-color="#F0E281" stop-opacity=".55"/>
+      <stop offset="1"   stop-color="#F0E281" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="halo-hexRoute" cx=".5" cy=".5" r=".5">
+      <stop offset="0"   stop-color="#F0E281" stop-opacity=".30"/>
+      <stop offset=".55" stop-color="#A37B3C" stop-opacity=".10"/>
+      <stop offset="1"   stop-color="#A37B3C" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow-hexRoute" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft-hexRoute" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+  </defs>
+  <circle cx="200" cy="200" r="196" fill="url(#halo-hexRoute)"/>
+  <g stroke="url(#g-hexRoute)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"
+     filter="url(#glow-hexRoute)">
+    
+    <path d="M62 318L158 252L252 174L344 96" stroke-dasharray="2 16" stroke-width="5" opacity=".75"/>
+    <path d="M87.48 313.64Q90.00 318.00 87.48 322.36L78.52 337.88Q76.00 342.25 70.96 342.25L53.04 342.25Q48.00 342.25 45.48 337.88L36.52 322.36Q34.00 318.00 36.52 313.64L45.48 298.12Q48.00 293.75 53.04 293.75L70.96 293.75Q76.00 293.75 78.52 298.12Z" fill="rgba(240,226,129,.07)" stroke-width="4.5"/><path d="M183.48 247.64Q186.00 252.00 183.48 256.36L174.52 271.88Q172.00 276.25 166.96 276.25L149.04 276.25Q144.00 276.25 141.48 271.88L132.52 256.36Q130.00 252.00 132.52 247.64L141.48 232.12Q144.00 227.75 149.04 227.75L166.96 227.75Q172.00 227.75 174.52 232.12Z" fill="rgba(240,226,129,.07)" stroke-width="4.5"/><path d="M277.48 169.64Q280.00 174.00 277.48 178.36L268.52 193.88Q266.00 198.25 260.96 198.25L243.04 198.25Q238.00 198.25 235.48 193.88L226.52 178.36Q224.00 174.00 226.52 169.64L235.48 154.12Q238.00 149.75 243.04 149.75L260.96 149.75Q266.00 149.75 268.52 154.12Z" fill="rgba(240,226,129,.07)" stroke-width="4.5"/><path d="M380.40 89.76Q384.00 96.00 380.40 102.24L367.60 124.41Q364.00 130.64 356.80 130.64L331.20 130.64Q324.00 130.64 320.40 124.41L307.60 102.24Q304.00 96.00 307.60 89.76L320.40 67.59Q324.00 61.36 331.20 61.36L356.80 61.36Q364.00 61.36 367.60 67.59Z" fill="url(#g-hexRoute)" stroke="none" stroke-width="4.5"/>
+    <path d="M330 84 l14 -14 14 14" stroke-width="5" opacity=".9"/>
+    <path d="M344 70 v34" stroke-width="5" opacity=".9"/>
+    <circle cx="62"  cy="318" r="6" fill="url(#g-hexRoute)" stroke="none"/>
+    <circle cx="158" cy="252" r="6" fill="url(#g-hexRoute)" stroke="none"/>
+    <circle cx="252" cy="174" r="6" fill="url(#g-hexRoute)" stroke="none"/>
+  </g>
+</svg></div>
+    <figcaption>hexRoute</figcaption>
+  </figure>
+  <figure>
+    <div class="box"><svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  
+  <defs>
+    <linearGradient id="g-mindset" gradientUnits="userSpaceOnUse" x1="90" y1="30" x2="230" y2="380">
+      <stop offset="0"   stop-color="#F0E281"/>
+      <stop offset=".55" stop-color="#D8BC66"/>
+      <stop offset="1"   stop-color="#A37B3C"/>
+    </linearGradient>
+    <!-- userSpaceOnUse: un degradado objectBoundingBox degenera en trazos
+         de ancho o alto cero (líneas rectas) y no pinta nada. -->
+    <linearGradient id="gh-mindset" gradientUnits="userSpaceOnUse" x1="40" y1="40" x2="360" y2="360">
+      <stop offset="0" stop-color="#F6EFB4"/>
+      <stop offset="1" stop-color="#A37B3C"/>
+    </linearGradient>
+    <linearGradient id="fade-mindset" gradientUnits="userSpaceOnUse" x1="0" y1="80" x2="0" y2="340">
+      <stop offset="0"   stop-color="#F0E281" stop-opacity=".55"/>
+      <stop offset="1"   stop-color="#F0E281" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="halo-mindset" cx=".5" cy=".5" r=".5">
+      <stop offset="0"   stop-color="#F0E281" stop-opacity=".30"/>
+      <stop offset=".55" stop-color="#A37B3C" stop-opacity=".10"/>
+      <stop offset="1"   stop-color="#A37B3C" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow-mindset" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft-mindset" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+  </defs>
+  <circle cx="200" cy="200" r="196" fill="url(#halo-mindset)"/>
+  <g stroke="url(#g-mindset)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"
+     filter="url(#glow-mindset)">
+    
+  <path d="M138 356 v-78
+           C104 254 96 196 108 156
+           C124 100 172 68 222 72
+           C282 77 318 122 318 172
+           C318 196 312 214 330 232
+           C338 240 334 250 322 252
+           L300 256
+           C300 282 292 300 262 304
+           L238 307 V356"
+        fill="rgba(240,226,129,.05)"/>
+  <path d="M300 256 c-14 6 -26 6 -38 0" stroke-width="3.4" opacity=".55"/>
+  <path d="M258.78 158.96Q264.00 168.00 258.78 177.04L240.22 209.19Q235.00 218.23 224.56 218.23L187.44 218.23Q177.00 218.23 171.78 209.19L153.22 177.04Q148.00 168.00 153.22 158.96L171.78 126.81Q177.00 117.77 187.44 117.77L224.56 117.77Q235.00 117.77 240.22 126.81Z" fill="rgba(240,226,129,.07)" stroke-width="3.4" opacity=".9"/>
+  <path d="M206 120 v96 M164 144 l84 48 M248 144 l-84 48" stroke-width="3.2" opacity=".75"/>
+  <circle cx="206" cy="120" r="8"  fill="url(#g-mindset)" stroke="none"/>
+  <circle cx="164" cy="144" r="6.5" fill="url(#g-mindset)" stroke="none"/>
+  <circle cx="248" cy="144" r="6.5" fill="url(#g-mindset)" stroke="none"/>
+  <circle cx="164" cy="192" r="6.5" fill="url(#g-mindset)" stroke="none"/>
+  <circle cx="248" cy="192" r="6.5" fill="url(#g-mindset)" stroke="none"/>
+  <circle cx="206" cy="216" r="9"  fill="url(#g-mindset)" stroke="none"/>
+  </g>
+</svg></div>
+    <figcaption>mindset</figcaption>
+  </figure>
+  <figure>
+    <div class="box"><svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  
+  <defs>
+    <linearGradient id="g-launch" gradientUnits="userSpaceOnUse" x1="90" y1="30" x2="230" y2="380">
+      <stop offset="0"   stop-color="#F0E281"/>
+      <stop offset=".55" stop-color="#D8BC66"/>
+      <stop offset="1"   stop-color="#A37B3C"/>
+    </linearGradient>
+    <!-- userSpaceOnUse: un degradado objectBoundingBox degenera en trazos
+         de ancho o alto cero (líneas rectas) y no pinta nada. -->
+    <linearGradient id="gh-launch" gradientUnits="userSpaceOnUse" x1="40" y1="40" x2="360" y2="360">
+      <stop offset="0" stop-color="#F6EFB4"/>
+      <stop offset="1" stop-color="#A37B3C"/>
+    </linearGradient>
+    <linearGradient id="fade-launch" gradientUnits="userSpaceOnUse" x1="0" y1="80" x2="0" y2="340">
+      <stop offset="0"   stop-color="#F0E281" stop-opacity=".55"/>
+      <stop offset="1"   stop-color="#F0E281" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="halo-launch" cx=".5" cy=".5" r=".5">
+      <stop offset="0"   stop-color="#F0E281" stop-opacity=".30"/>
+      <stop offset=".55" stop-color="#A37B3C" stop-opacity=".10"/>
+      <stop offset="1"   stop-color="#A37B3C" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow-launch" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft-launch" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+  </defs>
+  <circle cx="200" cy="200" r="196" fill="url(#halo-launch)"/>
+  <g stroke="url(#g-launch)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"
+     filter="url(#glow-launch)">
+    
+  <path d="M200 58 c40 42 60 90 60 140 l0 36 -120 0 0 -36 c0 -50 20 -98 60 -140Z"
+        fill="rgba(240,226,129,.07)"/>
+  <circle cx="200" cy="164" r="26" fill="rgba(14,14,14,.9)"/>
+  <path d="M140 202 l-34 46 34 -8Z" fill="rgba(240,226,129,.12)"/>
+  <path d="M260 202 l34 46 -34 -8Z" fill="rgba(240,226,129,.12)"/>
+  <path d="M170 266 c10 30 20 46 30 52 10 -6 20 -22 30 -52" fill="url(#g-launch)" stroke="none" opacity=".9"/>
+  <path d="M200 330 v34" stroke-width="5"/>
+  <path d="M158 320 v22 M242 320 v22" stroke-width="4" opacity=".6"/>
+  <path d="M96 128 l18 10 -18 10" stroke-width="3.4" opacity=".55"/>
+  <path d="M304 128 l-18 10 18 10" stroke-width="3.4" opacity=".55"/>
+  </g>
+</svg></div>
+    <figcaption>launch</figcaption>
+  </figure>
+  <figure>
+    <div class="box"><svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  
+  <defs>
+    <linearGradient id="g-stairs" gradientUnits="userSpaceOnUse" x1="90" y1="30" x2="230" y2="380">
+      <stop offset="0"   stop-color="#F0E281"/>
+      <stop offset=".55" stop-color="#D8BC66"/>
+      <stop offset="1"   stop-color="#A37B3C"/>
+    </linearGradient>
+    <!-- userSpaceOnUse: un degradado objectBoundingBox degenera en trazos
+         de ancho o alto cero (líneas rectas) y no pinta nada. -->
+    <linearGradient id="gh-stairs" gradientUnits="userSpaceOnUse" x1="40" y1="40" x2="360" y2="360">
+      <stop offset="0" stop-color="#F6EFB4"/>
+      <stop offset="1" stop-color="#A37B3C"/>
+    </linearGradient>
+    <linearGradient id="fade-stairs" gradientUnits="userSpaceOnUse" x1="0" y1="80" x2="0" y2="340">
+      <stop offset="0"   stop-color="#F0E281" stop-opacity=".55"/>
+      <stop offset="1"   stop-color="#F0E281" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="halo-stairs" cx=".5" cy=".5" r=".5">
+      <stop offset="0"   stop-color="#F0E281" stop-opacity=".30"/>
+      <stop offset=".55" stop-color="#A37B3C" stop-opacity=".10"/>
+      <stop offset="1"   stop-color="#A37B3C" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow-stairs" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft-stairs" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+  </defs>
+  <circle cx="200" cy="200" r="196" fill="url(#halo-stairs)"/>
+  <g stroke="url(#g-stairs)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"
+     filter="url(#glow-stairs)">
+    
+    <path d="M56 328 v-52 h66 v-52 h66 v-52 h66 v-52 h66 V328 Z" fill="rgba(240,226,129,.07)" stroke-width="5"/>
+    <path d="M56 276 h66" stroke-width="5"
+             stroke="url(#gh-stairs)" opacity=".95"/><path d="M122 224 h66" stroke-width="5"
+             stroke="url(#gh-stairs)" opacity=".95"/><path d="M188 172 h66" stroke-width="5"
+             stroke="url(#gh-stairs)" opacity=".95"/><path d="M254 120 h66" stroke-width="5"
+             stroke="url(#gh-stairs)" opacity=".95"/>
+    <path d="M56 328 h264" opacity=".3" stroke-width="3.4"/>
+    <path d="M371.30 81.32Q374.00 86.00 371.30 90.68L361.70 107.30Q359.00 111.98 353.60 111.98L334.40 111.98Q329.00 111.98 326.30 107.30L316.70 90.68Q314.00 86.00 316.70 81.32L326.30 64.70Q329.00 60.02 334.40 60.02L353.60 60.02Q359.00 60.02 361.70 64.70Z" fill="url(#g-stairs)" stroke="none"/>
+    <path d="M344 44 v-26 M326 34
+             l18 -18 18 18" stroke-width="4.4" opacity=".75"/>
+  </g>
+</svg></div>
+    <figcaption>stairs</figcaption>
+  </figure>
+  <figure>
+    <div class="box"><svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  
+  <defs>
+    <linearGradient id="g-funnel" gradientUnits="userSpaceOnUse" x1="90" y1="30" x2="230" y2="380">
+      <stop offset="0"   stop-color="#F0E281"/>
+      <stop offset=".55" stop-color="#D8BC66"/>
+      <stop offset="1"   stop-color="#A37B3C"/>
+    </linearGradient>
+    <!-- userSpaceOnUse: un degradado objectBoundingBox degenera en trazos
+         de ancho o alto cero (líneas rectas) y no pinta nada. -->
+    <linearGradient id="gh-funnel" gradientUnits="userSpaceOnUse" x1="40" y1="40" x2="360" y2="360">
+      <stop offset="0" stop-color="#F6EFB4"/>
+      <stop offset="1" stop-color="#A37B3C"/>
+    </linearGradient>
+    <linearGradient id="fade-funnel" gradientUnits="userSpaceOnUse" x1="0" y1="80" x2="0" y2="340">
+      <stop offset="0"   stop-color="#F0E281" stop-opacity=".55"/>
+      <stop offset="1"   stop-color="#F0E281" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="halo-funnel" cx=".5" cy=".5" r=".5">
+      <stop offset="0"   stop-color="#F0E281" stop-opacity=".30"/>
+      <stop offset=".55" stop-color="#A37B3C" stop-opacity=".10"/>
+      <stop offset="1"   stop-color="#A37B3C" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow-funnel" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft-funnel" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+  </defs>
+  <circle cx="200" cy="200" r="196" fill="url(#halo-funnel)"/>
+  <g stroke="url(#g-funnel)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"
+     filter="url(#glow-funnel)">
+    
+  <path d="M74 86 h252 l-92 118 v104 l-68 32 v-136Z" fill="rgba(240,226,129,.06)"/>
+  <path d="M74 86 h252" stroke-width="5"/>
+  <path d="M110 140 h180" opacity=".4" stroke-width="3.4"/>
+  <path d="M146 194 h108" opacity=".4" stroke-width="3.4"/>
+  <circle cx="122" cy="52" r="9" fill="url(#g-funnel)" stroke="none" opacity=".8"/>
+  <circle cx="200" cy="40" r="9" fill="url(#g-funnel)" stroke="none"/>
+  <circle cx="278" cy="52" r="9" fill="url(#g-funnel)" stroke="none" opacity=".8"/>
+  <path d="M122 62 v16 M200 50 v28 M278 62 v16" stroke-width="3.4" opacity=".55"/>
+  <path d="M227.30 341.32Q230.00 346.00 227.30 350.68L217.70 367.30Q215.00 371.98 209.60 371.98L190.40 371.98Q185.00 371.98 182.30 367.30L172.70 350.68Q170.00 346.00 172.70 341.32L182.30 324.70Q185.00 320.02 190.40 320.02L209.60 320.02Q215.00 320.02 217.70 324.70Z" fill="url(#g-funnel)" stroke="none"/>
+  </g>
+</svg></div>
+    <figcaption>funnel</figcaption>
+  </figure>
+  <figure>
+    <div class="box"><svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  
+  <defs>
+    <linearGradient id="g-income" gradientUnits="userSpaceOnUse" x1="90" y1="30" x2="230" y2="380">
+      <stop offset="0"   stop-color="#F0E281"/>
+      <stop offset=".55" stop-color="#D8BC66"/>
+      <stop offset="1"   stop-color="#A37B3C"/>
+    </linearGradient>
+    <!-- userSpaceOnUse: un degradado objectBoundingBox degenera en trazos
+         de ancho o alto cero (líneas rectas) y no pinta nada. -->
+    <linearGradient id="gh-income" gradientUnits="userSpaceOnUse" x1="40" y1="40" x2="360" y2="360">
+      <stop offset="0" stop-color="#F6EFB4"/>
+      <stop offset="1" stop-color="#A37B3C"/>
+    </linearGradient>
+    <linearGradient id="fade-income" gradientUnits="userSpaceOnUse" x1="0" y1="80" x2="0" y2="340">
+      <stop offset="0"   stop-color="#F0E281" stop-opacity=".55"/>
+      <stop offset="1"   stop-color="#F0E281" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="halo-income" cx=".5" cy=".5" r=".5">
+      <stop offset="0"   stop-color="#F0E281" stop-opacity=".30"/>
+      <stop offset=".55" stop-color="#A37B3C" stop-opacity=".10"/>
+      <stop offset="1"   stop-color="#A37B3C" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow-income" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft-income" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+  </defs>
+  <circle cx="200" cy="200" r="196" fill="url(#halo-income)"/>
+  <g stroke="url(#g-income)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"
+     filter="url(#glow-income)">
+    
+    <path d="M104 306 v-96 M296 306 v-96" stroke-width="4.5"/>
+    
+    <ellipse cx="200" cy="306" rx="96" ry="30" fill="rgba(240,226,129,0.05)"/>
+    <ellipse cx="200" cy="306" rx="96" ry="30"/>
+    <ellipse cx="200" cy="262" rx="96" ry="30" fill="rgba(240,226,129,0.07)"/>
+    <ellipse cx="200" cy="262" rx="96" ry="30"/>
+    <ellipse cx="200" cy="218" rx="96" ry="30" fill="rgba(240,226,129,0.09)"/>
+    <ellipse cx="200" cy="218" rx="96" ry="30"/>
+    <ellipse cx="200" cy="174" rx="96" ry="30" fill="url(#g-income)" stroke="none"/>
+    <path d="M219.80 170.19Q222.00 174.00 219.80 177.81L213.20 189.24Q211.00 193.05 206.60 193.05L193.40 193.05Q189.00 193.05 186.80 189.24L180.20 177.81Q178.00 174.00 180.20 170.19L186.80 158.76Q189.00 154.95 193.40 154.95L206.60 154.95Q211.00 154.95 213.20 158.76Z" fill="rgba(14,14,14,.85)" stroke="none"/>
+    <path d="M200 96 v-46 M170 80 l30 -30 30 30" stroke-width="5"/>
+    <path d="M200 140 v-26" stroke-width="4" opacity=".5" stroke-dasharray="2 10"/>
+  </g>
+</svg></div>
+    <figcaption>income</figcaption>
+  </figure>
+  <figure>
+    <div class="box"><svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  
+  <defs>
+    <linearGradient id="g-ideaSystem" gradientUnits="userSpaceOnUse" x1="90" y1="30" x2="230" y2="380">
+      <stop offset="0"   stop-color="#F0E281"/>
+      <stop offset=".55" stop-color="#D8BC66"/>
+      <stop offset="1"   stop-color="#A37B3C"/>
+    </linearGradient>
+    <!-- userSpaceOnUse: un degradado objectBoundingBox degenera en trazos
+         de ancho o alto cero (líneas rectas) y no pinta nada. -->
+    <linearGradient id="gh-ideaSystem" gradientUnits="userSpaceOnUse" x1="40" y1="40" x2="360" y2="360">
+      <stop offset="0" stop-color="#F6EFB4"/>
+      <stop offset="1" stop-color="#A37B3C"/>
+    </linearGradient>
+    <linearGradient id="fade-ideaSystem" gradientUnits="userSpaceOnUse" x1="0" y1="80" x2="0" y2="340">
+      <stop offset="0"   stop-color="#F0E281" stop-opacity=".55"/>
+      <stop offset="1"   stop-color="#F0E281" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="halo-ideaSystem" cx=".5" cy=".5" r=".5">
+      <stop offset="0"   stop-color="#F0E281" stop-opacity=".30"/>
+      <stop offset=".55" stop-color="#A37B3C" stop-opacity=".10"/>
+      <stop offset="1"   stop-color="#A37B3C" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow-ideaSystem" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft-ideaSystem" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+  </defs>
+  <circle cx="200" cy="200" r="196" fill="url(#halo-ideaSystem)"/>
+  <g stroke="url(#g-ideaSystem)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"
+     filter="url(#glow-ideaSystem)">
+    
+  <path d="M200 52 c-56 0 -100 42 -100 96 c0 36 20 60 36 80 c10 12 14 22 14 34 h100
+           c0 -12 4 -22 14 -34 c16 -20 36 -44 36 -80 c0 -54 -44 -96 -100 -96Z"
+        fill="rgba(240,226,129,.06)"/>
+  <path d="M240.04 141.14Q244.00 148.00 240.04 154.86L225.96 179.25Q222.00 186.11 214.08 186.11L185.92 186.11Q178.00 186.11 174.04 179.25L159.96 154.86Q156.00 148.00 159.96 141.14L174.04 116.75Q178.00 109.89 185.92 109.89L214.08 109.89Q222.00 109.89 225.96 116.75Z" fill="rgba(240,226,129,.10)" stroke-width="3.6"/>
+  <path d="M176 176 c0 -22 12 -34 24 -34 c12 0 24 12 24 34" stroke-width="4" opacity=".8"/>
+  <path d="M150 288 h100 M154 312 h92 M166 336 h68" stroke-width="9" stroke="url(#gh-ideaSystem)"/>
+  <path d="M96 60 l20 20 M304 60 l-20 20 M62 150 h26 M312 150 h26 M110 236 l-20 18 M290 236 l20 18"
+        stroke-width="4" opacity=".45"/>
+  </g>
+</svg></div>
+    <figcaption>ideaSystem</figcaption>
+  </figure>
+  <figure>
+    <div class="box"><svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  
+  <defs>
+    <linearGradient id="g-aiChip" gradientUnits="userSpaceOnUse" x1="90" y1="30" x2="230" y2="380">
+      <stop offset="0"   stop-color="#F0E281"/>
+      <stop offset=".55" stop-color="#D8BC66"/>
+      <stop offset="1"   stop-color="#A37B3C"/>
+    </linearGradient>
+    <!-- userSpaceOnUse: un degradado objectBoundingBox degenera en trazos
+         de ancho o alto cero (líneas rectas) y no pinta nada. -->
+    <linearGradient id="gh-aiChip" gradientUnits="userSpaceOnUse" x1="40" y1="40" x2="360" y2="360">
+      <stop offset="0" stop-color="#F6EFB4"/>
+      <stop offset="1" stop-color="#A37B3C"/>
+    </linearGradient>
+    <linearGradient id="fade-aiChip" gradientUnits="userSpaceOnUse" x1="0" y1="80" x2="0" y2="340">
+      <stop offset="0"   stop-color="#F0E281" stop-opacity=".55"/>
+      <stop offset="1"   stop-color="#F0E281" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="halo-aiChip" cx=".5" cy=".5" r=".5">
+      <stop offset="0"   stop-color="#F0E281" stop-opacity=".30"/>
+      <stop offset=".55" stop-color="#A37B3C" stop-opacity=".10"/>
+      <stop offset="1"   stop-color="#A37B3C" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow-aiChip" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft-aiChip" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+  </defs>
+  <circle cx="200" cy="200" r="196" fill="url(#halo-aiChip)"/>
+  <g stroke="url(#g-aiChip)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"
+     filter="url(#glow-aiChip)">
+    
+    <path d="M126 104 v-46" stroke-width="7" stroke="url(#gh-aiChip)" opacity=".85"/><path d="M126 296 v46" stroke-width="7" stroke="url(#gh-aiChip)" opacity=".85"/><path d="M104 126 h-46" stroke-width="7" stroke="url(#gh-aiChip)" opacity=".85"/><path d="M296 126 h46" stroke-width="7" stroke="url(#gh-aiChip)" opacity=".85"/><path d="M176 104 v-46" stroke-width="7" stroke="url(#gh-aiChip)" opacity=".85"/><path d="M176 296 v46" stroke-width="7" stroke="url(#gh-aiChip)" opacity=".85"/><path d="M104 176 h-46" stroke-width="7" stroke="url(#gh-aiChip)" opacity=".85"/><path d="M296 176 h46" stroke-width="7" stroke="url(#gh-aiChip)" opacity=".85"/><path d="M226 104 v-46" stroke-width="7" stroke="url(#gh-aiChip)" opacity=".85"/><path d="M226 296 v46" stroke-width="7" stroke="url(#gh-aiChip)" opacity=".85"/><path d="M104 226 h-46" stroke-width="7" stroke="url(#gh-aiChip)" opacity=".85"/><path d="M296 226 h46" stroke-width="7" stroke="url(#gh-aiChip)" opacity=".85"/><path d="M276 104 v-46" stroke-width="7" stroke="url(#gh-aiChip)" opacity=".85"/><path d="M276 296 v46" stroke-width="7" stroke="url(#gh-aiChip)" opacity=".85"/><path d="M104 276 h-46" stroke-width="7" stroke="url(#gh-aiChip)" opacity=".85"/><path d="M296 276 h46" stroke-width="7" stroke="url(#gh-aiChip)" opacity=".85"/>
+    <path d="M104 104 h192 v192 h-192Z" fill="rgba(240,226,129,.05)" stroke-width="5"/>
+    <path d="M140 140 h120 v120 h-120Z" stroke-width="3" opacity=".3"/>
+    <path d="M243.68 192.52Q248.00 200.00 243.68 207.48L228.32 234.09Q224.00 241.57 215.36 241.57L184.64 241.57Q176.00 241.57 171.68 234.09L156.32 207.48Q152.00 200.00 156.32 192.52L171.68 165.91Q176.00 158.43 184.64 158.43L215.36 158.43Q224.00 158.43 228.32 165.91Z" fill="url(#g-aiChip)" stroke="none"/>
+    <path d="M221.60 195.84Q224.00 200.00 221.60 204.16L214.40 216.63Q212.00 220.78 207.20 220.78L192.80 220.78Q188.00 220.78 185.60 216.63L178.40 204.16Q176.00 200.00 178.40 195.84L185.60 183.37Q188.00 179.22 192.80 179.22L207.20 179.22Q212.00 179.22 214.40 183.37Z" fill="rgba(14,14,14,.92)" stroke="none"/>
+  </g>
+</svg></div>
+    <figcaption>aiChip</figcaption>
+  </figure>
+  <figure>
+    <div class="box"><svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  
+  <defs>
+    <linearGradient id="g-product" gradientUnits="userSpaceOnUse" x1="90" y1="30" x2="230" y2="380">
+      <stop offset="0"   stop-color="#F0E281"/>
+      <stop offset=".55" stop-color="#D8BC66"/>
+      <stop offset="1"   stop-color="#A37B3C"/>
+    </linearGradient>
+    <!-- userSpaceOnUse: un degradado objectBoundingBox degenera en trazos
+         de ancho o alto cero (líneas rectas) y no pinta nada. -->
+    <linearGradient id="gh-product" gradientUnits="userSpaceOnUse" x1="40" y1="40" x2="360" y2="360">
+      <stop offset="0" stop-color="#F6EFB4"/>
+      <stop offset="1" stop-color="#A37B3C"/>
+    </linearGradient>
+    <linearGradient id="fade-product" gradientUnits="userSpaceOnUse" x1="0" y1="80" x2="0" y2="340">
+      <stop offset="0"   stop-color="#F0E281" stop-opacity=".55"/>
+      <stop offset="1"   stop-color="#F0E281" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="halo-product" cx=".5" cy=".5" r=".5">
+      <stop offset="0"   stop-color="#F0E281" stop-opacity=".30"/>
+      <stop offset=".55" stop-color="#A37B3C" stop-opacity=".10"/>
+      <stop offset="1"   stop-color="#A37B3C" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow-product" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft-product" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+  </defs>
+  <circle cx="200" cy="200" r="196" fill="url(#halo-product)"/>
+  <g stroke="url(#g-product)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"
+     filter="url(#glow-product)">
+    
+  <path d="M130 44 h140 a18 18 0 0 1 18 18 v276 a18 18 0 0 1 -18 18 h-140 a18 18 0 0 1 -18 -18
+           v-276 a18 18 0 0 1 18 -18Z" fill="rgba(240,226,129,.05)"/>
+  <path d="M176 44 h48" stroke-width="5" opacity=".7"/>
+  <path d="M240.04 139.14Q244.00 146.00 240.04 152.86L225.96 177.25Q222.00 184.11 214.08 184.11L185.92 184.11Q178.00 184.11 174.04 177.25L159.96 152.86Q156.00 146.00 159.96 139.14L174.04 114.75Q178.00 107.89 185.92 107.89L214.08 107.89Q222.00 107.89 225.96 114.75Z" fill="url(#g-product)" stroke="none"/>
+  <path d="M148 220 h104 M148 254 h104 M148 288 h64" stroke-width="6" opacity=".45"/>
+  <path d="M258 322 a22 22 0 1 0 .1 0Z" fill="url(#g-product)" stroke="none" opacity=".9"/>
+  <path d="M250 322 l6 7 12 -14" stroke="#0E0E0E" stroke-width="4"/>
+  </g>
+</svg></div>
+    <figcaption>product</figcaption>
+  </figure>
+  <figure>
+    <div class="box"><svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  
+  <defs>
+    <linearGradient id="g-growth" gradientUnits="userSpaceOnUse" x1="90" y1="30" x2="230" y2="380">
+      <stop offset="0"   stop-color="#F0E281"/>
+      <stop offset=".55" stop-color="#D8BC66"/>
+      <stop offset="1"   stop-color="#A37B3C"/>
+    </linearGradient>
+    <!-- userSpaceOnUse: un degradado objectBoundingBox degenera en trazos
+         de ancho o alto cero (líneas rectas) y no pinta nada. -->
+    <linearGradient id="gh-growth" gradientUnits="userSpaceOnUse" x1="40" y1="40" x2="360" y2="360">
+      <stop offset="0" stop-color="#F6EFB4"/>
+      <stop offset="1" stop-color="#A37B3C"/>
+    </linearGradient>
+    <linearGradient id="fade-growth" gradientUnits="userSpaceOnUse" x1="0" y1="80" x2="0" y2="340">
+      <stop offset="0"   stop-color="#F0E281" stop-opacity=".55"/>
+      <stop offset="1"   stop-color="#F0E281" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="halo-growth" cx=".5" cy=".5" r=".5">
+      <stop offset="0"   stop-color="#F0E281" stop-opacity=".30"/>
+      <stop offset=".55" stop-color="#A37B3C" stop-opacity=".10"/>
+      <stop offset="1"   stop-color="#A37B3C" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow-growth" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft-growth" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+  </defs>
+  <circle cx="200" cy="200" r="196" fill="url(#halo-growth)"/>
+  <g stroke="url(#g-growth)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"
+     filter="url(#glow-growth)">
+    
+  <path d="M64 330 h288" opacity=".35" stroke-width="3.4"/>
+  <path d="M64 330 v-268" opacity=".35" stroke-width="3.4"/>
+  <path d="M64 306 C132 300 168 268 202 216 C236 164 272 116 348 96" stroke-width="6"/>
+  <path d="M64 306 C132 300 168 268 202 216 C236 164 272 116 348 96 L348 330 L64 330Z"
+        fill="url(#fade-growth)" stroke="none" opacity=".55"/>
+  <circle cx="132" cy="300" r="8" fill="url(#g-growth)" stroke="none" opacity=".75"/>
+  <circle cx="202" cy="216" r="9" fill="url(#g-growth)" stroke="none"/>
+  <path d="M371.66 91.95Q374.00 96.00 371.66 100.05L363.34 114.46Q361.00 118.52 356.32 118.52L339.68 118.52Q335.00 118.52 332.66 114.46L324.34 100.05Q322.00 96.00 324.34 91.95L332.66 77.54Q335.00 73.48 339.68 73.48L356.32 73.48Q361.00 73.48 363.34 77.54Z" fill="url(#g-growth)" stroke="none"/>
+  <path d="M100 96 h74 M100 132 h44" stroke-width="4" opacity=".3"/>
+  </g>
+</svg></div>
+    <figcaption>growth</figcaption>
+  </figure>
+  <figure>
+    <div class="box"><svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  
+  <defs>
+    <linearGradient id="g-clock" gradientUnits="userSpaceOnUse" x1="90" y1="30" x2="230" y2="380">
+      <stop offset="0"   stop-color="#F0E281"/>
+      <stop offset=".55" stop-color="#D8BC66"/>
+      <stop offset="1"   stop-color="#A37B3C"/>
+    </linearGradient>
+    <!-- userSpaceOnUse: un degradado objectBoundingBox degenera en trazos
+         de ancho o alto cero (líneas rectas) y no pinta nada. -->
+    <linearGradient id="gh-clock" gradientUnits="userSpaceOnUse" x1="40" y1="40" x2="360" y2="360">
+      <stop offset="0" stop-color="#F6EFB4"/>
+      <stop offset="1" stop-color="#A37B3C"/>
+    </linearGradient>
+    <linearGradient id="fade-clock" gradientUnits="userSpaceOnUse" x1="0" y1="80" x2="0" y2="340">
+      <stop offset="0"   stop-color="#F0E281" stop-opacity=".55"/>
+      <stop offset="1"   stop-color="#F0E281" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="halo-clock" cx=".5" cy=".5" r=".5">
+      <stop offset="0"   stop-color="#F0E281" stop-opacity=".30"/>
+      <stop offset=".55" stop-color="#A37B3C" stop-opacity=".10"/>
+      <stop offset="1"   stop-color="#A37B3C" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow-clock" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft-clock" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+  </defs>
+  <circle cx="200" cy="200" r="196" fill="url(#halo-clock)"/>
+  <g stroke="url(#g-clock)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"
+     filter="url(#glow-clock)">
+    
+    <circle cx="200" cy="200" r="140" fill="rgba(240,226,129,.05)"/>
+    <path d="M200.0 84.0
+      L200.0 104.0"
+      stroke-width="6" opacity="0.9"/><path d="M258.0 99.5
+      L252.0 109.9"
+      stroke-width="3.4" opacity="0.45"/><path d="M300.5 142.0
+      L290.1 148.0"
+      stroke-width="3.4" opacity="0.45"/><path d="M316.0 200.0
+      L296.0 200.0"
+      stroke-width="6" opacity="0.9"/><path d="M300.5 258.0
+      L290.1 252.0"
+      stroke-width="3.4" opacity="0.45"/><path d="M258.0 300.5
+      L252.0 290.1"
+      stroke-width="3.4" opacity="0.45"/><path d="M200.0 316.0
+      L200.0 296.0"
+      stroke-width="6" opacity="0.9"/><path d="M142.0 300.5
+      L148.0 290.1"
+      stroke-width="3.4" opacity="0.45"/><path d="M99.5 258.0
+      L109.9 252.0"
+      stroke-width="3.4" opacity="0.45"/><path d="M84.0 200.0
+      L104.0 200.0"
+      stroke-width="6" opacity="0.9"/><path d="M99.5 142.0
+      L109.9 148.0"
+      stroke-width="3.4" opacity="0.45"/><path d="M142.0 99.5
+      L148.0 109.9"
+      stroke-width="3.4" opacity="0.45"/>
+    <path d="M200 200 v-72" stroke-width="7"/>
+    <path d="M200 200 l58 34" stroke-width="6" opacity=".8"/>
+    <circle cx="200" cy="200" r="10" fill="url(#g-clock)" stroke="none"/>
+    <path d="M200 60 a140 140 0 0 1 121 70" stroke-width="7" stroke-linecap="round"/>
+  </g>
+</svg></div>
+    <figcaption>clock</figcaption>
+  </figure>
+  <figure>
+    <div class="box"><svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  
+  <defs>
+    <linearGradient id="g-magnet" gradientUnits="userSpaceOnUse" x1="90" y1="30" x2="230" y2="380">
+      <stop offset="0"   stop-color="#F0E281"/>
+      <stop offset=".55" stop-color="#D8BC66"/>
+      <stop offset="1"   stop-color="#A37B3C"/>
+    </linearGradient>
+    <!-- userSpaceOnUse: un degradado objectBoundingBox degenera en trazos
+         de ancho o alto cero (líneas rectas) y no pinta nada. -->
+    <linearGradient id="gh-magnet" gradientUnits="userSpaceOnUse" x1="40" y1="40" x2="360" y2="360">
+      <stop offset="0" stop-color="#F6EFB4"/>
+      <stop offset="1" stop-color="#A37B3C"/>
+    </linearGradient>
+    <linearGradient id="fade-magnet" gradientUnits="userSpaceOnUse" x1="0" y1="80" x2="0" y2="340">
+      <stop offset="0"   stop-color="#F0E281" stop-opacity=".55"/>
+      <stop offset="1"   stop-color="#F0E281" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="halo-magnet" cx=".5" cy=".5" r=".5">
+      <stop offset="0"   stop-color="#F0E281" stop-opacity=".30"/>
+      <stop offset=".55" stop-color="#A37B3C" stop-opacity=".10"/>
+      <stop offset="1"   stop-color="#A37B3C" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow-magnet" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft-magnet" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+  </defs>
+  <circle cx="200" cy="200" r="196" fill="url(#halo-magnet)"/>
+  <g stroke="url(#g-magnet)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"
+     filter="url(#glow-magnet)">
+    
+  <path d="M120 300 v-104 a80 80 0 0 1 160 0 v104" fill="rgba(240,226,129,.05)"/>
+  <path d="M120 300 h56 v-104 a24 24 0 0 1 48 0 v104 h56" stroke-width="5"/>
+  <path d="M120 300 h56 v40 h-56Z" fill="url(#g-magnet)" stroke="none"/>
+  <path d="M224 300 h56 v40 h-56Z" fill="url(#g-magnet)" stroke="none"/>
+  <circle cx="200" cy="96"  r="9" fill="url(#g-magnet)" stroke="none"/>
+  <circle cx="132" cy="128" r="7" fill="url(#g-magnet)" stroke="none" opacity=".7"/>
+  <circle cx="268" cy="128" r="7" fill="url(#g-magnet)" stroke="none" opacity=".7"/>
+  <path d="M200 96 v-44 M132 128 l-26 -30 M268 128 l26 -30" stroke-width="3.4"
+        opacity=".5" stroke-dasharray="2 10"/>
+  </g>
+</svg></div>
+    <figcaption>magnet</figcaption>
+  </figure>
+  <figure>
+    <div class="box"><svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  
+  <defs>
+    <linearGradient id="g-target" gradientUnits="userSpaceOnUse" x1="90" y1="30" x2="230" y2="380">
+      <stop offset="0"   stop-color="#F0E281"/>
+      <stop offset=".55" stop-color="#D8BC66"/>
+      <stop offset="1"   stop-color="#A37B3C"/>
+    </linearGradient>
+    <!-- userSpaceOnUse: un degradado objectBoundingBox degenera en trazos
+         de ancho o alto cero (líneas rectas) y no pinta nada. -->
+    <linearGradient id="gh-target" gradientUnits="userSpaceOnUse" x1="40" y1="40" x2="360" y2="360">
+      <stop offset="0" stop-color="#F6EFB4"/>
+      <stop offset="1" stop-color="#A37B3C"/>
+    </linearGradient>
+    <linearGradient id="fade-target" gradientUnits="userSpaceOnUse" x1="0" y1="80" x2="0" y2="340">
+      <stop offset="0"   stop-color="#F0E281" stop-opacity=".55"/>
+      <stop offset="1"   stop-color="#F0E281" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="halo-target" cx=".5" cy=".5" r=".5">
+      <stop offset="0"   stop-color="#F0E281" stop-opacity=".30"/>
+      <stop offset=".55" stop-color="#A37B3C" stop-opacity=".10"/>
+      <stop offset="1"   stop-color="#A37B3C" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow-target" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft-target" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+  </defs>
+  <circle cx="200" cy="200" r="196" fill="url(#halo-target)"/>
+  <g stroke="url(#g-target)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"
+     filter="url(#glow-target)">
+    
+  <circle cx="190" cy="212" r="132" fill="rgba(240,226,129,.04)"/>
+  <circle cx="190" cy="212" r="132"/>
+  <circle cx="190" cy="212" r="88"  opacity=".65"/>
+  <circle cx="190" cy="212" r="44"  opacity=".8"/>
+  <path d="M208.00 208.54Q210.00 212.00 208.00 215.46L202.00 225.86Q200.00 229.32 196.00 229.32L184.00 229.32Q180.00 229.32 178.00 225.86L172.00 215.46Q170.00 212.00 172.00 208.54L178.00 198.14Q180.00 194.68 184.00 194.68L196.00 194.68Q200.00 194.68 202.00 198.14Z" fill="url(#g-target)" stroke="none"/>
+  <path d="M190 212 L340 62" stroke-width="6"/>
+  <path d="M340 62 l-4 34 34 -4Z" fill="url(#g-target)" stroke="none"/>
+  <path d="M300 62 h40 v40" stroke-width="3.6" opacity=".4"/>
+  </g>
+</svg></div>
+    <figcaption>target</figcaption>
+  </figure>
+  <figure>
+    <div class="box"><svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  
+  <defs>
+    <linearGradient id="g-shortcut" gradientUnits="userSpaceOnUse" x1="90" y1="30" x2="230" y2="380">
+      <stop offset="0"   stop-color="#F0E281"/>
+      <stop offset=".55" stop-color="#D8BC66"/>
+      <stop offset="1"   stop-color="#A37B3C"/>
+    </linearGradient>
+    <!-- userSpaceOnUse: un degradado objectBoundingBox degenera en trazos
+         de ancho o alto cero (líneas rectas) y no pinta nada. -->
+    <linearGradient id="gh-shortcut" gradientUnits="userSpaceOnUse" x1="40" y1="40" x2="360" y2="360">
+      <stop offset="0" stop-color="#F6EFB4"/>
+      <stop offset="1" stop-color="#A37B3C"/>
+    </linearGradient>
+    <linearGradient id="fade-shortcut" gradientUnits="userSpaceOnUse" x1="0" y1="80" x2="0" y2="340">
+      <stop offset="0"   stop-color="#F0E281" stop-opacity=".55"/>
+      <stop offset="1"   stop-color="#F0E281" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="halo-shortcut" cx=".5" cy=".5" r=".5">
+      <stop offset="0"   stop-color="#F0E281" stop-opacity=".30"/>
+      <stop offset=".55" stop-color="#A37B3C" stop-opacity=".10"/>
+      <stop offset="1"   stop-color="#A37B3C" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow-shortcut" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft-shortcut" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+  </defs>
+  <circle cx="200" cy="200" r="196" fill="url(#halo-shortcut)"/>
+  <g stroke="url(#g-shortcut)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"
+     filter="url(#glow-shortcut)">
+    
+  <path d="M60 336 h52 v-52 h-52 v-84 h104 v-52 h-52 v-52 h156"
+        stroke-width="5" opacity=".38" stroke-dasharray="14 10"/>
+  <path d="M60 336 C150 336 250 250 340 96" stroke-width="7"/>
+  <path d="M340 96 l-32 6 12 30Z" fill="url(#g-shortcut)" stroke="none"/>
+  <path d="M80.02 332.57Q82.00 336.00 80.02 339.43L72.98 351.62Q71.00 355.05 67.04 355.05L52.96 355.05Q49.00 355.05 47.02 351.62L39.98 339.43Q38.00 336.00 39.98 332.57L47.02 320.38Q49.00 316.95 52.96 316.95L67.04 316.95Q71.00 316.95 72.98 320.38Z" fill="rgba(240,226,129,.10)"/>
+  <path d="M367.30 91.32Q370.00 96.00 367.30 100.68L357.70 117.30Q355.00 121.98 349.60 121.98L330.40 121.98Q325.00 121.98 322.30 117.30L312.70 100.68Q310.00 96.00 312.70 91.32L322.30 74.70Q325.00 70.02 330.40 70.02L349.60 70.02Q355.00 70.02 357.70 74.70Z" fill="url(#g-shortcut)" stroke="none"/>
+  <circle cx="200" cy="230" r="7" fill="url(#g-shortcut)" stroke="none" opacity=".8"/>
+  </g>
+</svg></div>
+    <figcaption>shortcut</figcaption>
+  </figure>
+  <figure>
+    <div class="box"><svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  
+  <defs>
+    <linearGradient id="g-asset" gradientUnits="userSpaceOnUse" x1="90" y1="30" x2="230" y2="380">
+      <stop offset="0"   stop-color="#F0E281"/>
+      <stop offset=".55" stop-color="#D8BC66"/>
+      <stop offset="1"   stop-color="#A37B3C"/>
+    </linearGradient>
+    <!-- userSpaceOnUse: un degradado objectBoundingBox degenera en trazos
+         de ancho o alto cero (líneas rectas) y no pinta nada. -->
+    <linearGradient id="gh-asset" gradientUnits="userSpaceOnUse" x1="40" y1="40" x2="360" y2="360">
+      <stop offset="0" stop-color="#F6EFB4"/>
+      <stop offset="1" stop-color="#A37B3C"/>
+    </linearGradient>
+    <linearGradient id="fade-asset" gradientUnits="userSpaceOnUse" x1="0" y1="80" x2="0" y2="340">
+      <stop offset="0"   stop-color="#F0E281" stop-opacity=".55"/>
+      <stop offset="1"   stop-color="#F0E281" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="halo-asset" cx=".5" cy=".5" r=".5">
+      <stop offset="0"   stop-color="#F0E281" stop-opacity=".30"/>
+      <stop offset=".55" stop-color="#A37B3C" stop-opacity=".10"/>
+      <stop offset="1"   stop-color="#A37B3C" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow-asset" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft-asset" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+  </defs>
+  <circle cx="200" cy="200" r="196" fill="url(#halo-asset)"/>
+  <g stroke="url(#g-asset)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"
+     filter="url(#glow-asset)">
+    
+  <path d="M116 56 h120 l68 68 v220 h-188Z" fill="rgba(240,226,129,.05)"/>
+  <path d="M236 56 v68 h68" stroke-width="4.4" opacity=".7"/>
+  <path d="M148 186 h124 M148 222 h124 M148 258 h80" stroke-width="6" opacity=".45"/>
+  <path d="M339.32 281.89Q344.00 290.00 339.32 298.11L322.68 326.93Q318.00 335.03 308.64 335.03L275.36 335.03Q266.00 335.03 261.32 326.93L244.68 298.11Q240.00 290.00 244.68 281.89L261.32 253.07Q266.00 244.97 275.36 244.97L308.64 244.97Q318.00 244.97 322.68 253.07Z" fill="url(#g-asset)" stroke="none"/>
+  <path d="M270 290 l14 16 26 -30" stroke="#0E0E0E" stroke-width="6"/>
+  </g>
+</svg></div>
+    <figcaption>asset</figcaption>
+  </figure>
+  <figure>
+    <div class="box"><svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  
+  <defs>
+    <linearGradient id="g-twoPaths" gradientUnits="userSpaceOnUse" x1="90" y1="30" x2="230" y2="380">
+      <stop offset="0"   stop-color="#F0E281"/>
+      <stop offset=".55" stop-color="#D8BC66"/>
+      <stop offset="1"   stop-color="#A37B3C"/>
+    </linearGradient>
+    <!-- userSpaceOnUse: un degradado objectBoundingBox degenera en trazos
+         de ancho o alto cero (líneas rectas) y no pinta nada. -->
+    <linearGradient id="gh-twoPaths" gradientUnits="userSpaceOnUse" x1="40" y1="40" x2="360" y2="360">
+      <stop offset="0" stop-color="#F6EFB4"/>
+      <stop offset="1" stop-color="#A37B3C"/>
+    </linearGradient>
+    <linearGradient id="fade-twoPaths" gradientUnits="userSpaceOnUse" x1="0" y1="80" x2="0" y2="340">
+      <stop offset="0"   stop-color="#F0E281" stop-opacity=".55"/>
+      <stop offset="1"   stop-color="#F0E281" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="halo-twoPaths" cx=".5" cy=".5" r=".5">
+      <stop offset="0"   stop-color="#F0E281" stop-opacity=".30"/>
+      <stop offset=".55" stop-color="#A37B3C" stop-opacity=".10"/>
+      <stop offset="1"   stop-color="#A37B3C" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow-twoPaths" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft-twoPaths" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+  </defs>
+  <circle cx="200" cy="200" r="196" fill="url(#halo-twoPaths)"/>
+  <g stroke="url(#g-twoPaths)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"
+     filter="url(#glow-twoPaths)">
+    
+  <path d="M227.30 325.32Q230.00 330.00 227.30 334.68L217.70 351.30Q215.00 355.98 209.60 355.98L190.40 355.98Q185.00 355.98 182.30 351.30L172.70 334.68Q170.00 330.00 172.70 325.32L182.30 308.70Q185.00 304.02 190.40 304.02L209.60 304.02Q215.00 304.02 217.70 308.70Z" fill="rgba(240,226,129,.10)"/>
+  <path d="M200 300 C200 240 116 226 116 166" stroke-width="5" opacity=".35" stroke-dasharray="12 10"/>
+  <path d="M200 300 C200 240 284 226 284 166" stroke-width="7"/>
+  <path d="M152.40 113.76Q156.00 120.00 152.40 126.24L139.60 148.41Q136.00 154.64 128.80 154.64L103.20 154.64Q96.00 154.64 92.40 148.41L79.60 126.24Q76.00 120.00 79.60 113.76L92.40 91.59Q96.00 85.36 103.20 85.36L128.80 85.36Q136.00 85.36 139.60 91.59Z" fill="rgba(240,226,129,.05)"/>
+  <path d="M100 120 h32 M116 104 v32" stroke-width="4" opacity=".45"/>
+  <path d="M325.86 112.83Q330.00 120.00 325.86 127.17L311.14 152.67Q307.00 159.84 298.72 159.84L269.28 159.84Q261.00 159.84 256.86 152.67L242.14 127.17Q238.00 120.00 242.14 112.83L256.86 87.33Q261.00 80.16 269.28 80.16L298.72 80.16Q307.00 80.16 311.14 87.33Z" fill="url(#g-twoPaths)" stroke="none"/>
+  <path d="M266 120 l12 14 24 -26" stroke="#0E0E0E" stroke-width="6"/>
+  <path d="M284 66 v-22" stroke-width="4" opacity=".5"/>
+  </g>
+</svg></div>
+    <figcaption>twoPaths</figcaption>
+  </figure></div></body></html>
