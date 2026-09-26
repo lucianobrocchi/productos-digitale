@@ -509,7 +509,7 @@
   {
    "id": "h8-nadie-te-dice",
    "titulo": "Nadie te va a decir esto",
-   "dur": 14.5,
+   "dur": 17,
    "tomas": [
     {
      "escena": 1,
@@ -523,46 +523,46 @@
      "escena": 2,
      "tipo": "kin",
      "t0": 1.5,
-     "dur": 2,
+     "dur": 2.5,
      "toma": "Una pieza de cerámica con una grieta reparada en oro.",
      "camara": "macro, órbita"
     },
     {
      "escena": 3,
      "tipo": "kin",
-     "t0": 3.5,
-     "dur": 2,
+     "t0": 4,
+     "dur": 2.5,
      "toma": "Vidriera iluminada de noche con un solo producto en el centro.",
      "camara": "travelling lateral"
     },
     {
      "escena": 4,
      "tipo": "kin",
-     "t0": 5.5,
-     "dur": 2,
+     "t0": 6.5,
+     "dur": 2.5,
      "toma": "Dos manos que se estrechan en penumbra, luz dorada en el borde.",
      "camara": "macro, cámara lenta"
     },
     {
      "escena": 5,
      "tipo": "kin",
-     "t0": 7.5,
-     "dur": 2,
+     "t0": 9,
+     "dur": 2.5,
      "toma": "Huellas en la arena que siguen otras huellas y se desvían.",
      "camara": "cenital"
     },
     {
      "escena": 6,
      "tipo": "kin",
-     "t0": 9.5,
-     "dur": 2,
+     "t0": 11.5,
+     "dur": 2.5,
      "toma": "Un chip dorado junto a una brújula antigua.",
      "camara": "macro"
     },
     {
      "escena": 7,
      "tipo": "impact",
-     "t0": 11.5,
+     "t0": 14,
      "dur": 1,
      "toma": "Humo que se disipa y deja ver una luz dorada nítida.",
      "camara": "fijo, el humo sale de cuadro"
@@ -570,7 +570,7 @@
     {
      "escena": 8,
      "tipo": "kin",
-     "t0": 12.5,
+     "t0": 15,
      "dur": 2,
      "toma": "El dedo sobre los labios se retira.",
      "camara": "fijo"

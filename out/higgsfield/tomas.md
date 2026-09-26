@@ -115,15 +115,15 @@ Cada escena de los Relatos tiene su toma. Al generarla, guardala como
 
 ## Nadie te va a decir esto
 
-`h8-nadie-te-dice` · 14.5 s · 8 tomas
+`h8-nadie-te-dice` · 17 s · 8 tomas
 
 | # | Duración | Toma | Cámara |
 |---|---|---|---|
 | 01 | 1.5 s | Un dedo sobre los labios en silencio, contraluz dorado. | dolly in lento |
-| 02 | 2 s | Una pieza de cerámica con una grieta reparada en oro. | macro, órbita |
-| 03 | 2 s | Vidriera iluminada de noche con un solo producto en el centro. | travelling lateral |
-| 04 | 2 s | Dos manos que se estrechan en penumbra, luz dorada en el borde. | macro, cámara lenta |
-| 05 | 2 s | Huellas en la arena que siguen otras huellas y se desvían. | cenital |
-| 06 | 2 s | Un chip dorado junto a una brújula antigua. | macro |
+| 02 | 2.5 s | Una pieza de cerámica con una grieta reparada en oro. | macro, órbita |
+| 03 | 2.5 s | Vidriera iluminada de noche con un solo producto en el centro. | travelling lateral |
+| 04 | 2.5 s | Dos manos que se estrechan en penumbra, luz dorada en el borde. | macro, cámara lenta |
+| 05 | 2.5 s | Huellas en la arena que siguen otras huellas y se desvían. | cenital |
+| 06 | 2.5 s | Un chip dorado junto a una brújula antigua. | macro |
 | 07 | 1 s | Humo que se disipa y deja ver una luz dorada nítida. | fijo, el humo sale de cuadro |
 | 08 | 2 s | El dedo sobre los labios se retira. | fijo |
