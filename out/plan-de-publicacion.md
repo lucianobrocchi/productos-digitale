@@ -1,6 +1,6 @@
 # Plan de publicación — Productos Digitales
 
-8 semanas. Cada posteo con su pieza, el texto listo para pegar y las historias que lo acompañan.
+10 semanas. Cada posteo con su pieza, el texto listo para pegar y las historias que lo acompañan.
 
 ## Semana 1
 
@@ -342,8 +342,93 @@ Guardalo y probalos esta semana.
 
 #productosdigitales #emprendimientodigital #inteligenciaartificial #ia
 
+## Semana 9
+
+### Lunes · Reel · Por qué existe Productos Digitales
+
+Pieza: `out/video/relatos/h2-origen.mp4`
+
+Nos dijeron que para vivir de Internet hacía falta suerte. O un secreto. O años de experiencia.
+
+Lo que hace falta es método. Por eso existimos.
+
+#productosdigitales #emprendimientodigital #inteligenciaartificial #ia
+
+### Martes · Reel · Tenés 3 segundos
+
+Pieza: `out/video/relatos/h5-tres-segundos.mp4`
+
+Tres ganchos para tu próximo video. Si llegaste hasta acá, funcionó.
+
+Guardalo para cuando grabes.
+
+#productosdigitales #emprendimientodigital #marketingdigital #creadoresdecontenido
+
+### Miércoles · Reel · Dos personas, el mismo día
+
+Pieza: `out/video/relatos/h1-dos-personas.mp4`
+
+Dos personas arrancan el mismo día, con la misma idea. Una graba primero. La otra pregunta primero.
+
+No fue el talento: fue el orden. ¿Vos cuál de los dos sos hoy?
+
+#productosdigitales #emprendimientodigital #negociosonline #ventasonline
+
+### Jueves · Reel · POV: le explicás a tu familia
+
+Pieza: `out/video/relatos/h6-pov-familia.mp4`
+
+POV: le explicás a tu familia a qué te dedicás.
+
+Mandáselo a ese tío. Vos sabés cuál.
+
+#productosdigitales #emprendimientodigital #marketingdigital #creadoresdecontenido
+
+### Viernes · Reel · Tenés una idea hace meses
+
+Pieza: `out/video/relatos/h3-idea-hace-meses.mp4`
+
+Tenés una idea hace meses y todos los días aparece una razón para no empezar.
+
+El problema no es la idea: es el orden. Hoy puede ser el día 1.
+
+#productosdigitales #emprendimientodigital #negociosonline #ventasonline
+
+## Semana 10
+
+### Lunes · Reel · Seis meses grabando un curso
+
+Pieza: `out/video/relatos/h4-seis-meses.mp4`
+
+Seis meses grabando un curso para lanzarlo al silencio. Pasa todo el tiempo.
+
+Antes de grabar un minuto: 10 conversaciones. Guardalo antes de tus seis meses.
+
+#productosdigitales #emprendimientodigital #negociosonline #ventasonline
+
+### Miércoles · Reel · 30 días en 20 segundos
+
+Pieza: `out/video/relatos/h7-30-dias.mp4`
+
+30 días en 20 segundos. No es magia: es un orden.
+
+Guardalo. Mañana puede ser el día 1.
+
+#productosdigitales #emprendimientodigital #inteligenciaartificial #ia #negociosonline #ventasonline
+
+### Viernes · Reel · Nadie te va a decir esto
+
+Pieza: `out/video/relatos/h8-nadie-te-dice.mp4`
+
+Cinco verdades sin humo sobre vender productos digitales.
+
+¿Cuál te dolió más? Contanos.
+
+#productosdigitales #emprendimientodigital #marketingdigital #creadoresdecontenido
+
 ## Notas
 
+- Semanas 9 y 10: los Relatos. Buscan alcance, así que el texto va corto y la historia la cuenta el video. Terminan en loop: no los cortes antes.
 - Semanas 5 a 8: las clases. Cada una tiene su versión 16:9 para YouTube (y su miniatura): subila el mismo día que el Reel.
 - Horario: probá dos franjas (12 a 13 h y 19 a 21 h) las dos primeras semanas y quedate con la que mejor rinda en las estadísticas de la cuenta.
 - Los Reels llevan audio propio: subilos con su sonido original. Si se usa un audio en tendencia, bajá la música del video al 20% en el editor de Instagram.

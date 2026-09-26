@@ -35,6 +35,37 @@ consejos concretos son buenas prácticas generales que encajan con su misión:
 no son su programa ni prometen resultados. Cuando tengamos su temario real,
 se reescriben en `clases.mjs` y se regenera todo.
 
+### Relatos — `out/video/relatos/`
+
+Ocho Reels con historia, de 14 a 23 segundos, hechos para **alcance**: más
+rápidos que las clases y con un protagonista, un personaje dorado dibujado
+con la misma línea que las ilustraciones (`src/figure.mjs`, 9 poses).
+
+| Relato | Gancho |
+|---|---|
+| Dos personas, el mismo día | la misma idea, dos caminos: uno graba un curso, el otro pregunta primero |
+| Por qué existe Productos Digitales | la historia de la marca, del manual, en 22 segundos |
+| Tenés una idea hace meses | la voz que frena, en globos de chat |
+| Seis meses grabando un curso | lo que pasa cuando nadie lo pidió |
+| Tenés 3 segundos | el gancho, explicado con el propio gancho |
+| POV: le explicás a tu familia | lo que ellos escuchan y lo que vos hacés |
+| 30 días en 20 segundos | un contador de días con el personaje avanzando |
+| Nadie te va a decir esto | 5 verdades en golpes de un segundo |
+
+**Pensados para retener.** Hay texto desde el primer cuadro (sin negro de
+arranque), subtítulo palabra por palabra, cortes de uno a dos segundos, un
+golpe de pantalla cada tanto y un final que empalma con el principio para que
+el video se vuelva a ver. No son testimonios: son parábolas, historias en
+segunda persona o la historia de la marca contada en su manual.
+
+**Listos para Higgsfield.** Cada escena trae la toma que habría que generar
+(`shot`) y el movimiento de cámara (`cam`). Están todas en
+`out/higgsfield/tomas.md` (y `tomas.json`), con un estilo común para que lo
+generado parezca de la marca. Al generar una toma, se guarda como
+`assets/tomas/<relato>/<NN>.mp4` (NN = número de escena) y se corre
+`node scripts/video/build.mjs relatos`: el clip entra de fondo solo, oscurecido
+para que el texto se lea, y el sonido no cambia.
+
 ### Audiovisual — `out/video/`
 
 | Pieza | Medida | Cantidad | Carpeta |
@@ -92,6 +123,13 @@ licencias que pagar ni reclamos de copyright** en ninguna plataforma.
 | Historias (9:16) | 1080 × 1920 | 6 | `historias/` |
 | Cuadradas / citas (1:1) | 1080 × 1080 | 5 | `cuadradas/` |
 | Portadas y miniaturas (16:9) | 1920 × 1080 | 4 | `portadas/` |
+| Destacadas de Instagram | 1080 × 1920 | 8 + vista en el perfil | `destacadas/` |
+
+**Destacadas.** El manual dice que las destacadas usan la galería de íconos de
+la marca (p. 26). Esa página no se pudo bajar del Drive, así que por ahora van
+íconos provisorios con la misma lógica: trazo grueso dentro del hexágono
+metálico oficial. "Nosotros" lleva el badge oficial tal cual. Cuando tengamos
+sus íconos se reemplazan en `scripts/destacadas.mjs` y se corre de nuevo.
 
 ---
 
@@ -130,19 +168,22 @@ cifras inventadas.
 
 ```bash
 npm run build           # piezas fijas
-npm run video           # todo lo audiovisual (logo, reels, historias, portadas, loops, kit)
+npm run video           # todo lo audiovisual (logo, reels, relatos, clases, historias, portadas, loops, kit)
 npm run audio           # biblioteca de música y efectos
 npm run gallery         # galería de revisión
 node scripts/render.mjs clases   # solo los carruseles de las clases
 ```
 
-Para un solo grupo: `node scripts/video/build.mjs reels` (o `clases`, `logo`,
-`historias`, `portadas`, `citas`, `loops`, `kit`).
+Para un solo grupo: `node scripts/video/build.mjs reels` (o `relatos`, `clases`,
+`logo`, `historias`, `portadas`, `citas`, `loops`, `kit`). Las destacadas:
+`node scripts/destacadas.mjs`.
 
 - **Copy de las piezas fijas** → `src/content.mjs`
 - **Guiones de los Reels** → `src/motion/specs/reels.mjs`
 - **Guiones de las clases** → `src/motion/specs/clases.mjs`
-- **Plan de publicación** → `src/plan.mjs` (8 semanas, se exporta a `out/plan-de-publicacion.md`)
+- **Guiones de los relatos y sus tomas** → `src/motion/specs/relatos.mjs`
+- **Personaje** → `src/figure.mjs`
+- **Plan de publicación** → `src/plan.mjs` (10 semanas, se exporta a `out/plan-de-publicacion.md`)
 - **Escenas y compositor** → `src/motion/scenes.mjs`
 - **Motor de animación** → `src/motion/engine.js`
 - **Síntesis de sonido** → `scripts/audio/synth.py`
@@ -168,6 +209,8 @@ pillow pymupdf imageio-ffmpeg`, y ffmpeg.
   marcador, en una constante arriba de `src/content.mjs`.
 - **El nombre del zócalo** del kit de edición.
 - **La licencia de Neue Haas Grotesk**, si quieren la tipografía exacta.
+- **La galería de íconos del manual (p. 26)**, para recrearla en este estilo
+  y usarla en las destacadas y en las piezas.
 - **Voz en off.** Los Reels están hechos para verse sin sonido y la música
   los sostiene, pero si alguien de la marca graba la voz, entra encima sin
   tocar nada.

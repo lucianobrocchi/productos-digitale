@@ -3,10 +3,12 @@ import { preview } from './preview.mjs';
 import { compose, BEAT } from '../../src/motion/scenes.mjs';
 import { reels } from '../../src/motion/specs/reels.mjs';
 import { clases } from '../../src/motion/specs/clases.mjs';
+import { relatos } from '../../src/motion/specs/relatos.mjs';
 // uso: _t.mjs <id> <W> <H> <escenas: índices, se toma cada una a mitad y al final> [salida]
 const [id, W, H, sc, dest] = process.argv.slice(2);
-const r = [...reels, ...clases].find(x => x.id === id);
-const { video } = compose({ id: id + '-p' + W, w: +W, h: +H, scenes: r.scenes, gx: r.gx, progress: true });
+const r = [...reels, ...clases, ...relatos].find(x => x.id === id);
+const isRel = relatos.includes(r);
+const { video } = compose({ id: id + '-p' + W, w: +W, h: +H, scenes: r.scenes, gx: r.gx, progress: !isRel, fast: isRel, instant: isRel });
 let t = 0; const starts = r.scenes.map(s => { const a = t; t += s.len * BEAT; return a; });
 const times = sc.split(',').map(Number).flatMap(i => [starts[i] + r.scenes[i].len * BEAT * .55, starts[i] + r.scenes[i].len * BEAT - .2]);
 const b = await chromium.launch();

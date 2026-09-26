@@ -17,6 +17,8 @@ import { reels } from '../../src/motion/specs/reels.mjs';
 import { logoReveal, LOGO_CUES } from '../../src/motion/specs/logo.mjs';
 import { clases } from '../../src/motion/specs/clases.mjs';
 import { cover169 } from '../../src/motion/specs/portadas.mjs';
+import { relatos, ESTILO_TOMAS } from '../../src/motion/specs/relatos.mjs';
+import { existsSync } from 'node:fs';
 
 const want = process.argv.slice(2);
 const has = g => !want.length || want.includes(g);
@@ -65,6 +67,44 @@ if (has('clases')) {
     jobs.push(cover169({ id: k.id, h1: k.mini, art, gx: `${k.gx}%`, gy: '90%' },
       { prefix: 'miniatura-', out: 'clases' }));
   }
+}
+
+/* ------------------------------ relatos ------------------------------
+   Ritmo rápido, contenido desde el primer cuadro y final en loop.
+   Tomas generadas (Higgsfield u otra): si existe assets/tomas/<relato>/<NN>.mp4,
+   entra de fondo en la escena NN sin tocar el guion. */
+if (has('relatos')) {
+  const doc = [];
+  for (const k of relatos) {
+    const scenes = k.scenes.map((s, i) => {
+      const clip = `assets/tomas/${k.id}/${String(i + 1).padStart(2, '0')}.mp4`;
+      return existsSync(resolve(ROOT, clip)) ? { ...s, bg: clip } : s;
+    });
+    const { video, audio } = compose({ id: k.id, w: 1080, h: 1920, scenes, gx: k.gx, fast: true, instant: true });
+    jobs.push({ video: { ...video, out: `relatos/${k.id}.mp4` }, audio });
+    doc.push({ id: k.id, titulo: k.titulo, dur: video.dur, tomas: video.shots,
+      conClip: video.bgs.length });
+  }
+  writeTomas(doc);
+}
+
+/** Documento de tomas para generar con Higgsfield: un .md para leer y un .json para automatizar. */
+function writeTomas(doc) {
+  const dir = resolve(ROOT, 'out/higgsfield');
+  mkdirSync(dir, { recursive: true });
+  writeFileSync(resolve(dir, 'tomas.json'), JSON.stringify({ estilo: ESTILO_TOMAS, formato: '9:16, 1080×1920, 30 fps',
+    relatos: doc }, null, 1));
+  const md = ['# Tomas para generar — Relatos', '',
+    'Cada escena de los Relatos tiene su toma. Al generarla, guardala como',
+    '`assets/tomas/<relato>/<NN>.mp4` (NN = número de escena, con dos cifras) y corré',
+    '`node scripts/video/build.mjs relatos`: el clip entra de fondo solo, con el texto encima.', '',
+    `**Estilo común (sumalo a cada prompt):** ${ESTILO_TOMAS}`, '',
+    '**Formato:** vertical 9:16, 1080×1920. La duración de cada toma está en la tabla; generá un poco más larga.', '',
+    ...doc.flatMap(r => [`## ${r.titulo}`, '', `\`${r.id}\` · ${r.dur} s · ${r.tomas.length} tomas`, '',
+      '| # | Duración | Toma | Cámara |', '|---|---|---|---|',
+      ...r.tomas.map(t => `| ${String(t.escena).padStart(2, '0')} | ${t.dur} s | ${t.toma} | ${t.camara} |`), ''])].join('\n');
+  writeFileSync(resolve(dir, 'tomas.md'), md);
+  console.log(`🎬 ${doc.reduce((n, r) => n + r.tomas.length, 0)} tomas documentadas en out/higgsfield/`);
 }
 
 /* ----------------------------- el resto ----------------------------- */

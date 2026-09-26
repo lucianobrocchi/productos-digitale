@@ -202,9 +202,44 @@ Guardalo y marcá en qué semana estás.`,
 
 Guardalo y probalos esta semana.`,
     tags: tags('ia') },
+  /* --------------------- semanas 9 y 10: relatos ---------------------
+     Buscan alcance: la historia está en el video, el texto acompaña corto. */
+  { semana: 9, dia: 'Lunes', tipo: 'Reel', pieza: 'video/relatos/h2-origen.mp4', titulo: 'Por qué existe Productos Digitales',
+    texto: `Nos dijeron que para vivir de Internet hacía falta suerte. O un secreto. O años de experiencia.
+
+Lo que hace falta es método. Por eso existimos.`, tags: tags('ia') },
+  { semana: 9, dia: 'Martes', tipo: 'Reel', pieza: 'video/relatos/h5-tres-segundos.mp4', titulo: 'Tenés 3 segundos',
+    texto: `Tres ganchos para tu próximo video. Si llegaste hasta acá, funcionó.
+
+Guardalo para cuando grabes.`, tags: tags('contenido') },
+  { semana: 9, dia: 'Miércoles', tipo: 'Reel', pieza: 'video/relatos/h1-dos-personas.mp4', titulo: 'Dos personas, el mismo día',
+    texto: `Dos personas arrancan el mismo día, con la misma idea. Una graba primero. La otra pregunta primero.
+
+No fue el talento: fue el orden. ¿Vos cuál de los dos sos hoy?`, tags: tags('venta') },
+  { semana: 9, dia: 'Jueves', tipo: 'Reel', pieza: 'video/relatos/h6-pov-familia.mp4', titulo: 'POV: le explicás a tu familia',
+    texto: `POV: le explicás a tu familia a qué te dedicás.
+
+Mandáselo a ese tío. Vos sabés cuál.`, tags: tags('contenido') },
+  { semana: 9, dia: 'Viernes', tipo: 'Reel', pieza: 'video/relatos/h3-idea-hace-meses.mp4', titulo: 'Tenés una idea hace meses',
+    texto: `Tenés una idea hace meses y todos los días aparece una razón para no empezar.
+
+El problema no es la idea: es el orden. Hoy puede ser el día 1.`, tags: tags('venta') },
+  { semana: 10, dia: 'Lunes', tipo: 'Reel', pieza: 'video/relatos/h4-seis-meses.mp4', titulo: 'Seis meses grabando un curso',
+    texto: `Seis meses grabando un curso para lanzarlo al silencio. Pasa todo el tiempo.
+
+Antes de grabar un minuto: 10 conversaciones. Guardalo antes de tus seis meses.`, tags: tags('venta') },
+  { semana: 10, dia: 'Miércoles', tipo: 'Reel', pieza: 'video/relatos/h7-30-dias.mp4', titulo: '30 días en 20 segundos',
+    texto: `30 días en 20 segundos. No es magia: es un orden.
+
+Guardalo. Mañana puede ser el día 1.`, tags: tags('ia', 'venta') },
+  { semana: 10, dia: 'Viernes', tipo: 'Reel', pieza: 'video/relatos/h8-nadie-te-dice.mp4', titulo: 'Nadie te va a decir esto',
+    texto: `Cinco verdades sin humo sobre vender productos digitales.
+
+¿Cuál te dolió más? Contanos.`, tags: tags('contenido') },
 ];
 
 export const notas = [
+  'Semanas 9 y 10: los Relatos. Buscan alcance, así que el texto va corto y la historia la cuenta el video. Terminan en loop: no los cortes antes.',
   'Semanas 5 a 8: las clases. Cada una tiene su versión 16:9 para YouTube (y su miniatura): subila el mismo día que el Reel.',
   'Horario: probá dos franjas (12 a 13 h y 19 a 21 h) las dos primeras semanas y quedate con la que mejor rinda en las estadísticas de la cuenta.',
   'Los Reels llevan audio propio: subilos con su sonido original. Si se usa un audio en tendencia, bajá la música del video al 20% en el editor de Instagram.',

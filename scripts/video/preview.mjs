@@ -2,12 +2,13 @@
    la animación sin renderizar el video entero. */
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
-import { page, BUILD, ROOT } from './core.mjs';
+import { page, BUILD, ROOT, prepareBgs, attachBgs, syncBgs } from './core.mjs';
 
 export async function preview(browser, spec, times, dest, { thumb = 480 } = {}) {
   mkdirSync(BUILD, { recursive: true });
   const html = join(BUILD, `${spec.id}.preview.html`);
   writeFileSync(html, page(spec));
+  const bgmap = await prepareBgs(spec);
   const pg = await browser.newPage({ viewport: { width: spec.w, height: spec.h }, deviceScaleFactor: 1 });
   const errs = [];
   pg.on('pageerror', e => errs.push(e.message));
@@ -15,9 +16,11 @@ export async function preview(browser, spec, times, dest, { thumb = 480 } = {}) 
   await pg.evaluate(async () => { await document.fonts.ready; });
   await pg.waitForTimeout(150);
   if (errs.length) throw new Error(errs.join(' | '));
+  await attachBgs(pg, bgmap);
   const shots = [];
   for (const t of times) {
     await pg.evaluate(tt => window.__seek(tt), t);
+    if (spec.bgs?.length) await syncBgs(pg, t);
     shots.push({ t, b64: (await pg.screenshot({ type: 'jpeg', quality: 80 })).toString('base64') });
   }
   await pg.close();

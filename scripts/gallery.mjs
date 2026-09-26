@@ -7,7 +7,8 @@ import { carousels, stories, squares, covers, HANDLE } from '../src/content.mjs'
 import { reels } from '../src/motion/specs/reels.mjs';
 import { plan, notas } from '../src/plan.mjs';
 import { clases } from '../src/motion/specs/clases.mjs';
-import { readdirSync, writeFileSync, mkdirSync, copyFileSync, existsSync, statSync } from 'node:fs';
+import { relatos } from '../src/motion/specs/relatos.mjs';
+import { readdirSync, readFileSync, writeFileSync, mkdirSync, copyFileSync, existsSync, statSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
@@ -150,6 +151,26 @@ const efectos = ls('audio/efectos', '.mp3').map(f => aud(`audio/efectos/${f}`,
   f.replace('.mp3', '').replace(/-/g, ' '), f)).join('');
 
 
+
+/* ------------------------------- relatos ------------------------------- */
+const RL = 'video/relatos';
+const relV = relatos.map(k => {
+  if (!existsSync(resolve(OUT, `${RL}/${k.id}.mp4`))) return '';
+  const web = `build/web/${RL}/${k.id}.mp4`;                // vista previa 720 × 1280
+  return vid(`${RL}/${k.id}.mp4`, k.titulo, '9 / 16', '', existsSync(resolve(root, web)) ? web : undefined);
+}).join('');
+let tomasDoc = { relatos: [] };
+try { tomasDoc = JSON.parse(readFileSync(resolve(OUT, 'higgsfield/tomas.json'), 'utf8')); } catch (e) { /* sin documento todavía */ }
+const tomasHtml = tomasDoc.relatos.map(r => `
+  <details class="tomas"><summary><b>${r.titulo}</b> <span>${r.tomas.length} tomas · ${r.dur} s</span></summary>
+    <ol>${r.tomas.map(t => `<li><span class="td">${t.dur} s · ${esc(t.camara)}</span>${esc(t.toma)}</li>`).join('')}</ol>
+  </details>`).join('');
+
+/* ------------------------------ destacadas ------------------------------ */
+const destOrden = ['empeza-aca', 'metodo', 'clases', 'ia', 'ofertas', 'preguntas', 'recursos', 'nosotros'];
+const destV = destOrden.filter(k => existsSync(resolve(OUT, `destacadas/${k}.png`)))
+  .map(k => pic(`destacadas/${k}.png`, k.replace(/-/g, ' '), '9 / 16')).join('');
+
 /* ------------------------------- clases ------------------------------- */
 const K = 'video/clases';
 const clasesHtml = clases.map((k, i) => {
@@ -214,7 +235,7 @@ const rej = (dir, ratio) => ls(dir).map(f => pic(`${dir}/${f}`, f.replace('.png'
 /* -------------------------------- cifras -------------------------------- */
 const nFijas = [...carousels, ...clases].reduce((n, c) => n + ls(`carruseles/${c.id}`).length, 0)
   + stories.length + squares.length + covers.length;
-const nVideos = reelFiles.length + ls('video/clases', '.mp4').filter(f => !f.startsWith('miniatura')).length + ls('video/logo', '.mp4').length + ls('video/historias', '.mp4').length
+const nVideos = reelFiles.length + ls('video/relatos', '.mp4').length + ls('video/clases', '.mp4').filter(f => !f.startsWith('miniatura')).length + ls('video/logo', '.mp4').length + ls('video/historias', '.mp4').length
   + portadasV.length + ls('video/loops', '.mp4').length + ls('video/citas', '.mp4').length;
 const nKit = ls('video/kit', '.webm').length;
 const nAudio = ls('audio/musica', '.mp3').length + ls('audio/efectos', '.mp3').length;
@@ -336,6 +357,11 @@ const html = `<title>Piezas Productos Digitales</title>
   .clase{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:16px;align-items:start}
   .c-h{display:grid;gap:16px;grid-template-columns:1fr 1fr}
   @media (max-width:640px){.clase{grid-template-columns:1fr 1fr}.c-reel{grid-row:span 2}.c-h{grid-template-columns:1fr}}
+  details.tomas{border:1px solid var(--linea);border-radius:12px;background:var(--bg-2);padding:12px 16px;margin-top:10px}
+  details.tomas summary{cursor:pointer;font-size:15px;list-style-position:outside}
+  details.tomas summary span{color:var(--apagado);font-size:13px;margin-left:6px}
+  details.tomas ol{margin:12px 0 4px;padding-left:22px;display:grid;gap:8px;font-size:14px;color:rgba(242,242,242,.86)}
+  details.tomas .td{display:block;font-size:12px;color:var(--oro);letter-spacing:.02em}
   .posts{display:grid;gap:14px}
   .post{display:grid;grid-template-columns:120px 1fr;gap:18px;border:1px solid var(--linea);border-radius:14px;
     background:var(--bg-2);padding:14px}
@@ -371,11 +397,23 @@ const html = `<title>Piezas Productos Digitales</title>
 </header>
 
 <nav class="sec" aria-label="Secciones"><div class="env">
-  <a href="#clases">Clases</a><a href="#audiovisual">Audiovisual</a><a href="#kit">Kit de edición</a><a href="#sonido">Sonido</a><a href="#plan">Plan</a>
+  <a href="#relatos">Relatos</a><a href="#clases">Clases</a><a href="#audiovisual">Audiovisual</a><a href="#kit">Kit de edición</a><a href="#destacadas">Destacadas</a><a href="#sonido">Sonido</a><a href="#plan">Plan</a>
   <a href="#fijas">Piezas fijas</a><a href="#marca">De dónde sale</a>
 </div></nav>
 
 <main><div class="env">
+  <h2 id="relatos">Relatos: historias rápidas para alcance</h2>
+  <p class="bajada" style="font-size:15.5px;margin-top:14px">Reels de 15 a 22 segundos con historia: algo en pantalla desde el
+    primer cuadro, cortes de un segundo, subtítulo palabra por palabra y un final que empalma con el principio para que se
+    vuelvan a ver. Sin testimonios ni resultados inventados: parábolas, historias en segunda persona y la historia de la marca.</p>
+  ${bloque(hex, 'Relatos', `${relatos.length} piezas · 1080 × 1920 · el personaje dorado es el protagonista`, relV, 'tira')}
+  <section class="bloque">
+    <header class="cab"><div class="idx">${hex}</div><div><h3>Listos para Higgsfield</h3>
+      <p class="meta">Cada escena tiene su toma escrita. Cuando se genera, el clip entra de fondo solo y el texto queda
+        encima: se guarda como assets/tomas/&lt;relato&gt;/&lt;escena&gt;.mp4 y se vuelve a renderizar.</p></div></header>
+    ${tomasHtml}
+  </section>
+
   <h2 id="clases">Clases: contenido de valor</h2>
   <p class="bajada" style="font-size:15.5px;margin-top:14px">Piezas largas, de 45 a 65 segundos, sobre los temas de las portadas
     de la marca: Introducción, Mentalidad, Principios del marketing digital y La nueva economía digital. Cada clase sale en
@@ -394,6 +432,16 @@ const html = `<title>Piezas Productos Digitales</title>
   <h2 id="kit">Kit de edición</h2>
   ${bloque(hex, 'Overlays horizontales', 'Para poner encima de videos filmados. Van en .mov (PNG con alfa, con sonido) para Premiere, After Effects, DaVinci y Final Cut, y en .webm para web y editores de celular.', kitH, 'rejilla', '300px')}
   ${bloque(hex, 'Overlays verticales', 'Los mismos, para Reels, TikTok e historias.', kitVt, 'rejilla', '170px')}
+
+  <h2 id="destacadas">Destacadas de Instagram</h2>
+  <section class="bloque">
+    <header class="cab"><div class="idx">${hex}</div><div><h3>Portadas de historias destacadas</h3>
+      <p class="meta">El hexágono oficial en oro, como el badge del logo. Los íconos son provisorios: se reemplazan por los
+        de la galería de íconos del manual en cuanto los tengamos.</p></div></header>
+    ${existsSync(resolve(OUT, 'destacadas/vista-en-el-perfil.png')) ? `<img src="${webImg('destacadas/vista-en-el-perfil.png')}" alt="Así se ven en el perfil"
+      style="width:100%;max-width:100%;border-radius:12px;border:1px solid var(--linea);display:block;margin-bottom:18px">` : ''}
+    <div class="rejilla" style="--w:120px">${destV}</div>
+  </section>
 
   <h2 id="sonido">Sonido</h2>
   <section class="bloque">

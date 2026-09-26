@@ -11,6 +11,7 @@
    ------------------------------------------------------------------ */
 import { library, iconYes, iconNo, hexPath } from '../illus.mjs';
 import { logoReveal, LOGO_CUES } from './specs/logo.mjs';
+import { figure } from '../figure.mjs';
 
 export const BPM = 120;
 export const BEAT = 60 / BPM;
@@ -490,7 +491,170 @@ function timeline(s, c) {
   return { html, js, cues, e: s.e ?? 2 };
 }
 
-export const SCENES = { hook, statement, step, myth, stat, list, compare, cta, logo, point, prompt, template, timeline };
+/* ===================== escenas de relato (ritmo rápido) =====================
+   Pensadas para retener: algo en pantalla desde el primer cuadro, cortes de
+   ~1 s, subtítulo que entra palabra por palabra y golpes que rompen el patrón. */
+
+/** Parte un texto en palabras; lo que va entre *asteriscos* sale en dorado. */
+function tokens(text) {
+  const out = [];
+  let gold = false;
+  for (const raw of text.split(/\s+/).filter(Boolean)) {
+    let w = raw;
+    const open = w.startsWith('*'), close = w.endsWith('*') || /\*[.,!?:;…]$/.test(w);
+    if (open) { gold = true; w = w.slice(1); }
+    w = w.replace(/\*(?=[.,!?:;…]?$)/, '');
+    out.push({ w, gold });
+    if (close) gold = false;
+  }
+  return out;
+}
+
+const figBox = (pose, id, size, tono) => `<div class="fg abs" style="width:${size}px;height:${size}px">${figure(pose, id, { tono })}</div>`;
+
+/** Subtítulo que entra palabra por palabra, con personaje opcional arriba. */
+function words(s, c) {
+  const { l, r, V } = safe(c.w, c.h);
+  const tk = tokens(s.text);
+  const rate = s.rate ?? .2;
+  const size = s.size ?? (V ? 104 : 96);
+  const F = V ? 520 : 560;
+  const fig = s.fig ? `<div class="abs fgw" style="left:${V ? (c.w - r + l) / 2 - F / 2 : c.w - r - F}px;top:${V ? 250 : (c.h - F) / 2}px;
+       width:${F}px;height:${F}px">${figure(s.fig, `${c.sid}-f`, { tono: s.tono || 'oro' })}</div>` : '';
+  const html = `
+  ${fig}
+  <div class="abs" style="left:${l}px;right:${V ? r : (s.fig ? F + r + 60 : c.w * .22)}px;top:${V ? (s.fig ? 250 + F : 280) : 120}px;
+       bottom:${V ? 440 : 120}px;display:flex;flex-direction:column;justify-content:${s.fig && V ? 'flex-start' : 'center'}">
+    ${s.kicker ? `<div class="kicker k" style="margin-bottom:26px">${s.kicker}</div>` : ''}
+    <div class="wd" style="font-size:${size}px;line-height:1.04;font-weight:900;letter-spacing:-.03em;${s.upper === false ? '' : 'text-transform:uppercase;'}">
+      ${tk.map(t => `<span class="w${t.gold ? ' gold' : ''}" style="display:inline-block;margin-right:.24em">${t.w}</span>`).join('')}
+    </div>
+  </div>`;
+  const first = c.instant ? 0 : .05;
+  const js = `
+  ${s.kicker ? `tw(S+' .k',{opacity:[0,1]},T0,${c.instant ? 0 : .3},'out');` : ''}
+  ${s.fig ? `tw(S+' .fgw',{scale:[${c.instant ? 1 : .7},1],opacity:[${c.instant ? 1 : 0},1]},T0,.35,'back');
+             tw(S+' .fgw',{y:[0,-10]},T0+.35,${Math.max(.5, c.len * BEAT - .35)},'sine');` : ''}
+  [...document.querySelectorAll(S+' .w')].forEach((w,i)=>{
+    const at=T0+${first}+i*${rate};
+    if (${c.instant ? 'i===0' : 'false'}) { tw(w,{opacity:[1,1]},T0,0,'linear'); return; }
+    tw(w,{opacity:[0,1],scale:[1.35,1],y:[18,0]},at,.2,'back');
+  });`;
+  const cues = tk.map((t, i) => t.gold
+    ? { t: first + i * rate, type: 'tick', level: .7, freq: 2300 }
+    : { t: first + i * rate, type: 'tick', level: .14, freq: 3000 + (i % 3) * 200 });
+  return { html, js, cues, e: s.e ?? 2 };
+}
+
+/** Golpe: una palabra gigante que rompe el ritmo. */
+function punch(s, c) {
+  const { l, r, V } = safe(c.w, c.h);
+  const ls = Array.isArray(s.text) ? s.text : [s.text];
+  const html = `
+  <div class="abs pz" style="left:${l}px;right:${V ? r : l}px;top:0;bottom:${V ? 180 : 0}px;display:flex;flex-direction:column;
+       align-items:center;justify-content:center;text-align:center">
+    <div class="gl pw" style="position:relative;display:inline-block;width:100%">
+      <div class="${s.gold === false ? '' : 'gold'} pt" data-fit style="font-weight:900;font-size:${s.size ?? (V ? 210 : 230)}px;line-height:.92;
+           letter-spacing:-.05em;text-transform:uppercase;display:flex;flex-direction:column;align-items:center">
+        ${ls.map(t => `<span class="line">${t}</span>`).join('')}</div>
+    </div>
+    ${s.sub ? `<div class="sub" style="margin-top:34px;font-weight:700;font-size:${V ? 44 : 40}px;color:rgba(242,242,242,.8)">${s.sub}</div>` : ''}
+  </div>`;
+  const js = `
+  tw(S+' .pw',{scale:[1.7,1],opacity:[0,1],blur:[18,0]},T0,.26,'expo');
+  glitch(S+' .pw',T0+.02,.22,40,${(c.sid.length * 7) % 97});
+  tw(S+' .pz',{scale:[1,1.06]},T0+.26,${Math.max(.3, c.len * BEAT - .26)},'linear');
+  ${s.sub ? `tw(S+' .sub',{opacity:[0,1],y:[16,0]},T0+.3,.3,'out');` : ''}`;
+  return { html, js, e: s.e ?? 3, cues: [{ t: 0, type: 'hit', level: .6 }, { t: .02, type: 'glitch', len: .22, level: .5, seed: 3 }] };
+}
+
+/** A contra B: el mismo punto de partida, dos caminos. */
+function versus(s, c) {
+  const { l, r, V } = safe(c.w, c.h);
+  const W = (c.w - l - r - 30) / 2;
+  const F = V ? 420 : 460;
+  const col = (x, k, tono) => `
+    <div class="col ${k}" style="flex:1;display:flex;flex-direction:column;align-items:center;text-align:center">
+      <div style="width:${F}px;height:${F}px;max-width:100%">${figure(x.pose || 'parado', `${c.sid}-${k}`, { tono })}</div>
+      <div class="kicker" style="margin-top:6px;font-size:${V ? 26 : 24}px;${tono === 'oro' ? '' : 'color:rgba(242,242,242,.5)'}">${x.label}</div>
+      <div style="margin-top:12px;font-weight:800;font-size:${V ? 50 : 44}px;line-height:1.1;letter-spacing:-.015em;
+           ${tono === 'oro' ? '' : 'color:rgba(242,242,242,.62)'}">${x.text}</div>
+    </div>`;
+  const html = `
+  <div class="abs" style="left:${l}px;right:${r}px;top:${V ? 290 : 90}px;bottom:${V ? 420 : 90}px;display:flex;flex-direction:column">
+    ${s.title ? `<div class="quote" data-fit style="font-size:${V ? 96 : 80}px;line-height:1;font-weight:900;text-transform:uppercase;
+         letter-spacing:-.03em">${headline(s.title, { gold: s.gold ?? [] })}</div>` : ''}
+    <div style="flex:1;display:flex;gap:30px;align-items:center;margin-top:20px">
+      ${col(s.a, 'ca', 'apagado')}${col(s.b, 'cb', 'oro')}
+    </div>
+  </div>`;
+  const js = `
+  ${s.title ? `lines(S+' .quote .line',T0,.1,.4);` : ''}
+  tw(S+' .ca',{opacity:[0,1],y:[30,0]},T0+${s.title ? .25 : 0},.35,'expo');
+  tw(S+' .cb',{opacity:[0,1],y:[30,0]},T0+B*${s.bAt ?? 2},.35,'expo');
+  tw(S+' .cb svg',{scale:[.8,1]},T0+B*${s.bAt ?? 2},.4,'back');`;
+  return { html, js, e: s.e ?? 2,
+    cues: [{ t: .25, type: 'tick', level: .5, freq: 1500 }, { t: BEAT * (s.bAt ?? 2), type: 'hit', level: .4 }] };
+}
+
+/** Contador de días: el tiempo pasa en pantalla. */
+function day(s, c) {
+  const { l, r, V } = safe(c.w, c.h);
+  const [a, b] = Array.isArray(s.day) ? s.day : [s.day, s.day];
+  const F = V ? 540 : 520;
+  const html = `
+  <div class="abs" style="left:${l}px;right:${r}px;top:${V ? 280 : 100}px;bottom:${V ? 400 : 100}px;display:flex;
+       flex-direction:${V ? 'column' : 'row'};${V ? 'justify-content:center' : 'align-items:center;gap:60px'}">
+    <div style="${V ? '' : 'flex:1'}">
+      <div style="display:flex;align-items:baseline;gap:22px">
+        <span class="kicker" style="font-size:${V ? 34 : 32}px">Día</span>
+        <span class="num gold" data-fmt="int" style="font-weight:900;font-size:${V ? 250 : 220}px;line-height:.9;letter-spacing:-.05em;
+              font-variant-numeric:tabular-nums">${a}</span>
+      </div>
+      <div class="wd" style="margin-top:${V ? 22 : 30}px;font-size:${V ? 78 : 64}px;line-height:1.06;font-weight:800;letter-spacing:-.02em">
+        ${tokens(s.text).map(t => `<span class="w${t.gold ? ' gold' : ''}" style="display:inline-block;margin-right:.24em">${t.w}</span>`).join('')}
+      </div>
+    </div>
+    ${s.fig ? `<div class="fgw" style="width:${F}px;height:${F}px;${V ? 'margin-top:20px;align-self:center' : ''}">${figure(s.fig, `${c.sid}-f`, { tono: s.tono || 'oro' })}</div>` : ''}
+  </div>`;
+  const js = `
+  tw(S+' .num',{count:[${a},${b}],scale:[1.25,1]},T0,${a === b ? .25 : .7},'expo');
+  document.querySelector(S+' .num').style.transformOrigin='0 80%';
+  ${s.fig ? `tw(S+' .fgw',{opacity:[0,1],scale:[.75,1]},T0+.1,.35,'back');` : ''}
+  [...document.querySelectorAll(S+' .w')].forEach((w,i)=>tw(w,{opacity:[0,1],y:[16,0]},T0+.3+i*${s.rate ?? .12},.18,'out'));`;
+  const cues = [{ t: 0, type: 'hit', level: .45 }];
+  if (a !== b) for (let k = 0; k < 6; k++) cues.push({ t: k * .1, type: 'tick', level: .35, freq: 2000 + k * 150 });
+  return { html, js, cues, e: s.e ?? 2 };
+}
+
+/** Diálogo en formato POV: burbujas que entran de a una. */
+function dialog(s, c) {
+  const { l, r, V } = safe(c.w, c.h);
+  const every = s.every ?? 2;
+  const html = `
+  <div class="abs" style="left:${l}px;right:${r}px;top:${V ? 290 : 90}px;bottom:${V ? 430 : 90}px;display:flex;
+       flex-direction:column;justify-content:center;gap:${V ? 26 : 22}px">
+    ${s.kicker ? `<div class="kicker k" style="margin-bottom:10px">${s.kicker}</div>` : ''}
+    ${s.lines.map(ln => ln.a === 'vos' ? `
+      <div class="bb" style="align-self:flex-end;max-width:78%;padding:26px 34px;border-radius:34px 34px 8px 34px;
+           background:linear-gradient(140deg,#F0E281,#C9A24E);color:#12171E;font-weight:800;font-size:${V ? 56 : 46}px;line-height:1.16">${ln.t}</div>` : `
+      <div class="bb" style="align-self:flex-start;max-width:78%;padding:26px 34px;border-radius:34px 34px 34px 8px;
+           background:rgba(242,242,242,.10);border:1.5px solid rgba(242,242,242,.14);font-weight:700;font-size:${V ? 56 : 46}px;
+           line-height:1.18;color:#F2F2F2">${ln.t}</div>`).join('')}
+  </div>`;
+  const js = `
+  ${s.kicker ? `tw(S+' .k',{opacity:[0,1]},T0,${c.instant ? 0 : .25},'out');` : ''}
+  [...document.querySelectorAll(S+' .bb')].forEach((b,i)=>{
+    const at=T0+${c.instant ? 0 : .1}+i*B*${every};
+    tw(b,{opacity:[${c.instant ? '(i===0?1:0)' : 0},1],scale:[.6,1],y:[30,0]},at,.3,'back');
+    b.style.transformOrigin = b.style.alignSelf==='flex-end' ? '100% 100%' : '0 100%';
+  });`;
+  const cues = s.lines.map((ln, i) => ({ t: .1 + i * BEAT * every, type: 'tick', level: .55, freq: ln.a === 'vos' ? 2400 : 1500 }));
+  return { html, js, cues, e: s.e ?? 1 };
+}
+
+export const SCENES = { hook, statement, step, myth, stat, list, compare, cta, logo, point, prompt, template, timeline,
+  words, punch, versus, day, dialog };
 
 /* ============================ compositor ============================ */
 
@@ -498,29 +662,44 @@ export const SCENES = { hook, statement, step, myth, stat, list, compare, cta, l
  * Encadena escenas. Cada escena lleva `t` (tipo) y `len` en pulsos.
  * Devuelve el spec de video y el spec de audio sincronizado.
  */
-export function compose({ id, w, h, scenes, handle, persistentLogo = true, gx, gy, progress = false }) {
+export function compose({ id, w, h, scenes, handle, persistentLogo = true, gx, gy, progress = false,
+                         fast = false, instant = false }) {
   const { V } = safe(w, h);
   let T = 0;
   const html = [], js = [], cues = [], sections = [];
   let musicEnd = null;
+  const bgs = [], shots = [];
   scenes.forEach((s, i) => {
     const sid = `${id}-s${i}`;
     const len = s.len;
-    const r = SCENES[s.t]({ ...s, handle }, { w, h, sid, len });
+    const first = instant && i === 0;
+    const r = SCENES[s.t]({ ...s, handle }, { w, h, sid, len, instant: first });
     const T0 = +(T).toFixed(3), T1 = +(T + len * BEAT).toFixed(3);
-    html.push(`<div class="scene" id="${sid}"><div class="cam">${r.html}</div></div>`);
+    // fondo de video por escena (tomas generadas, p. ej. con Higgsfield): se
+    // pasa a secuencia de imágenes y el renderizador elige el cuadro exacto
+    const bg = s.bg ? (bgs.push({ id: sid, src: s.bg, t0: T0, dur: len * BEAT }), `
+      <img class="bgseq" data-id="${sid}" data-t0="${T0}" alt=""
+           style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,14,14,.55),rgba(14,14,14,.25) 40%,
+           rgba(14,14,14,.78));"></div>`) : '';
+    if (s.shot) shots.push({ escena: i + 1, tipo: s.t, t0: T0, dur: +(len * BEAT).toFixed(2), toma: s.shot, camara: s.cam || '' });
+    html.push(`<div class="scene" id="${sid}">${bg}<div class="cam">${r.html}</div></div>`);
     const last = i === scenes.length - 1;
+    const enter = first ? '' : fast
+      ? `tw(S+' > .cam',{scale:[1.1,1],blur:[5,0]},T0,.28,'expo');`
+      : `tw(S+' > .cam',{scale:[1.07,1],blur:[14,0]},T0,.5,'expo');`;
     js.push(`{ const S='#${sid}', T0=${T0}, B=${BEAT};
       tw(S,{opacity:[0,1]},T0,0,'linear'); ${last ? '' : `tw(S,{opacity:[1,0]},${T1},0,'linear');`}
-      tw(S+' > .cam',{scale:[1.07,1],blur:[14,0]},T0,.5,'expo');
-      ${last ? '' : `tw(S+' > .cam',{opacity:[1,0],scale:[1,.97]},${T1}-.16,.16,'in');`}
+      ${enter}
+      ${last ? '' : `tw(S+' > .cam',{opacity:[1,0],scale:[1,.97]},${T1}-${fast ? .1 : .16},${fast ? .1 : .16},'in');`}
       ${r.js}
     }`);
-    // corte: destello + barrido de aire que llega justo al tiempo fuerte
+    // corte: destello + barrido de aire que llega justo al tiempo fuerte.
+    // En ritmo rápido los cortes son cada ~1 s: menos aire y menos desgarros.
     if (i > 0) {
-      js.push(`tw('#${id}-flash',{opacity:[.55,0]},${T0},.45,'out');`);
-      cues.push({ t: Math.max(0, T0 - .32), type: 'whoosh', len: .45, level: .55 });
-      if (s.t === 'hook' || s.t === 'logo' || i % 3 === 0) {
+      js.push(`tw('#${id}-flash',{opacity:[${fast ? .3 : .55},0]},${T0},${fast ? .3 : .45},'out');`);
+      if (!fast || len >= 3) cues.push({ t: Math.max(0, T0 - .32), type: 'whoosh', len: .45, level: fast ? .3 : .55 });
+      if (fast ? (s.t === 'punch' || s.t === 'versus') : (s.t === 'hook' || s.t === 'logo' || i % 3 === 0)) {
         js.push(`PD.tear('#${id}-tear',${T0}-.04,.2,${i * 7 + 1});`);
         cues.push({ t: T0 - .04, type: 'glitch', len: .2, seed: i, level: .7 });
       }
@@ -558,14 +737,15 @@ export function compose({ id, w, h, scenes, handle, persistentLogo = true, gx, g
   ${js.join('\n')}`;
 
   return {
-    video: { id, w, h, dur, body, timeline, poster: posterTime(scenes), gx: '80%', gy: '100%' },
+    video: { id, w, h, dur, body, timeline, poster: posterTime(scenes, instant), gx: '80%', gy: '100%', bgs, shots },
     audio: { dur, bpm: BPM, sections, cues: cues.sort((a, b) => a.t - b.t), musicEnd, musicLevel: .5 },
   };
 }
 
-function posterTime(scenes) {
+function posterTime(scenes, instant) {
   // el poster es el final del primer gancho: la frase ya armada
   let t = 0;
+  if (instant) return Math.max(.4, scenes[0].len * BEAT - .15);
   for (const s of scenes) {
     if (s.t === 'hook') return t + s.len * BEAT - .15;
     t += s.len * BEAT;

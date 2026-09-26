@@ -59,6 +59,47 @@ function ffmpeg(args) {
 
 const write = (stream, buf) => new Promise(res => (stream.write(buf) ? res() : stream.once('drain', res)));
 
+/* ---------------- fondos de video por escena (tomas de Higgsfield) ----------------
+   Cada clip se pasa a una secuencia de JPG a 30 fps, recortada a cubrir el cuadro.
+   Así el cuadro exacto se elige por número y no depende de que el navegador
+   pueda decodificar el códec del clip. */
+export async function prepareBgs(spec) {
+  const out = {};
+  for (const b of spec.bgs || []) {
+    const dir = join(BUILD, 'bg', b.id);
+    mkdirSync(dir, { recursive: true });
+    const src = resolve(ROOT, b.src);
+    const f = ffmpeg(['-i', src, '-t', String(b.dur + .2), '-vf',
+      `fps=${spec.fps || 30},scale=${spec.w}:${spec.h}:force_original_aspect_ratio=increase,crop=${spec.w}:${spec.h}`,
+      '-q:v', '3', join(dir, '%05d.jpg')]);
+    await f.done;
+    out[b.id] = { dir: `bg/${b.id}`, n: (await import('node:fs')).readdirSync(dir).filter(x => x.endsWith('.jpg')).length };
+  }
+  return out;
+}
+
+export async function syncBgs(pg, t, fps = 30) {
+  await pg.evaluate(async ({ t, fps }) => {
+    const imgs = [...document.querySelectorAll('img.bgseq')];
+    await Promise.all(imgs.map(im => {
+      if (!im.dataset.dir) return;
+      const k = Math.min(+im.dataset.n, Math.max(1, Math.floor((t - +im.dataset.t0) * fps) + 1));
+      const src = `${im.dataset.dir}/${String(k).padStart(5, '0')}.jpg`;
+      if (im.getAttribute('src') === src) return;
+      return new Promise(r => { im.onload = im.onerror = () => r(); im.src = src; });
+    }));
+  }, { t, fps });
+}
+
+export async function attachBgs(pg, bgmap) {
+  await pg.evaluate(m => {
+    document.querySelectorAll('img.bgseq').forEach(im => {
+      const b = m[im.dataset.id];
+      if (b) { im.dataset.dir = b.dir; im.dataset.n = b.n; }
+    });
+  }, bgmap);
+}
+
 /**
  * Renderiza un video. Devuelve la ruta del archivo final.
  * spec: { id, w, h, fps, dur, body, timeline, alpha, poster, out }
@@ -69,6 +110,7 @@ export async function render(browser, spec, { log = () => {} } = {}) {
   const html = join(BUILD, `${spec.id}.html`);
   writeFileSync(html, page(spec));
 
+  const bgmap = await prepareBgs(spec);
   const pg = await browser.newPage({ viewport: { width: spec.w, height: spec.h }, deviceScaleFactor: 1 });
   const errors = [];
   pg.on('pageerror', e => errors.push(e.message));
@@ -76,6 +118,7 @@ export async function render(browser, spec, { log = () => {} } = {}) {
   await pg.evaluate(async () => { await document.fonts.ready; });
   await pg.waitForTimeout(150);
   if (errors.length) throw new Error(`${spec.id}: ${errors.join(' | ')}`);
+  await attachBgs(pg, bgmap);
 
   const dur = spec.dur ?? await pg.evaluate(() => PD.dur);
   const frames = Math.round(dur * fps);
@@ -99,6 +142,7 @@ export async function render(browser, spec, { log = () => {} } = {}) {
   for (let f = 0; f < frames; f++) {
     const t = f / fps;
     await pg.evaluate(tt => window.__seek(tt), t);
+    if (spec.bgs?.length) await syncBgs(pg, t, fps);
     const buf = await pg.screenshot(shot);
     await write(enc.p.stdin, buf);
     if (!posterDone && t >= posterAt) {
