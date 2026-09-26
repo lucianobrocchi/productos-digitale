@@ -8,6 +8,7 @@ import { reels } from '../src/motion/specs/reels.mjs';
 import { plan, notas } from '../src/plan.mjs';
 import { clases } from '../src/motion/specs/clases.mjs';
 import { relatos } from '../src/motion/specs/relatos.mjs';
+import { ICONOS_MANUAL } from '../src/iconos.mjs';
 import { readdirSync, readFileSync, writeFileSync, mkdirSync, copyFileSync, existsSync, statSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
@@ -172,6 +173,14 @@ const DEST_NOMBRES = { 'empeza-aca': 'Empezá acá', metodo: 'Método', clases: 
 const destOrden = Object.keys(DEST_NOMBRES);
 const destV = destOrden.filter(k => existsSync(resolve(OUT, `destacadas/${k}.png`)))
   .map(k => pic(`destacadas/${k}.png`, DEST_NOMBRES[k], '9 / 16')).join('');
+const destM = destOrden.filter(k => existsSync(resolve(OUT, `destacadas/manual/${k}.png`)))
+  .map(k => pic(`destacadas/manual/${k}.png`, DEST_NOMBRES[k], '9 / 16')).join('');
+
+/* ------------------------------ iconografía ------------------------------ */
+const icoV = ICONOS_MANUAL.filter(ic => existsSync(resolve(OUT, `iconos/png/oro/${ic.key}.png`))).map(ic => `
+  <figure style="margin:0;display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 8px;border:1px solid var(--linea);border-radius:12px">
+    <img src="${use(`iconos/png/oro/${ic.key}.png`)}" alt="${esc(ic.nombre)}" loading="lazy" style="width:64px;height:64px">
+    <figcaption style="font-size:12px;letter-spacing:.08em;text-transform:uppercase;opacity:.7">${ic.nombre}</figcaption></figure>`).join('');
 
 /* ------------------------------- clases ------------------------------- */
 const K = 'video/clases';
@@ -399,7 +408,7 @@ const html = `<title>Piezas Productos Digitales</title>
 </header>
 
 <nav class="sec" aria-label="Secciones"><div class="env">
-  <a href="#relatos">Relatos</a><a href="#clases">Clases</a><a href="#audiovisual">Audiovisual</a><a href="#kit">Kit de edición</a><a href="#destacadas">Destacadas</a><a href="#sonido">Sonido</a><a href="#plan">Plan</a>
+  <a href="#relatos">Relatos</a><a href="#clases">Clases</a><a href="#audiovisual">Audiovisual</a><a href="#kit">Kit de edición</a><a href="#iconos">Íconos</a><a href="#destacadas">Destacadas</a><a href="#sonido">Sonido</a><a href="#plan">Plan</a>
   <a href="#fijas">Piezas fijas</a><a href="#marca">De dónde sale</a>
 </div></nav>
 
@@ -437,11 +446,28 @@ const html = `<title>Piezas Productos Digitales</title>
   ${bloque(hex, 'Overlays horizontales', 'Para poner encima de videos filmados. Van en .mov (PNG con alfa, con sonido) para Premiere, After Effects, DaVinci y Final Cut, y en .webm para web y editores de celular.', kitH, 'rejilla', '300px')}
   ${bloque(hex, 'Overlays verticales', 'Los mismos, para Reels, TikTok e historias.', kitVt, 'rejilla', '170px')}
 
+  <h2 id="iconos">Iconografía</h2>
+  <section class="bloque">
+    <header class="cab"><div class="idx">${hex}</div><div><h3>Galería de íconos del manual</h3>
+      <p class="meta">Los 20 íconos de la página 26, redibujados en vector y en el mismo orden. Salen en tinta (como el manual)
+        y en oro metálico para las piezas, en SVG y PNG con transparencia.</p></div></header>
+    ${existsSync(resolve(OUT, 'iconos/galeria-de-iconos.png')) ? pic('iconos/galeria-de-iconos.png', 'Galería de íconos · versión oscura', '16 / 9') : ''}
+    <div class="rejilla" style="--w:112px;margin-top:18px">${icoV}</div>
+    ${existsSync(resolve(OUT, 'iconos/galeria-de-iconos-claro.png')) ? `<div style="margin-top:18px">${pic('iconos/galeria-de-iconos-claro.png', 'Galería de íconos · versión clara, como el manual', '16 / 9')}</div>` : ''}
+  </section>
+
   <h2 id="destacadas">Destacadas de Instagram</h2>
   <section class="bloque">
-    <header class="cab"><div class="idx">${hex}</div><div><h3>Portadas de historias destacadas</h3>
-      <p class="meta">El hexágono oficial en oro, como el badge del logo. Los íconos son provisorios: se reemplazan por los
-        de la galería de íconos del manual en cuanto los tengamos.</p></div></header>
+    <header class="cab"><div class="idx">${hex}</div><div><h3>Con los íconos del manual</h3>
+      <p class="meta">El hexágono oficial en oro, como el badge del logo, con los íconos de su galería: el camino, el
+        engranaje, el birrete, el trabajo online, la bolsa, el chat, el libro y la comunidad.</p></div></header>
+    ${existsSync(resolve(OUT, 'destacadas/manual/vista-en-el-perfil.png')) ? `<img src="${webImg('destacadas/manual/vista-en-el-perfil.png')}" alt="Así se ven en el perfil"
+      style="width:100%;max-width:100%;border-radius:12px;border:1px solid var(--linea);display:block;margin-bottom:18px">` : ''}
+    <div class="rejilla" style="--w:120px">${destM}</div>
+  </section>
+  <section class="bloque">
+    <header class="cab"><div class="idx">${hex}</div><div><h3>Propuesta alternativa</h3>
+      <p class="meta">El mismo hexágono con íconos propios, dibujados con la misma lógica, por si prefieren otros motivos.</p></div></header>
     ${existsSync(resolve(OUT, 'destacadas/vista-en-el-perfil.png')) ? `<img src="${webImg('destacadas/vista-en-el-perfil.png')}" alt="Así se ven en el perfil"
       style="width:100%;max-width:100%;border-radius:12px;border:1px solid var(--linea);display:block;margin-bottom:18px">` : ''}
     <div class="rejilla" style="--w:120px">${destV}</div>

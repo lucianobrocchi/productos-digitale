@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <title>Engranaje — Productos Digitales</title><defs><linearGradient id="oro" gradientUnits="userSpaceOnUse" x1="10" y1="10" x2="90" y2="90">
+  <stop offset="0" stop-color="#FFF3C4"/><stop offset=".35" stop-color="#F0E281"/><stop offset=".7" stop-color="#D6AE58"/>
+  <stop offset="1" stop-color="#A37B3C"/></linearGradient></defs>
+  <path d="M75.99 42.67 L85.41 43.53 A36 36 0 0 1 85.41 56.47 L75.99 57.33 A27 27 0 0 1 73.56 63.19 L73.56 63.19 L79.62 70.47 A36 36 0 0 1 70.47 79.62 L63.19 73.56 A27 27 0 0 1 57.33 75.99 L57.33 75.99 L56.47 85.41 A36 36 0 0 1 43.53 85.41 L42.67 75.99 A27 27 0 0 1 36.81 73.56 L36.81 73.56 L29.53 79.62 A36 36 0 0 1 20.38 70.47 L26.44 63.19 A27 27 0 0 1 24.01 57.33 L24.01 57.33 L14.59 56.47 A36 36 0 0 1 14.59 43.53 L24.01 42.67 A27 27 0 0 1 26.44 36.81 L26.44 36.81 L20.38 29.53 A36 36 0 0 1 29.53 20.38 L36.81 26.44 A27 27 0 0 1 42.67 24.01 L42.67 24.01 L43.53 14.59 A36 36 0 0 1 56.47 14.59 L57.33 24.01 A27 27 0 0 1 63.19 26.44 L63.19 26.44 L70.47 20.38 A36 36 0 0 1 79.62 29.53 L73.56 36.81 A27 27 0 0 1 75.99 42.67 Z M63 50 A13 13 0 1 0 37 50 A13 13 0 1 0 63 50 Z" fill="url(#oro)" fill-rule="evenodd" stroke="url(#oro)" stroke-width="2" stroke-linejoin="round"/>
+</svg>

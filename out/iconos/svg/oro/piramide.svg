@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <title>Pirámide — Productos Digitales</title><defs><linearGradient id="oro" gradientUnits="userSpaceOnUse" x1="10" y1="10" x2="90" y2="90">
+  <stop offset="0" stop-color="#FFF3C4"/><stop offset=".35" stop-color="#F0E281"/><stop offset=".7" stop-color="#D6AE58"/>
+  <stop offset="1" stop-color="#A37B3C"/></linearGradient></defs>
+  <path d="M50 16 L18 72 L50 84 L82 72 Z M50 16 V84 M36.56 39.519999999999996 L50 44.56 L63.44 39.519999999999996 M28.88 52.96 L50 60.88 L71.12 52.96" fill="none" stroke="url(#oro)" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <title>Servicio — Productos Digitales</title><defs><linearGradient id="oro" gradientUnits="userSpaceOnUse" x1="10" y1="10" x2="90" y2="90">
+  <stop offset="0" stop-color="#FFF3C4"/><stop offset=".35" stop-color="#F0E281"/><stop offset=".7" stop-color="#D6AE58"/>
+  <stop offset="1" stop-color="#A37B3C"/></linearGradient></defs>
+  <path d="M42 44 V30 A12 12 0 0 1 40 7.5 V16 H50 V7.5 A12 12 0 0 1 48 30 V44 M24 46 H64 a5.5 5.5 0 0 1 0 11 H62 M62 57 h7 a5.5 5.5 0 0 1 0 11 h-7 M62 68 h6 a5 5 0 0 1 0 10 h-6 M62 78 h4 a4.5 4.5 0 0 1 0 9 H34 M34 46 V87 M34 87 L24 90" fill="none" stroke="url(#oro)" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

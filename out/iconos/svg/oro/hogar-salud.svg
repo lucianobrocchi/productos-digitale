@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <title>Hogar y salud — Productos Digitales</title><defs><linearGradient id="oro" gradientUnits="userSpaceOnUse" x1="10" y1="10" x2="90" y2="90">
+  <stop offset="0" stop-color="#FFF3C4"/><stop offset=".35" stop-color="#F0E281"/><stop offset=".7" stop-color="#D6AE58"/>
+  <stop offset="1" stop-color="#A37B3C"/></linearGradient></defs>
+  <mask id="m-hogar-salud" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100">
+    <rect width="100" height="100" fill="#fff"/><circle cx="50" cy="58" r="17" fill="#000"/></mask><g mask="url(#m-hogar-salud)" fill="url(#oro)"><path d="M50 14 L80 34 V86 H20 V34 Z"/></g><path d="M46.5 48 h7 v6.5 h6.5 v7 h-6.5 v6.5 h-7 v-6.5 h-6.5 v-7 h6.5 Z" fill="url(#oro)"/>
+</svg>

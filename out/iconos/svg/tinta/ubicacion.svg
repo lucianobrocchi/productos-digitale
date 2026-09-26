@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <title>Ubicación — Productos Digitales</title>
+  <mask id="m-ubicacion" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100">
+    <rect width="100" height="100" fill="#fff"/><path d="M44.5 17 h11 v9 h9 v11 h-9 v9 h-11 v-9 h-9 v-11 h9 Z" fill="none" stroke="#000" stroke-width="3.8" stroke-linejoin="round"/>
+     <path d="M35 70 L50 88 L65 70" fill="none" stroke="#000" stroke-width="4.5"/></mask><g mask="url(#m-ubicacion)" fill="#12171E"><path d="M50 6 a26 26 0 0 1 26 26 c0 16 -15 27 -26 50 c-11 -23 -26 -34 -26 -50 a26 26 0 0 1 26 -26 Z"/>
+     <ellipse cx="50" cy="82" rx="37" ry="12"/></g>
+</svg>

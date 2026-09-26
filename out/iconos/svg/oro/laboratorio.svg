@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <title>Laboratorio — Productos Digitales</title><defs><linearGradient id="oro" gradientUnits="userSpaceOnUse" x1="10" y1="10" x2="90" y2="90">
+  <stop offset="0" stop-color="#FFF3C4"/><stop offset=".35" stop-color="#F0E281"/><stop offset=".7" stop-color="#D6AE58"/>
+  <stop offset="1" stop-color="#A37B3C"/></linearGradient></defs>
+  <path d="M31 30 V12 H68 V19 M23 30 H39 V38 H23 Z M19 46 H43 M25 38 V46 M37 38 V46 M24 46 L17 86 M38 46 L45 86 M21 64 H41 M55 19 H81 L75 27 H61 Z M63 27 V38 H73 V27 M68 60 L58 86 M68 60 L78 86" fill="none" stroke="url(#oro)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="68" cy="50" r="10" fill="none" stroke="url(#oro)" stroke-width="6"/>
+</svg>

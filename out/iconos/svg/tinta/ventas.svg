@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <title>Ventas — Productos Digitales</title>
+  <mask id="m-ventas" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100">
+    <rect width="100" height="100" fill="#fff"/><path d="M57.5 56 C55 51 43 51 43 57.5 C43 64 57.5 61.5 57.5 68.5 C57.5 75 45 75 42.5 70.5 M50 48.5 V53 M50 74 V78.5"
+       fill="none" stroke="#000" stroke-width="4.2" stroke-linecap="round"/></mask><g mask="url(#m-ventas)" fill="#12171E"><path d="M50 40 C30 40 17 60 19 72 C20 81 30 86 50 86 C70 86 80 81 81 72 C83 60 70 40 50 40 Z"/>
+     <rect x="39" y="31" width="22" height="7" rx="3"/>
+     <path d="M36 17 Q43 22 50 18 Q57 22 64 17 L60 28 H40 Z"/></g>
+</svg>

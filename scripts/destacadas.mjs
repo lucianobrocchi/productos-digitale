@@ -2,9 +2,10 @@
    Portadas de historias destacadas de Instagram.
 
    El manual (p. 24 y 26) dice que la galería de íconos de la marca se usa
-   para las destacadas. Hasta tener esos íconos, van íconos provisorios
-   dibujados en la misma lógica: trazo grueso, esquinas redondeadas, dentro
-   del hexágono oficial en oro metálico, como el badge del logo.
+   para las destacadas. Salen dos juegos: out/destacadas/manual/ con los
+   íconos de esa galería (redibujados en src/iconos.mjs) y out/destacadas/
+   con una propuesta propia en la misma lógica. Los dos, dentro del
+   hexágono oficial en oro metálico, como el badge del logo.
 
    Instagram recorta la portada en un círculo al centro: todo lo importante
    vive dentro de ese círculo.
@@ -14,6 +15,7 @@ import { readFileSync, mkdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 import { logoMark } from '../src/motion/logo.mjs';
+import { ICONOS_MANUAL } from '../src/iconos.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = resolve(ROOT, 'out/destacadas');
@@ -32,13 +34,24 @@ const ICONOS = {
   nosotros: { nombre: 'Nosotros', svg: null },   // el badge oficial, tal cual
 };
 
+/* el mismo juego de destacadas con los íconos de la galería del manual (p. 26) */
+const MANUAL = { 'empeza-aca': 'progreso', metodo: 'engranaje', clases: 'formacion', ia: 'trabajo-online',
+  ofertas: 'ventas', preguntas: 'consultas', recursos: 'guias', nosotros: 'comunidad' };
+const iconoManual = k => ICONOS_MANUAL.find(i => i.key === MANUAL[k]);
+
 const [vx, vy, vw, vh] = P.viewBox.split(' ').map(Number);
 const METAL = '<stop offset="0" stop-color="#AF7C38"/><stop offset=".14" stop-color="#BD9149"/><stop offset=".3" stop-color="#D1AF5E"/>' +
   '<stop offset=".5" stop-color="#EAD77A"/><stop offset=".7" stop-color="#E5C969"/><stop offset=".86" stop-color="#DEB957"/><stop offset="1" stop-color="#DAAE4A"/>';
 
-function portada(key) {
+function portada(key, manual = false) {
   const ic = ICONOS[key];
-  const badge = ic.svg === null
+  const im = manual && iconoManual(key);
+  const badge = im ? `<svg width="780" height="705" viewBox="${vx} ${vy} ${vw} ${vh}">
+        <defs><linearGradient id="m" gradientUnits="userSpaceOnUse" x1="${vx}" y1="0" x2="${vx + vw}" y2="0">${METAL}</linearGradient></defs>
+        <path transform="${P.hex.t}" d="${P.hex.d}" fill="url(#m)"/>
+        <g transform="translate(${vx + vw / 2 - 135} ${vy + vh / 2 - 135}) scale(2.7)" style="color:#12171E">${im.svg('dm-' + key)}</g>
+      </svg>`
+    : ic.svg === null
     ? `<div style="width:780px;height:705px">${logoMark('n')}</div>`
     : `<svg width="780" height="705" viewBox="${vx} ${vy} ${vw} ${vh}">
         <defs><linearGradient id="m" gradientUnits="userSpaceOnUse" x1="${vx}" y1="0" x2="${vx + vw}" y2="0">${METAL}</linearGradient></defs>
@@ -57,19 +70,25 @@ function portada(key) {
 
 const browser = await chromium.launch();
 const pg = await browser.newPage({ viewport: { width: 1080, height: 1920 } });
+mkdirSync(resolve(OUT, 'manual'), { recursive: true });
 for (const k of Object.keys(ICONOS)) {
   await pg.setContent(portada(k));
   await pg.screenshot({ path: resolve(OUT, `${k}.png`) });
+  await pg.setContent(portada(k, true));
+  await pg.screenshot({ path: resolve(OUT, `manual/${k}.png`) });
 }
 // vista de cómo se ven en el perfil: círculos chicos con el nombre abajo
-const fila = Object.entries(ICONOS).map(([k, v]) => `
-  <div style="display:flex;flex-direction:column;align-items:center;gap:10px;width:150px">
-    <div style="width:128px;height:128px;border-radius:50%;padding:5px;border:2px solid #3a3a3a">
-      <div style="width:100%;height:100%;border-radius:50%;background:url('data:image/png;base64,${
-        readFileSync(resolve(OUT, `${k}.png`)).toString('base64')}') center/100% auto no-repeat"></div></div>
-    <div style="font:500 22px -apple-system,Inter,sans-serif;color:#F2F2F2">${v.nombre}</div></div>`).join('');
-await pg.setViewportSize({ width: 1300, height: 260 });
-await pg.setContent(`<body style="margin:0;background:#000;padding:40px 30px;display:flex;gap:6px">${fila}</body>`);
-await pg.screenshot({ path: resolve(OUT, 'vista-en-el-perfil.png') });
+for (const dir of ['', 'manual/']) {
+  const fila = Object.entries(ICONOS).map(([k, v]) => `
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px;width:150px">
+      <div style="width:128px;height:128px;border-radius:50%;padding:5px;border:2px solid #3a3a3a">
+        <div style="width:100%;height:100%;border-radius:50%;background:url('data:image/png;base64,${
+          readFileSync(resolve(OUT, `${dir}${k}.png`)).toString('base64')}') center/100% auto no-repeat"></div></div>
+      <div style="font:500 22px -apple-system,Inter,sans-serif;color:#F2F2F2">${v.nombre}</div></div>`).join('');
+  await pg.setViewportSize({ width: 1300, height: 260 });
+  await pg.setContent(`<body style="margin:0;background:#000;padding:40px 30px;display:flex;gap:6px">${fila}</body>`);
+  await pg.screenshot({ path: resolve(OUT, `${dir}vista-en-el-perfil.png`) });
+  await pg.setViewportSize({ width: 1080, height: 1920 });
+}
 await browser.close();
-console.log(`${Object.keys(ICONOS).length} portadas en out/destacadas/`);
+console.log(`${Object.keys(ICONOS).length} portadas en out/destacadas/ y otras tantas con los íconos del manual en out/destacadas/manual/`);

@@ -41,6 +41,7 @@ def v720(mp4, vf='scale=1280:-2'):
 if __name__ == '__main__':
     pngs = [p for d in ('carruseles', 'historias', 'cuadradas', 'portadas', 'destacadas')
             for p in glob.glob(os.path.join(OUT, d, '**', '*.png'), recursive=True)]
+    pngs += glob.glob(os.path.join(OUT, 'iconos', '*.png'))       # las láminas; los íconos sueltos van en PNG con alfa
     with ThreadPoolExecutor(4) as ex:
         r = list(ex.map(jpg, pngs))
     print(f'{len(r)} piezas fijas: {sum(a for a, _ in r) / 1e6:.0f} MB en PNG → {sum(b for _, b in r) / 1e6:.0f} MB en JPG')

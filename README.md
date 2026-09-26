@@ -147,10 +147,26 @@ licencias que pagar ni reclamos de copyright** en ninguna plataforma.
 | Destacadas de Instagram | 1080 × 1920 | 8 + vista en el perfil | `destacadas/` |
 
 **Destacadas.** El manual dice que las destacadas usan la galería de íconos de
-la marca (p. 26). Esa página no se pudo bajar del Drive, así que por ahora van
-íconos provisorios con la misma lógica: trazo grueso dentro del hexágono
-metálico oficial. "Nosotros" lleva el badge oficial tal cual. Cuando tengamos
-sus íconos se reemplazan en `scripts/destacadas.mjs` y se corre de nuevo.
+la marca (p. 26). Salen dos juegos dentro del hexágono metálico oficial:
+`destacadas/manual/` con los íconos de esa galería y `destacadas/` con una
+propuesta alternativa propia ("Nosotros" lleva el badge oficial).
+
+### Iconografía — `out/iconos/`
+
+Los 20 íconos de la galería del manual (p. 26), redibujados en vector a partir
+de una foto de la página, en el mismo orden y con la misma mezcla de íconos
+llenos y de línea (`src/iconos.mjs`). Los calados (la cruz del pin, el $ de
+la bolsa, el círculo de la casa) son huecos reales.
+
+| Carpeta | Qué hay |
+|---|---|
+| `svg/tinta/` | tinta `#12171E`, como en el manual, para web y documentos |
+| `svg/oro/` | oro metálico de la marca, para fondos oscuros |
+| `png/tinta/`, `png/oro/` | 512 × 512 con transparencia |
+| `galeria-de-iconos.png` | la página del manual en el estilo de las piezas |
+| `galeria-de-iconos-claro.png` | la misma página en claro, como el original |
+
+Se regeneran con `node scripts/iconos.mjs`.
 
 ---
 
@@ -232,8 +248,9 @@ pillow pymupdf imageio-ffmpeg`, y ffmpeg.
   marcador, en una constante arriba de `src/content.mjs`.
 - **El nombre del zócalo** del kit de edición.
 - **La licencia de Neue Haas Grotesk**, si quieren la tipografía exacta.
-- **La galería de íconos del manual (p. 26)**, para recrearla en este estilo
-  y usarla en las destacadas y en las piezas.
+- **El manual en alta.** La galería de íconos salió de una foto de la página
+  26; el resto de las páginas visuales (patrones, estilo de imagen,
+  aplicaciones) todavía no las vimos. Con el PDF entero se afinan.
 - **Voz en off.** Los Reels están hechos para verse sin sonido y la música
   los sostiene, pero si alguien de la marca graba la voz, entra encima sin
   tocar nada.

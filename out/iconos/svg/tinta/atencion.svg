@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <title>Atención — Productos Digitales</title>
+  
+    <rect x="14" y="30" width="32" height="24" rx="3" fill="#12171E"/><rect x="27" y="53" width="6" height="7" fill="#12171E"/>
+    <circle cx="68" cy="25" r="10" fill="#12171E"/>
+    <path d="M51 60 V52 a17 16 0 0 1 34 0 V60 Z" fill="#12171E"/>
+    <path d="M12 60 H88 V75 H12 Z" fill="#12171E"/>
+</svg>
