@@ -57,7 +57,9 @@ if (has('clases')) {
   for (const k of clases) {
     for (const [w, h, suf] of [[1080, 1920, ''], [1920, 1080, '-16x9']]) {
       const { video, audio } = compose({ id: k.id + suf, w, h, scenes: k.scenes, gx: k.gx, progress: true });
-      jobs.push({ video: { ...video, out: `clases/${k.id}${suf}.mp4` }, audio });
+      // CRF 20: las clases duran ~1 min; a 18 pasan los 15 MB por archivo que admite la
+      // galería, y la diferencia medida es imperceptible (SSIM 0,999)
+      jobs.push({ video: { ...video, crf: 20, out: `clases/${k.id}${suf}.mp4` }, audio });
     }
     const art = (k.scenes.find(s => s.art) || {}).art || 'hexRoute';
     jobs.push(cover169({ id: k.id, h1: k.mini, art, gx: `${k.gx}%`, gy: '90%' },
