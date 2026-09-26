@@ -6,3 +6,4 @@ build/galeria-archivos.json
 *.silent.mp4
 build/*.log
 build/tanda-*.json
+build/web/

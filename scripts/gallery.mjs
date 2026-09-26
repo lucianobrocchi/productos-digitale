@@ -22,8 +22,16 @@ const ls = (p, ext = '.png') => existsSync(resolve(OUT, p))
   ? readdirSync(resolve(OUT, p)).filter(f => f.endsWith(ext) && !f.includes('.silent')).sort() : [];
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 
-const archivos = new Set(['marca/lockup-oscuro.png']);
-const use = p => { archivos.add(p); return p; };
+/* ruta publicada → archivo de origen. Por defecto el de out/; las piezas fijas
+   se publican como JPG y las clases 16:9 en 720p desde build/web/ (ver
+   scripts/web_previews.py): la galería tiene un tope de 256 MB por versión. */
+const WEB = resolve(root, 'build/web');
+const archivos = new Map([['marca/lockup-oscuro.png', 'out/marca/lockup-oscuro.png']]);
+const use = (p, src = `out/${p}`) => { archivos.set(p, src); return p; };
+const webImg = p => {                         // carruseles/x/01.png → carruseles/x/01.jpg (vista previa)
+  const j = p.replace(/\.png$/, '.jpg');
+  return existsSync(resolve(WEB, j)) ? use(j, `build/web/${j}`) : use(p);
+};
 
 function dur(p) {
   try {
@@ -44,20 +52,20 @@ const hex = `<svg class="hex" viewBox="0 0 24 24" aria-hidden="true"><path d="M1
 
 const pic = (src, cap, ratio, eager = false) => `
   <figure class="pz" style="--r:${ratio}">
-    <button class="shot" data-kind="img" data-full="${use(src)}" data-cap="${esc(cap)}" aria-label="Ver ${esc(cap)}">
-      <img src="${src}" alt="${esc(cap)}" ${eager ? '' : 'loading="lazy"'} decoding="async">
+    <button class="shot" data-kind="img" data-full="${webImg(src)}" data-cap="${esc(cap)}" aria-label="Ver ${esc(cap)}">
+      <img src="${webImg(src)}" alt="${esc(cap)}" ${eager ? '' : 'loading="lazy"'} decoding="async">
     </button>
     <figcaption>${cap}</figcaption>
   </figure>`;
 
 /** Video con sonido: póster + botón; se abre en el visor. */
-const vid = (src, cap, ratio, sub = '') => {
+const vid = (src, cap, ratio, sub = '', from) => {
   const poster = src.replace(/\.(mp4|mov)$/, '.jpg');
   const hasPoster = existsSync(resolve(OUT, poster));
   const d = dur(src);
   return `
   <figure class="pz" style="--r:${ratio}">
-    <button class="shot vid" data-kind="video" data-full="${use(src)}" data-cap="${esc(cap)}" aria-label="Reproducir ${esc(cap)}">
+    <button class="shot vid" data-kind="video" data-full="${use(src, from)}" data-cap="${esc(cap)}" aria-label="Reproducir ${esc(cap)}">
       ${hasPoster ? `<img src="${use(poster)}" alt="" loading="lazy" decoding="async">` : ''}
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       ${d ? `<span class="dur">${d}</span>` : ''}
@@ -129,8 +137,6 @@ const KIT = {
 const kitCard = f => {
   const k = f.replace('.webm', '');
   const [t, m] = KIT[k] || [k, ''];
-  archivos.add(`video/kit/${k}.mov`.replace('video/kit/', 'video/kit/'));   // el .mov no se publica: pesa
-  archivos.delete(`video/kit/${k}.mov`);
   return loop(`video/kit/${f}`, `${t} <span>· ${m}</span>`, k.includes('16x9') ? '16 / 9' : '9 / 16', true);
 };
 const kitH = ls('video/kit', '.webm').filter(f => f.includes('16x9')).map(kitCard).join('');
@@ -149,7 +155,9 @@ const K = 'video/clases';
 const clasesHtml = clases.map((k, i) => {
   const has = f => existsSync(resolve(OUT, `${K}/${f}`));
   const reel = has(`${k.id}.mp4`) ? vid(`${K}/${k.id}.mp4`, 'Reel 9:16', '9 / 16') : '';
-  const yt = has(`${k.id}-16x9.mp4`) ? vid(`${K}/${k.id}-16x9.mp4`, 'YouTube 16:9', '16 / 9') : '';
+  const web169 = `build/web/${K}/${k.id}-16x9.mp4`;
+  const yt = has(`${k.id}-16x9.mp4`) ? vid(`${K}/${k.id}-16x9.mp4`, 'YouTube 16:9', '16 / 9', 'vista previa 720p',
+    existsSync(resolve(root, web169)) ? web169 : undefined) : '';
   const mini = has(`miniatura-${k.id}.jpg`) ? pic(`${K}/miniatura-${k.id}.jpg`, 'Miniatura', '16 / 9') : '';
   const slides = ls(`carruseles/${k.id}`).map((f, j, a) =>
     pic(`carruseles/${k.id}/${f}`, `${String(j + 1).padStart(2, '0')} / ${String(a.length).padStart(2, '0')}`, '4 / 5')).join('');
@@ -178,7 +186,7 @@ const semanas = SEMANAS.map(n => `
       const ok = existsSync(resolve(OUT, th));
       const full = `${x.texto}\n\n${x.tags}`;
       return `<article class="post">
-        ${ok ? `<img src="${use(th)}" alt="" loading="lazy" decoding="async" class="pt ${x.tipo === 'Reel' ? 'v' : ''}">` : ''}
+        ${ok ? `<img src="${th.endsWith(".png") ? webImg(th) : use(th)}" alt="" loading="lazy" decoding="async" class="pt ${x.tipo === 'Reel' ? 'v' : ''}">` : ''}
         <div class="pb">
           <div class="pm"><b>${x.dia}</b> · ${x.tipo} · ${esc(x.titulo)}</div>
           <p class="px">${esc(x.texto).replace(/\n/g, '<br>')}</p>
@@ -326,8 +334,8 @@ const html = `<title>Piezas Productos Digitales</title>
     border-radius:50%;border:1px solid rgba(240,226,129,.35);background:rgba(14,14,14,.8);color:var(--oro);font-size:22px;cursor:pointer}
 
   .clase{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:16px;align-items:start}
-  .c-h{display:grid;gap:16px}
-  @media (max-width:640px){.clase{grid-template-columns:1fr 1fr}.c-reel{grid-row:span 2}}
+  .c-h{display:grid;gap:16px;grid-template-columns:1fr 1fr}
+  @media (max-width:640px){.clase{grid-template-columns:1fr 1fr}.c-reel{grid-row:span 2}.c-h{grid-template-columns:1fr}}
   .posts{display:grid;gap:14px}
   .post{display:grid;grid-template-columns:120px 1fr;gap:18px;border:1px solid var(--linea);border-radius:14px;
     background:var(--bg-2);padding:14px}
@@ -526,9 +534,9 @@ const md = ['# Plan de publicación — Productos Digitales', '',
 writeFileSync(resolve(OUT, 'plan-de-publicacion.md'), md);
 
 // piezas fijas: todas las rutas usadas por pic() ya entraron en `archivos`
-const lista = [...archivos].filter(p => existsSync(resolve(OUT, p)));
-const faltan = [...archivos].filter(p => !existsSync(resolve(OUT, p)));
-const peso = lista.reduce((n, p) => n + statSync(resolve(OUT, p)).size, 0);
-writeFileSync(resolve(root, 'build/galeria-archivos.json'), JSON.stringify(lista, null, 1));
+const lista = [...archivos].filter(([, src]) => existsSync(resolve(root, src)));
+const faltan = [...archivos].filter(([, src]) => !existsSync(resolve(root, src))).map(([p]) => p);
+const peso = lista.reduce((n, [, src]) => n + statSync(resolve(root, src)).size, 0);
+writeFileSync(resolve(root, 'build/galeria-archivos.json'), JSON.stringify(Object.fromEntries(lista), null, 1));
 console.log(`galería · ${nVideos} videos · ${nFijas} fijas · ${nKit} kit · ${nAudio} audios`);
 console.log(`${lista.length} archivos · ${(peso / 1e6).toFixed(1)} MB${faltan.length ? ` · faltan ${faltan.length}: ${faltan.slice(0, 5)}` : ''}`);

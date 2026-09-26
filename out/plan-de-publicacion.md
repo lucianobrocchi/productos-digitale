@@ -1,6 +1,6 @@
 # Plan de publicación — Productos Digitales
 
-Cuatro semanas. Cada posteo con su pieza, el texto listo para pegar y las historias que lo acompañan.
+8 semanas. Cada posteo con su pieza, el texto listo para pegar y las historias que lo acompañan.
 
 ## Semana 1
 
@@ -191,8 +191,160 @@ Tu primer producto puede estar listo esta semana. Guardalo y seguinos para el pa
 
 #productosdigitales #emprendimientodigital #inteligenciaartificial #ia #negociosonline #ventasonline
 
+## Semana 5
+
+### Lunes · Reel · La nueva economía digital
+
+Pieza: `out/video/clases/k1-economia-digital.mp4`
+
+Lo que sabés ya se puede vender.
+
+Cinco claves de la nueva economía digital: se hace una vez y se vende muchas, la IA bajó el costo de crear, no competís con todo Internet, lo que sabés vale para alguien y lo que no cambió: la gente paga por un resultado.
+
+La oportunidad es real. El atajo, no. ¿Qué sabés vos que otro necesita?
+
+#productosdigitales #emprendimientodigital #inteligenciaartificial #ia
+
+YouTube: `out/video/clases/k1-economia-digital-16x9.mp4`
+
+### Miércoles · Carrusel · 7 principios (carrusel)
+
+Pieza: `out/carruseles/k3-principios-marketing`
+
+Los 7 principios del marketing digital, para tener a mano.
+
+La placa 9 los junta todos en una pantalla. Guardalo y usalo antes de publicar.
+
+#productosdigitales #emprendimientodigital #marketingdigital #creadoresdecontenido
+
+### Viernes · Reel · Mentalidad para arrancar de cero
+
+Pieza: `out/video/clases/k2-mentalidad.mp4`
+
+El que arranca de cero no pierde por falta de talento. Pierde por abandonar.
+
+Seis ideas para sostener el proceso cuando todavía no hay resultados. La última es la más importante: un paso por vez.
+
+Fe en el proceso, foco en el paso.
+
+#productosdigitales #emprendimientodigital #marketingdigital #creadoresdecontenido
+
+YouTube: `out/video/clases/k2-mentalidad-16x9.mp4`
+
+## Semana 6
+
+### Lunes · Reel · 7 principios del marketing digital
+
+Pieza: `out/video/clases/k3-principios-marketing.mp4`
+
+7 principios del marketing digital, sin humo.
+
+Un dolor. Una persona. Una promesa. Prueba. Un ángulo. Orgánico para confiar y anuncios para escalar. Y siempre un próximo paso.
+
+Guardalo y usalo en tu próxima publicación.
+
+#productosdigitales #emprendimientodigital #marketingdigital #creadoresdecontenido
+
+YouTube: `out/video/clases/k3-principios-marketing-16x9.mp4`
+
+### Miércoles · Carrusel · La nueva economía digital (carrusel)
+
+Pieza: `out/carruseles/k1-economia-digital`
+
+La nueva economía digital en nueve placas.
+
+Guardalo y releelo antes de decidir qué vas a vender.
+
+#productosdigitales #emprendimientodigital #inteligenciaartificial #ia
+
+### Viernes · Reel · La oferta que se vende
+
+Pieza: `out/video/clases/k4-oferta.mp4`
+
+Nadie compra tu curso. Compran tu oferta.
+
+La frase para escribir la tuya:
+Ayudo a [quién] a [resultado] en [tiempo] sin [lo que temen].
+
+Escribí la tuya en comentarios.
+
+#productosdigitales #emprendimientodigital #negociosonline #ventasonline
+
+YouTube: `out/video/clases/k4-oferta-16x9.mp4`
+
+## Semana 7
+
+### Lunes · Reel · Un plan de 30 días
+
+Pieza: `out/video/clases/k5-plan-30-dias.mp4`
+
+De idea a primera venta: un plan de 30 días.
+
+Semana 1, investigar. Semana 2, validar. Semana 3, construir. Semana 4, vender.
+
+No es una promesa: es un orden. Guardalo y arrancá el lunes.
+
+#productosdigitales #emprendimientodigital #negociosonline #ventasonline
+
+YouTube: `out/video/clases/k5-plan-30-dias-16x9.mp4`
+
+### Miércoles · Carrusel · Mentalidad (carrusel)
+
+Pieza: `out/carruseles/k2-mentalidad`
+
+Mentalidad para arrancar de cero, en un carrusel.
+
+Guardalo para el día que tengas ganas de largar.
+
+#productosdigitales #emprendimientodigital #marketingdigital #creadoresdecontenido
+
+### Viernes · Reel · 5 prompts de IA
+
+Pieza: `out/video/clases/k6-prompts-ia.mp4`
+
+5 prompts para crear tu producto con IA: para encontrar el dolor, definir la promesa, estructurar, guionar y crear contenido.
+
+Copialos, pero revisá todo lo que te devuelve. La IA acelera; el criterio lo ponés vos.
+
+#productosdigitales #emprendimientodigital #inteligenciaartificial #ia
+
+YouTube: `out/video/clases/k6-prompts-ia-16x9.mp4`
+
+## Semana 8
+
+### Lunes · Carrusel · La oferta que se vende (carrusel)
+
+Pieza: `out/carruseles/k4-oferta`
+
+La oferta que se vende: la fórmula, qué tiene que incluir, cómo pensar el precio y cómo sacarle el riesgo a la primera compra.
+
+Guardalo para cuando armes la tuya.
+
+#productosdigitales #emprendimientodigital #negociosonline #ventasonline
+
+### Miércoles · Carrusel · El plan de 30 días (carrusel)
+
+Pieza: `out/carruseles/k5-plan-30-dias`
+
+El plan de 30 días, semana por semana.
+
+Guardalo y marcá en qué semana estás.
+
+#productosdigitales #emprendimientodigital #negociosonline #ventasonline
+
+### Viernes · Carrusel · 5 prompts de IA (carrusel)
+
+Pieza: `out/carruseles/k6-prompts-ia`
+
+Los 5 prompts completos, listos para copiar.
+
+Guardalo y probalos esta semana.
+
+#productosdigitales #emprendimientodigital #inteligenciaartificial #ia
+
 ## Notas
 
+- Semanas 5 a 8: las clases. Cada una tiene su versión 16:9 para YouTube (y su miniatura): subila el mismo día que el Reel.
 - Horario: probá dos franjas (12 a 13 h y 19 a 21 h) las dos primeras semanas y quedate con la que mejor rinda en las estadísticas de la cuenta.
 - Los Reels llevan audio propio: subilos con su sonido original. Si se usa un audio en tendencia, bajá la música del video al 20% en el editor de Instagram.
 - Cuadradas q3 y q5 quedan de reserva para cubrir un día o responder un comentario frecuente.
