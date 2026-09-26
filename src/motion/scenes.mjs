@@ -308,7 +308,189 @@ function shiftTimes(js) {
   })();`;
 }
 
-export const SCENES = { hook, statement, step, myth, stat, list, compare, cta, logo };
+
+/* ======================= escenas de clase (valor) ======================= */
+
+const pad2 = n => String(n).padStart(2, '0');
+
+/** Punto de una clase: número, título, explicación y ejemplo concreto. */
+function point(s, c) {
+  const { l, r, V } = safe(c.w, c.h);
+  const art = s.art ? library[s.art](`${c.sid}-a`) : '';
+  const text = `
+    <div style="display:flex;align-items:center;gap:24px" class="hd">
+      ${hexBadge(s.n, V ? 104 : 116, `${c.sid}-hb`)}
+      <div class="kicker k">${s.label || 'Punto'} ${s.n}${s.of ? ` de ${s.of}` : ''}</div>
+    </div>
+    <div class="quote" data-fit style="margin-top:34px;font-size:${V ? 90 : 104}px;line-height:1;text-transform:uppercase;
+         font-weight:800">${headline(s.title, { gold: s.gold ?? [s.title.length - 1] })}</div>
+    <div class="rule rule--short" style="margin-top:28px"></div>
+    <p class="body" style="margin:28px 0 0;font-size:${V ? 42 : 46}px;line-height:1.38;color:rgba(242,242,242,.88);
+       font-weight:500;max-width:${V ? '30ch' : '32ch'}">${s.body}</p>
+    ${s.ex ? `<div class="ex" style="margin-top:${V ? 40 : 30}px;border-left:5px solid #F0E281;padding:20px 28px;
+         background:linear-gradient(90deg,rgba(240,226,129,.10),rgba(240,226,129,.02));border-radius:0 18px 18px 0">
+      <div class="kicker" style="font-size:${V ? 22 : 24}px">${s.exLabel || 'Ejemplo'}</div>
+      <div style="margin-top:10px;font-size:${V ? 36 : 40}px;font-weight:600;line-height:1.34">${s.ex}</div></div>` : ''}`;
+  const html = V ? `
+  ${art ? `<div class="abs art" style="right:-150px;bottom:-40px;width:700px;height:700px;opacity:.2">${art}</div>` : ''}
+  <div class="abs" style="left:${l}px;right:${r}px;top:280px;bottom:440px;display:flex;flex-direction:column;
+       justify-content:center">${text}</div>` : `
+  ${art ? `<div class="abs art" style="right:${r}px;top:${(c.h - 560) / 2}px;width:560px;height:560px">${art}</div>` : ''}
+  <div class="abs" style="left:${l}px;width:${c.w - l - r - (art ? 640 : 200)}px;top:120px;bottom:120px;display:flex;
+       flex-direction:column;justify-content:center">${text}</div>`;
+  const js = `
+  tw('#${c.sid}-hb',{scale:[0,1],rot:[-30,0]},T0,.55,'back');
+  tw(S+' .k',{opacity:[0,1],x:[-24,0]},T0+.12,.5,'expo');
+  ${art ? `drawArt(document.querySelector(S+' .art svg'),T0+.3,2.2,.06);` : ''}
+  lines(S+' .quote .line',T0+.25,.12,.6);
+  tw(S+' .rule',{sx:[0,1]},T0+.9,.6,'expo');
+  document.querySelectorAll(S+' .rule').forEach(e=>e.style.transformOrigin='0 50%');
+  tw(S+' .body',{opacity:[0,1],y:[26,0]},T0+B*2.4,.7,'out');
+  ${s.ex ? `tw(S+' .ex',{opacity:[0,1],x:[-40,0]},T0+B*${s.exAt ?? 6},.6,'expo');` : ''}`;
+  return {
+    html, js, e: s.e ?? 2,
+    cues: [{ t: 0, type: 'tick', level: .9, freq: 1500 + s.n * 110 }, { t: BEAT * 2.4, type: 'tick', level: .45 },
+      ...(s.ex ? [{ t: BEAT * (s.exAt ?? 6), type: 'whoosh', len: .35, level: .35 }] : [])],
+  };
+}
+
+/** Prompt de IA que se escribe en pantalla, listo para copiar. */
+function prompt(s, c) {
+  const { l, r, V } = safe(c.w, c.h);
+  const chars = s.prompt.length;
+  const typeDur = Math.min(4.2, Math.max(1.6, chars / 48));
+  const html = `
+  <div class="abs" style="left:${V ? l : c.w * .1}px;right:${V ? r : c.w * .1}px;top:${V ? 280 : 100}px;bottom:${V ? 440 : 100}px;
+       display:flex;flex-direction:column;justify-content:center">
+    <div style="display:flex;align-items:center;gap:22px" class="hd">
+      ${hexBadge(s.n, V ? 96 : 84, `${c.sid}-hb`)}
+      <div><div class="kicker k" style="font-size:${V ? 24 : 22}px">Prompt ${s.n}${s.of ? ` de ${s.of}` : ''}</div>
+        <div class="quote" style="margin-top:6px;font-size:${V ? 58 : 68}px;font-weight:800;line-height:1.05">
+          ${headline([s.title])}</div></div>
+    </div>
+    <div class="card-p" style="margin-top:${V ? 40 : 30}px;border-radius:26px;border:1.5px solid rgba(240,226,129,.34);
+         background:linear-gradient(180deg,rgba(26,24,18,.96),rgba(16,15,12,.96));box-shadow:0 0 80px rgba(240,226,129,.10)">
+      <div style="display:flex;align-items:center;gap:10px;padding:18px 26px;border-bottom:1px solid rgba(242,242,242,.08)">
+        <i style="width:14px;height:14px;border-radius:50%;background:#A37B3C"></i>
+        <i style="width:14px;height:14px;border-radius:50%;background:#D8BC66"></i>
+        <i style="width:14px;height:14px;border-radius:50%;background:#F0E281"></i>
+        <span style="margin-left:auto;font-size:20px;letter-spacing:.18em;text-transform:uppercase;color:rgba(242,242,242,.4);
+              font-weight:700">Copialo</span>
+      </div>
+      <div style="padding:${V ? '30px 32px 36px' : '28px 34px 32px'};font-family:'DejaVu Sans Mono',ui-monospace,monospace;
+           font-size:${V ? 36 : 38}px;line-height:1.5;color:#F2F2F2;min-height:${V ? 380 : 260}px">
+        <span class="gold" style="text-shadow:none">&gt;</span> <span class="tp">${s.prompt}</span><span class="cur"
+          style="display:inline-block;width:.55em;height:1.05em;vertical-align:-.15em;background:#F0E281;margin-left:4px"></span>
+      </div>
+    </div>
+    ${s.note ? `<p class="note" style="margin:26px 0 0;font-size:${V ? 32 : 34}px;color:rgba(242,242,242,.6);font-weight:500">${s.note}</p>` : ''}
+  </div>`;
+  const t0 = BEAT * 2;
+  const js = `
+  tw('#${c.sid}-hb',{scale:[0,1]},T0,.5,'back');
+  tw(S+' .k',{opacity:[0,1],x:[-20,0]},T0+.1,.45,'expo');
+  lines(S+' .hd .line',T0+.15,0,.55);
+  tw(S+' .card-p',{opacity:[0,1],y:[40,0]},T0+.35,.6,'expo');
+  tw(S+' .tp',{type:[0,1]},T0+${t0},${typeDur},'linear');
+  for (let t=T0; t<T0+${c.len}*B; t+=.5){ tw(S+' .cur',{opacity:[1,1]},t,0,'linear'); tw(S+' .cur',{opacity:[0,0]},t+.25,0,'linear'); }
+  ${s.note ? `tw(S+' .note',{opacity:[0,1],y:[16,0]},T0+${t0 + typeDur + .3},.6,'out');` : ''}`;
+  const cues = [{ t: 0, type: 'tick', level: .8, freq: 1700 }];
+  const R = mulberry(s.n * 97 + 3);
+  for (let t = 0; t < typeDur; t += .075 + R() * .05) cues.push({ t: t0 + t, type: 'tick', level: .16 + R() * .1, freq: 2600 + R() * 1400 });
+  return { html, js, cues, e: s.e ?? 2 };
+}
+
+function mulberry(seed) {
+  let a = seed >>> 0;
+  return () => { a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+}
+
+/** Plantilla: una frase con huecos que se completan con un ejemplo. */
+function template(s, c) {
+  const { l, r, V } = safe(c.w, c.h);
+  let k = 0;
+  const parts = [];
+  s.parts.forEach(p => {                        // ". , ;" se pegan al hueco anterior
+    if (typeof p === 'string' && /^[.,;:!?]+$/.test(p) && parts.length && typeof parts.at(-1) === 'object')
+      parts.at(-1).tail = p;
+    else parts.push(typeof p === 'string' ? p : { ...p });
+  });
+  const sentence = parts.map(p => typeof p === 'string' ? p
+    : `${p.tail ? '<span style="white-space:nowrap">' : ''}<span class="blank" data-i="${k++}" style="display:inline-grid;vertical-align:baseline;border-bottom:4px dashed rgba(240,226,129,.55);
+         padding:0 6px;margin:0 2px"><span class="ph" style="grid-area:1/1;color:rgba(242,242,242,.35);font-weight:600">[${p.b}]</span>
+         <span class="fl gold" style="grid-area:1/1;opacity:0">${p.f}</span></span>${p.tail ? `${p.tail}</span>` : ''}`).join('');
+  const html = `
+  <div class="abs" style="left:${l}px;right:${V ? r : c.w * .2}px;top:${V ? 280 : 100}px;bottom:${V ? 440 : 100}px;display:flex;
+       flex-direction:column;justify-content:center">
+    <div class="kicker k">${s.kicker || 'Plantilla'}</div>
+    <div class="quote" data-fit style="margin-top:22px;font-size:${V ? 84 : 96}px;line-height:1;text-transform:uppercase;font-weight:800">
+      ${headline(s.title, { gold: [s.title.length - 1] })}</div>
+    <div class="rule rule--short" style="margin-top:26px"></div>
+    <p class="sen" style="margin:44px 0 0;font-size:${V ? 56 : 66}px;line-height:1.55;font-weight:700;letter-spacing:-.01em">${sentence}</p>
+    ${s.note ? `<p class="note" style="margin:34px 0 0;font-size:${V ? 32 : 34}px;color:rgba(242,242,242,.6)">${s.note}</p>` : ''}
+  </div>`;
+  const js = `
+  tw(S+' .k',{opacity:[0,1],x:[-20,0]},T0,.45,'expo');
+  lines(S+' .quote .line',T0+.1,.12,.6);
+  tw(S+' .rule',{sx:[0,1]},T0+.7,.6,'expo'); document.querySelectorAll(S+' .rule').forEach(e=>e.style.transformOrigin='0 50%');
+  tw(S+' .sen',{opacity:[0,1],y:[24,0]},T0+B*2,.7,'out');
+  [...document.querySelectorAll(S+' .blank')].forEach((b,i)=>{
+    const at=T0+B*(4+i*2);
+    tw(b.querySelector('.ph'),{opacity:[1,0]},at,.25,'out');
+    tw(b.querySelector('.fl'),{opacity:[0,1],y:[18,0]},at+.05,.45,'expo');
+  });
+  ${s.note ? `tw(S+' .note',{opacity:[0,1]},T0+B*${4 + k * 2},.6,'out');` : ''}`;
+  const cues = Array.from({ length: k }, (_, i) => ({ t: BEAT * (4 + i * 2), type: 'tick', level: .85, freq: 1800 + i * 200 }));
+  return { html, js, cues, e: s.e ?? 2 };
+}
+
+/** Línea de tiempo: etapas que se encienden de a una. */
+function timeline(s, c) {
+  const { l, r, V } = safe(c.w, c.h);
+  const every = s.every ?? 3;
+  const items = s.items.map((it, i) => V ? `
+    <div class="ti" style="position:relative;display:flex;gap:30px;align-items:flex-start">
+      ${hexBadge(i + 1, 92, `${c.sid}-t${i}`)}
+      <div style="padding-top:4px">
+        <div class="kicker" style="font-size:22px">${it.k}</div>
+        <div style="font-weight:800;font-size:52px;letter-spacing:-.02em;line-height:1.05;margin-top:6px">${it.t}</div>
+        <div style="font-size:31px;line-height:1.36;color:rgba(242,242,242,.66);margin-top:10px;max-width:24ch">${it.d}</div>
+      </div>
+    </div>` : `
+    <div class="ti" style="flex:1;display:flex;flex-direction:column;align-items:flex-start;gap:18px">
+      ${hexBadge(i + 1, 92, `${c.sid}-t${i}`)}
+      <div class="kicker" style="font-size:24px">${it.k}</div>
+      <div style="font-weight:800;font-size:58px;letter-spacing:-.02em;line-height:1.05">${it.t}</div>
+      <div style="font-size:34px;line-height:1.38;color:rgba(242,242,242,.66)">${it.d}</div>
+    </div>`).join('');
+  const html = `
+  <div class="abs" style="left:${l}px;right:${r}px;top:${V ? 280 : 110}px;bottom:${V ? 400 : 110}px;display:flex;
+       flex-direction:column;justify-content:center">
+    <div class="quote" data-fit style="font-size:${V ? 84 : 100}px;line-height:1;text-transform:uppercase;font-weight:800">
+      ${headline(s.title, { gold: [s.title.length - 1] })}</div>
+    <div style="position:relative;margin-top:${V ? 56 : 70}px;display:flex;flex-direction:${V ? 'column' : 'row'};gap:${V ? 44 : 40}px">
+      <div class="tline" style="position:absolute;${V ? 'left:45px;top:40px;bottom:60px;width:4px' : 'left:46px;right:60px;top:44px;height:4px'};
+           background:linear-gradient(${V ? '180deg' : '90deg'},#F0E281,#A37B3C);transform-origin:${V ? '50% 0' : '0 50%'};
+           box-shadow:0 0 20px rgba(240,226,129,.4)"></div>
+      ${items}
+    </div>
+  </div>`;
+  const n = s.items.length;
+  const js = `
+  lines(S+' .quote .line',T0,.12,.6);
+  tw(S+' .tline',{${V ? 'sy' : 'sx'}:[0,1]},T0+B*2,B*${every * (n - 1)}+.3,'linear');
+  [...document.querySelectorAll(S+' .ti')].forEach((e,i)=>{
+    const at=T0+B*(2+i*${every});
+    tw(e,{opacity:[0,1],${V ? 'x:[-40,0]' : 'y:[40,0]'}},at,.55,'expo');
+    tw(e.querySelector('.hexnum'),{scale:[.3,1]},at,.5,'back');
+  });`;
+  const cues = s.items.map((_, i) => ({ t: BEAT * (2 + i * every), type: 'tick', level: .9, freq: 1500 + i * 220 }));
+  cues.push({ t: BEAT * (2 + (n - 1) * every), type: 'hit', level: .35 });
+  return { html, js, cues, e: s.e ?? 2 };
+}
+
+export const SCENES = { hook, statement, step, myth, stat, list, compare, cta, logo, point, prompt, template, timeline };
 
 /* ============================ compositor ============================ */
 
@@ -316,7 +498,7 @@ export const SCENES = { hook, statement, step, myth, stat, list, compare, cta, l
  * Encadena escenas. Cada escena lleva `t` (tipo) y `len` en pulsos.
  * Devuelve el spec de video y el spec de audio sincronizado.
  */
-export function compose({ id, w, h, scenes, handle, persistentLogo = true, gx, gy }) {
+export function compose({ id, w, h, scenes, handle, persistentLogo = true, gx, gy, progress = false }) {
   const { V } = safe(w, h);
   let T = 0;
   const html = [], js = [], cues = [], sections = [];
@@ -363,12 +545,16 @@ export function compose({ id, w, h, scenes, handle, persistentLogo = true, gx, g
   const body = `
   <div class="flash" id="${id}-flash"></div>
   <div class="tear" id="${id}-tear">${'<i></i>'.repeat(16)}</div>
+  ${progress ? `<div class="abs" id="${id}-pg" style="left:${V ? 90 : 150}px;right:${V ? 150 : 150}px;top:${V ? 150 : 40}px;height:5px;
+      border-radius:3px;background:rgba(242,242,242,.14);overflow:hidden"><b style="position:absolute;inset:0;border-radius:3px;
+      background:linear-gradient(90deg,#A37B3C,#F0E281);transform-origin:0 50%;box-shadow:0 0 14px rgba(240,226,129,.5)"></b></div>` : ''}
   ${persistentLogo ? `<img id="${id}-pl" class="abs" src="../../brand/logo/lockup-oscuro.png"
       style="left:${V ? 90 : 150}px;top:${V ? 190 : 70}px;height:${V ? 58 : 54}px">` : ''}
   ${html.join('\n')}`;
   const timeline = `
   tw(stage,{'--gx':[${gx ?? 80},${gx ? gx + 8 : 90}],'--gy':[108,86]},0,${dur},'sine');
   ${persistentLogo ? `tw('#${id}-pl',{opacity:[0,1]},.1,.6,'out'); tw('#${id}-pl',{opacity:[1,0]},${logoAt}-.3,.3,'out');` : ''}
+  ${progress ? `tw('#${id}-pg b',{sx:[0,1]},0,${logoAt},'linear'); tw('#${id}-pg',{opacity:[1,0]},${logoAt}-.3,.3,'out');` : ''}
   ${js.join('\n')}`;
 
   return {

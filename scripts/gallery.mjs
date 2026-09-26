@@ -6,6 +6,7 @@
 import { carousels, stories, squares, covers, HANDLE } from '../src/content.mjs';
 import { reels } from '../src/motion/specs/reels.mjs';
 import { plan, notas } from '../src/plan.mjs';
+import { clases } from '../src/motion/specs/clases.mjs';
 import { readdirSync, writeFileSync, mkdirSync, copyFileSync, existsSync, statSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
@@ -142,9 +143,33 @@ const musica = ls('audio/musica', '.mp3').map(f => aud(`audio/musica/${f}`,
 const efectos = ls('audio/efectos', '.mp3').map(f => aud(`audio/efectos/${f}`,
   f.replace('.mp3', '').replace(/-/g, ' '), f)).join('');
 
+
+/* ------------------------------- clases ------------------------------- */
+const K = 'video/clases';
+const clasesHtml = clases.map((k, i) => {
+  const has = f => existsSync(resolve(OUT, `${K}/${f}`));
+  const reel = has(`${k.id}.mp4`) ? vid(`${K}/${k.id}.mp4`, 'Reel 9:16', '9 / 16') : '';
+  const yt = has(`${k.id}-16x9.mp4`) ? vid(`${K}/${k.id}-16x9.mp4`, 'YouTube 16:9', '16 / 9') : '';
+  const mini = has(`miniatura-${k.id}.jpg`) ? pic(`${K}/miniatura-${k.id}.jpg`, 'Miniatura', '16 / 9') : '';
+  const slides = ls(`carruseles/${k.id}`).map((f, j, a) =>
+    pic(`carruseles/${k.id}/${f}`, `${String(j + 1).padStart(2, '0')} / ${String(a.length).padStart(2, '0')}`, '4 / 5')).join('');
+  const d = has(`${k.id}.mp4`) ? dur(`${K}/${k.id}.mp4`) : '';
+  return `
+  <section class="bloque">
+    <header class="cab"><div class="idx">${String(i + 1).padStart(2, '0')}</div>
+      <div><h3>${k.titulo}</h3><p class="meta">${d ? d + ' · ' : ''}tema: ${k.tema} · Reel, video para YouTube, miniatura y carrusel</p></div></header>
+    <div class="clase">
+      <div class="c-reel">${reel}</div>
+      <div class="c-h">${yt}${mini}</div>
+    </div>
+    <div class="tira" style="margin-top:18px">${slides}</div>
+  </section>`;
+}).join('');
+
 /* ------------------------------ plan ------------------------------ */
 const thumbOf = p => p.endsWith('.mp4') ? p.replace('.mp4', '.jpg') : p.endsWith('.png') ? p : `${p}/01.png`;
-const semanas = [1, 2, 3, 4].map(n => `
+const SEMANAS = [...new Set(plan.map(x => x.semana))].sort((a, b) => a - b);
+const semanas = SEMANAS.map(n => `
   <section class="bloque">
     <header class="cab"><div class="idx">${n}</div><div><h3>Semana ${n}</h3>
       <p class="meta">${plan.filter(x => x.semana === n).length} posteos</p></div></header>
@@ -159,6 +184,7 @@ const semanas = [1, 2, 3, 4].map(n => `
           <p class="px">${esc(x.texto).replace(/\n/g, '<br>')}</p>
           <p class="ph">${x.tags}</p>
           ${x.historias ? `<p class="ps">Historias: ${esc(x.historias)}</p>` : ''}
+          ${x.youtube ? `<p class="ps">YouTube: la versión 16:9, mismo día.</p>` : ''}
           <button class="copy" data-t="${esc(full)}" id="cp-${n}-${i}">Copiar texto</button>
         </div></article>`;
     }).join('')}</div>
@@ -178,9 +204,9 @@ const tiras = carousels.map((c, ci) => {
 const rej = (dir, ratio) => ls(dir).map(f => pic(`${dir}/${f}`, f.replace('.png', ''), ratio)).join('');
 
 /* -------------------------------- cifras -------------------------------- */
-const nFijas = carousels.reduce((n, c) => n + ls(`carruseles/${c.id}`).length, 0)
+const nFijas = [...carousels, ...clases].reduce((n, c) => n + ls(`carruseles/${c.id}`).length, 0)
   + stories.length + squares.length + covers.length;
-const nVideos = reelFiles.length + ls('video/logo', '.mp4').length + ls('video/historias', '.mp4').length
+const nVideos = reelFiles.length + ls('video/clases', '.mp4').filter(f => !f.startsWith('miniatura')).length + ls('video/logo', '.mp4').length + ls('video/historias', '.mp4').length
   + portadasV.length + ls('video/loops', '.mp4').length + ls('video/citas', '.mp4').length;
 const nKit = ls('video/kit', '.webm').length;
 const nAudio = ls('audio/musica', '.mp3').length + ls('audio/efectos', '.mp3').length;
@@ -299,6 +325,9 @@ const html = `<title>Piezas Productos Digitales</title>
   .visor .cerrar{position:fixed;top:calc(12px + env(safe-area-inset-top,0px));right:14px;width:44px;height:44px;
     border-radius:50%;border:1px solid rgba(240,226,129,.35);background:rgba(14,14,14,.8);color:var(--oro);font-size:22px;cursor:pointer}
 
+  .clase{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:16px;align-items:start}
+  .c-h{display:grid;gap:16px}
+  @media (max-width:640px){.clase{grid-template-columns:1fr 1fr}.c-reel{grid-row:span 2}}
   .posts{display:grid;gap:14px}
   .post{display:grid;grid-template-columns:120px 1fr;gap:18px;border:1px solid var(--linea);border-radius:14px;
     background:var(--bg-2);padding:14px}
@@ -334,11 +363,17 @@ const html = `<title>Piezas Productos Digitales</title>
 </header>
 
 <nav class="sec" aria-label="Secciones"><div class="env">
-  <a href="#audiovisual">Audiovisual</a><a href="#kit">Kit de edición</a><a href="#sonido">Sonido</a><a href="#plan">Plan</a>
+  <a href="#clases">Clases</a><a href="#audiovisual">Audiovisual</a><a href="#kit">Kit de edición</a><a href="#sonido">Sonido</a><a href="#plan">Plan</a>
   <a href="#fijas">Piezas fijas</a><a href="#marca">De dónde sale</a>
 </div></nav>
 
 <main><div class="env">
+  <h2 id="clases">Clases: contenido de valor</h2>
+  <p class="bajada" style="font-size:15.5px;margin-top:14px">Piezas largas, de 45 a 65 segundos, sobre los temas de las portadas
+    de la marca: Introducción, Mentalidad, Principios del marketing digital y La nueva economía digital. Cada clase sale en
+    Reel, en video 16:9 para YouTube con su miniatura, y en carrusel.</p>
+  ${clasesHtml}
+
   <h2 id="audiovisual">Audiovisual</h2>
   ${bloque(hex, 'Reels', `${reelFiles.filter(f => !f.includes('16x9')).length} piezas · 1080 × 1920 · música y sonido originales, sincronizados al pulso`, reelsV, 'tira')}
   ${bloque(hex, 'Logo animado', 'El logo oficial: el hexágono se traza, el glitch barre el monograma, suena la firma', logos, 'rejilla', '220px')}
@@ -367,7 +402,7 @@ const html = `<title>Piezas Productos Digitales</title>
   </section>
 
   <h2 id="plan">Plan de publicación</h2>
-  <p class="bajada" style="font-size:15.5px;margin-top:14px">Cuatro semanas con el texto de cada posteo listo para pegar.</p>
+  <p class="bajada" style="font-size:15.5px;margin-top:14px">${SEMANAS.length} semanas y ${plan.length} posteos, con el texto de cada uno listo para pegar.</p>
   ${semanas}
   <ul class="notas" style="margin-bottom:10px">${notas.map(n => `<li><p>${n}</p></li>`).join('')}</ul>
 
@@ -482,10 +517,11 @@ mkdirSync(resolve(root, 'build'), { recursive: true });
 writeFileSync(resolve(root, 'build/galeria.html'), html);
 
 const md = ['# Plan de publicación — Productos Digitales', '',
-  'Cuatro semanas. Cada posteo con su pieza, el texto listo para pegar y las historias que lo acompañan.', '',
-  ...[1, 2, 3, 4].flatMap(n => [`## Semana ${n}`, '', ...plan.filter(x => x.semana === n).flatMap(x => [
+  `${SEMANAS.length} semanas. Cada posteo con su pieza, el texto listo para pegar y las historias que lo acompañan.`, '',
+  ...SEMANAS.flatMap(n => [`## Semana ${n}`, '', ...plan.filter(x => x.semana === n).flatMap(x => [
     `### ${x.dia} · ${x.tipo} · ${x.titulo}`, '', `Pieza: \`out/${x.pieza}\``, '', x.texto, '', x.tags, '',
-    ...(x.historias ? [`Historias: ${x.historias}`, ''] : [])])]),
+    ...(x.historias ? [`Historias: ${x.historias}`, ''] : []),
+    ...(x.youtube ? [`YouTube: \`out/${x.youtube}\``, ''] : [])])]),
   '## Notas', '', ...notas.map(n => `- ${n}`), ''].join('\n');
 writeFileSync(resolve(OUT, 'plan-de-publicacion.md'), md);
 

@@ -7,6 +7,8 @@
 import { chromium } from 'playwright';
 import { library, iconYes, iconNo } from '../src/illus.mjs';
 import { carousels, stories, squares, covers, HANDLE } from '../src/content.mjs';
+import { clases } from '../src/motion/specs/clases.mjs';
+import { hexPath } from '../src/illus.mjs';
 import { writeFileSync, mkdirSync, rmSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve, join } from 'node:path';
@@ -271,16 +273,156 @@ const tCoverWide = (s, id) => shell({
   </div>`,
 });
 
+
+/* ===================== plantillas de las clases (carrusel) ===================== */
+
+const hexNum = (label, size = 84) => `<span style="position:relative;display:inline-grid;place-items:center;
+  width:${size}px;height:${size * .9}px;flex:0 0 auto;font-weight:900;font-size:${size * .46}px;color:#12171E">
+  <svg viewBox="0 0 120 108" style="position:absolute;inset:0;width:100%;height:100%">
+    <defs><linearGradient id="hn" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#AF7C38"/>
+    <stop offset=".5" stop-color="#EAD77A"/><stop offset="1" stop-color="#DAAE4A"/></linearGradient></defs>
+    <path d="${hexPath(60, 54, 58, .2)}" fill="url(#hn)"/></svg><span style="position:relative">${label}</span></span>`;
+
+const ghost = (name, id, o = .2) => name ? `<div class="art" style="right:-150px;bottom:-120px;width:640px;height:640px;opacity:${o}">
+  ${art(name, id)}</div>` : '';
+
+/** Punto de una clase: número, título, explicación y ejemplo. */
+const tPoint = (s, i, n, id) => shell({
+  kind: '45', gx: '92%', gy: '96%', gx2: '4%', gy2: '8%',
+  body: `
+  ${ghost(s.art, id)}
+  <div class="stack pad" style="flex:1;padding-top:180px;padding-bottom:150px;justify-content:center">
+    <div style="display:flex;align-items:center;gap:20px">${hexNum(s.n)}
+      <span class="eyebrow" style="font-size:21px">${s.label || 'Punto'} ${s.n}${s.of ? ` de ${s.of}` : ''}</span></div>
+    <h3 class="h3" data-fit style="margin-top:32px;font-size:80px">${lines(s.title)}</h3>
+    <div class="rule rule--short"></div>
+    <p class="lede" style="margin-top:30px;font-size:37px;max-width:28ch;color:rgba(242,242,242,.86)">${s.body}</p>
+    ${s.ex ? `<div style="margin-top:38px;border-left:5px solid #F0E281;padding:22px 28px;border-radius:0 18px 18px 0;
+         background:linear-gradient(90deg,rgba(240,226,129,.10),rgba(240,226,129,.02))">
+      <div class="eyebrow" style="font-size:19px">${s.exLabel || 'Ejemplo'}</div>
+      <div style="margin-top:10px;font-size:32px;font-weight:600;line-height:1.36">${s.ex}</div></div>` : ''}
+  </div>`,
+  foot: foot(HANDLE, pager(i, n)),
+});
+
+/** Prompt de IA completo, listo para copiar. */
+const tPrompt = (s, i, n, id) => shell({
+  kind: '45', gx: '50%', gy: '104%', gx2: '50%', gy2: '-4%',
+  body: `
+  <div class="stack pad" style="flex:1;padding-top:180px;padding-bottom:150px;justify-content:center">
+    <div style="display:flex;align-items:center;gap:20px">${hexNum(s.n)}
+      <div><span class="eyebrow" style="font-size:20px">Prompt ${s.n}${s.of ? ` de ${s.of}` : ''}</span>
+      <div style="margin-top:8px;font-weight:800;font-size:52px;letter-spacing:-.02em;line-height:1.05">${s.title}</div></div></div>
+    <div style="margin-top:40px;border-radius:26px;border:1.5px solid rgba(240,226,129,.34);
+         background:linear-gradient(180deg,rgba(26,24,18,.96),rgba(16,15,12,.96));box-shadow:0 0 80px rgba(240,226,129,.10)">
+      <div style="display:flex;align-items:center;gap:10px;padding:18px 26px;border-bottom:1px solid rgba(242,242,242,.08)">
+        <i style="width:14px;height:14px;border-radius:50%;background:#A37B3C"></i>
+        <i style="width:14px;height:14px;border-radius:50%;background:#D8BC66"></i>
+        <i style="width:14px;height:14px;border-radius:50%;background:#F0E281"></i>
+        <span style="margin-left:auto;font-size:19px;letter-spacing:.18em;text-transform:uppercase;color:rgba(242,242,242,.42);font-weight:700">Copialo</span></div>
+      <div style="padding:30px 32px 36px;font-family:'DejaVu Sans Mono',ui-monospace,monospace;font-size:31px;line-height:1.52">
+        <span style="color:#F0E281">&gt;</span> ${s.prompt}</div>
+    </div>
+    ${s.note ? `<p class="lede" style="margin-top:28px;font-size:30px;max-width:none">${s.note}</p>` : ''}
+  </div>`,
+  foot: foot(HANDLE, pager(i, n)),
+});
+
+/** Plantilla: la fórmula con huecos y un ejemplo completo. */
+const tTemplate = (s, i, n, id) => {
+  const f = s.parts.map(p => typeof p === 'string' ? p : `<span style="color:rgba(240,226,129,.9);border-bottom:3px dashed rgba(240,226,129,.5)">[${p.b}]</span>`).join('');
+  const e = s.parts.map(p => typeof p === 'string' ? p : `<span class="gold">${p.f}</span>`).join('');
+  return shell({
+    kind: '45', gx: '10%', gy: '96%', gx2: '96%', gy2: '6%',
+    body: `
+    <div class="stack pad" style="flex:1;padding-top:180px;padding-bottom:150px;justify-content:center">
+      <div class="eyebrow">${s.kicker || 'Plantilla'}</div>
+      <h3 class="h3" data-fit style="margin-top:24px;font-size:80px">${lines(s.title)}</h3>
+      <div class="rule rule--short"></div>
+      <div class="card" style="margin-top:44px;display:block;padding:34px 36px">
+        <div class="eyebrow" style="font-size:19px">Fórmula</div>
+        <p style="margin-top:14px;font-size:44px;font-weight:700;line-height:1.45;letter-spacing:-.01em">${f}</p></div>
+      <div style="margin-top:22px;padding:30px 36px;border-left:5px solid #F0E281;border-radius:0 18px 18px 0;
+           background:linear-gradient(90deg,rgba(240,226,129,.10),rgba(240,226,129,.02))">
+        <div class="eyebrow" style="font-size:19px">Ejemplo</div>
+        <p style="margin-top:12px;font-size:38px;font-weight:600;line-height:1.42">${e}</p></div>
+      ${s.note ? `<p class="lede" style="margin-top:28px;font-size:30px;max-width:none">${s.note}</p>` : ''}
+    </div>`,
+    foot: foot(HANDLE, pager(i, n)),
+  });
+};
+
+/** Línea de tiempo vertical. */
+const tTimeline = (s, i, n, id) => shell({
+  kind: '45', gx: '6%', gy: '100%', gx2: '96%', gy2: '4%',
+  body: `
+  <div class="stack pad" style="flex:1;padding-top:180px;padding-bottom:150px;justify-content:center">
+    <h3 class="h3" data-fit style="font-size:84px">${lines(s.title)}</h3>
+    <div class="rule rule--short"></div>
+    <div style="position:relative;margin-top:50px;display:flex;flex-direction:column;gap:40px">
+      <div style="position:absolute;left:40px;top:40px;bottom:50px;width:4px;background:linear-gradient(180deg,#F0E281,#A37B3C);
+           box-shadow:0 0 18px rgba(240,226,129,.4)"></div>
+      ${s.items.map((it, k) => `<div style="position:relative;display:flex;gap:28px;align-items:flex-start">${hexNum(k + 1)}
+        <div><div class="eyebrow" style="font-size:19px">${it.k}</div>
+          <div style="font-weight:800;font-size:46px;letter-spacing:-.02em;margin-top:6px">${it.t}</div>
+          <div style="font-size:29px;color:rgba(242,242,242,.66);margin-top:8px;line-height:1.36">${it.d}</div></div></div>`).join('')}
+    </div>
+  </div>`,
+  foot: foot(HANDLE, pager(i, n)),
+});
+
+/** Repaso: la lista para guardar. */
+const tRecap = (s, i, n, id) => shell({
+  kind: '45', gx: '50%', gy: '104%', gx2: '50%', gy2: '-4%',
+  body: `
+  <div class="stack pad" style="flex:1;padding-top:180px;padding-bottom:150px;justify-content:center">
+    <div class="eyebrow">Para guardar</div>
+    <h3 class="h3" data-fit style="margin-top:24px;font-size:84px">${lines(s.title)}</h3>
+    <div class="rule rule--short"></div>
+    <div style="margin-top:46px;display:flex;flex-direction:column;gap:${s.items.length > 6 ? 22 : 28}px">
+      ${s.items.map((t, k) => `<div style="display:flex;align-items:center;gap:24px">
+        ${s.check ? `<span style="width:52px;height:52px;flex:0 0 auto">${iconYes}</span>` : hexNum(k + 1, 64)}
+        <span style="font-weight:700;font-size:${s.items.length > 6 ? 38 : 42}px;letter-spacing:-.01em">${t}</span></div>`).join('')}
+    </div>
+  </div>`,
+  foot: foot(HANDLE, pager(i, n)),
+});
+
+/** Convierte una clase (guion de video) en diapositivas de carrusel. */
+function claseASlides(k) {
+  const hooks = k.scenes.filter(s => s.t === 'hook');
+  const firstArt = (k.scenes.find(s => s.art) || {}).art || 'hexRoute';
+  const slides = [{ t: 'cover', eyebrow: k.tema, h1: k.mini, art: firstArt, gx: '86%', gy: '90%',
+    lede: hooks.map(h => h.lines.join(' ')).join(' ') }];
+  const em = (ls, gold = []) => ls.map((l, i) => (gold.includes(i) ? `<em>${l}</em>` : l));
+  for (const s of k.scenes) {
+    if (s.t === 'point') slides.push({ ...s, t: 'point' });
+    else if (s.t === 'prompt') slides.push({ ...s, t: 'prompt' });
+    else if (s.t === 'template') slides.push({ ...s, t: 'template' });
+    else if (s.t === 'timeline') slides.push({ ...s, t: 'timeline' });
+    else if (s.t === 'list') slides.push({ t: 'recap', title: s.title, items: s.items, check: s.check });
+    else if (s.t === 'statement') slides.push({ t: 'statement', h: em(s.lines, s.gold || []), lede: s.sub || '', art: s.art });
+    else if (s.t === 'cta') slides.push({ t: 'cta', h: s.lines, lede: s.sub || 'Guardá este carrusel para tenerlo a mano.',
+      cta: s.pill === 'Guardalo' ? 'Guardalo' : s.pill, art: 'launch' });
+  }
+  return slides;
+}
+
 /* ============================== armado ============================== */
 
-const TPL = { cover: tCover, statement: tStatement, step: tStep, myth: tMyth, compare: tCompare, cta: tCta };
+const TPL = { cover: tCover, statement: tStatement, step: tStep, myth: tMyth, compare: tCompare, cta: tCta,
+  point: tPoint, prompt: tPrompt, template: tTemplate, timeline: tTimeline, recap: tRecap };
 
 const page = inner => `<!doctype html><html lang="es"><head><meta charset="utf-8">
 <link rel="stylesheet" href="../../src/brand.css">${FIT}</head><body>${inner}</body></html>`;
 
 const jobs = [];
+// `node scripts/render.mjs clases` renderiza solo los carruseles de las clases
+const soloClases = process.argv[2] === 'clases';
 
-for (const c of carousels) {
+const todos = soloClases ? [] : carousels;
+for (const k of clases) todos.push({ id: k.id, slides: claseASlides(k) });
+for (const c of todos) {
   c.slides.forEach((s, k) => {
     const i = k + 1, n = c.slides.length;
     const id = `${c.id}-${i}`;
@@ -288,15 +430,18 @@ for (const c of carousels) {
                 html: page(TPL[s.t](s, i, n, id)) });
   });
 }
-stories.forEach(s => jobs.push({ name: `historias/${s.id}`, kind: '916', html: page(tStory(s, s.id)) }));
-squares.forEach(s => jobs.push({ name: `cuadradas/${s.id}`, kind: '11', html: page(tSquare(s, s.id)) }));
-covers.forEach(s => jobs.push({ name: `portadas/${s.id}`, kind: '169', html: page(tCoverWide(s, s.id)) }));
+if (!soloClases) {
+  stories.forEach(s => jobs.push({ name: `historias/${s.id}`, kind: '916', html: page(tStory(s, s.id)) }));
+  squares.forEach(s => jobs.push({ name: `cuadradas/${s.id}`, kind: '11', html: page(tSquare(s, s.id)) }));
+  covers.forEach(s => jobs.push({ name: `portadas/${s.id}`, kind: '169', html: page(tCoverWide(s, s.id)) }));
+}
 
 const SIZE = { '45': [1080, 1350], '11': [1080, 1080], '916': [1080, 1920], '169': [1920, 1080] };
 
 // solo las carpetas de las piezas fijas: out/ también guarda video y audio
-for (const d of ['carruseles', 'historias', 'cuadradas', 'portadas', 'hojas-de-contacto'])
-  rmSync(resolve(OUT, d), { recursive: true, force: true });
+const limpiar = soloClases ? clases.map(k => `carruseles/${k.id}`)
+  : ['carruseles', 'historias', 'cuadradas', 'portadas', 'hojas-de-contacto'];
+for (const d of limpiar) rmSync(resolve(OUT, d), { recursive: true, force: true });
 
 const browser = await chromium.launch();
 for (const j of jobs) {

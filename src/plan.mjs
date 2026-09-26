@@ -125,9 +125,87 @@ Con fecha, con camino y con prueba de que funciona. Eso es una oferta.`,
 
 Tu primer producto puede estar listo esta semana. Guardalo y seguinos para el paso a paso.`,
     tags: tags('ia', 'venta') },
+  /* ------------------------ semanas 5 a 8: clases ------------------------
+     Cada clase sale dos veces, separada: el Reel busca alcance y el
+     carrusel busca guardados. La versión 16:9 va a YouTube el mismo día. */
+  { semana: 5, dia: 'Lunes', tipo: 'Reel', pieza: 'video/clases/k1-economia-digital.mp4', titulo: 'La nueva economía digital',
+    texto: `Lo que sabés ya se puede vender.
+
+Cinco claves de la nueva economía digital: se hace una vez y se vende muchas, la IA bajó el costo de crear, no competís con todo Internet, lo que sabés vale para alguien y lo que no cambió: la gente paga por un resultado.
+
+La oportunidad es real. El atajo, no. ¿Qué sabés vos que otro necesita?`,
+    tags: tags('ia'), youtube: 'video/clases/k1-economia-digital-16x9.mp4' },
+  { semana: 5, dia: 'Miércoles', tipo: 'Carrusel', pieza: 'carruseles/k3-principios-marketing', titulo: '7 principios (carrusel)',
+    texto: `Los 7 principios del marketing digital, para tener a mano.
+
+La placa 9 los junta todos en una pantalla. Guardalo y usalo antes de publicar.`,
+    tags: tags('contenido') },
+  { semana: 5, dia: 'Viernes', tipo: 'Reel', pieza: 'video/clases/k2-mentalidad.mp4', titulo: 'Mentalidad para arrancar de cero',
+    texto: `El que arranca de cero no pierde por falta de talento. Pierde por abandonar.
+
+Seis ideas para sostener el proceso cuando todavía no hay resultados. La última es la más importante: un paso por vez.
+
+Fe en el proceso, foco en el paso.`,
+    tags: tags('contenido'), youtube: 'video/clases/k2-mentalidad-16x9.mp4' },
+
+  { semana: 6, dia: 'Lunes', tipo: 'Reel', pieza: 'video/clases/k3-principios-marketing.mp4', titulo: '7 principios del marketing digital',
+    texto: `7 principios del marketing digital, sin humo.
+
+Un dolor. Una persona. Una promesa. Prueba. Un ángulo. Orgánico para confiar y anuncios para escalar. Y siempre un próximo paso.
+
+Guardalo y usalo en tu próxima publicación.`,
+    tags: tags('contenido'), youtube: 'video/clases/k3-principios-marketing-16x9.mp4' },
+  { semana: 6, dia: 'Miércoles', tipo: 'Carrusel', pieza: 'carruseles/k1-economia-digital', titulo: 'La nueva economía digital (carrusel)',
+    texto: `La nueva economía digital en nueve placas.
+
+Guardalo y releelo antes de decidir qué vas a vender.`,
+    tags: tags('ia') },
+  { semana: 6, dia: 'Viernes', tipo: 'Reel', pieza: 'video/clases/k4-oferta.mp4', titulo: 'La oferta que se vende',
+    texto: `Nadie compra tu curso. Compran tu oferta.
+
+La frase para escribir la tuya:
+Ayudo a [quién] a [resultado] en [tiempo] sin [lo que temen].
+
+Escribí la tuya en comentarios.`,
+    tags: tags('venta'), youtube: 'video/clases/k4-oferta-16x9.mp4' },
+
+  { semana: 7, dia: 'Lunes', tipo: 'Reel', pieza: 'video/clases/k5-plan-30-dias.mp4', titulo: 'Un plan de 30 días',
+    texto: `De idea a primera venta: un plan de 30 días.
+
+Semana 1, investigar. Semana 2, validar. Semana 3, construir. Semana 4, vender.
+
+No es una promesa: es un orden. Guardalo y arrancá el lunes.`,
+    tags: tags('venta'), youtube: 'video/clases/k5-plan-30-dias-16x9.mp4' },
+  { semana: 7, dia: 'Miércoles', tipo: 'Carrusel', pieza: 'carruseles/k2-mentalidad', titulo: 'Mentalidad (carrusel)',
+    texto: `Mentalidad para arrancar de cero, en un carrusel.
+
+Guardalo para el día que tengas ganas de largar.`,
+    tags: tags('contenido') },
+  { semana: 7, dia: 'Viernes', tipo: 'Reel', pieza: 'video/clases/k6-prompts-ia.mp4', titulo: '5 prompts de IA',
+    texto: `5 prompts para crear tu producto con IA: para encontrar el dolor, definir la promesa, estructurar, guionar y crear contenido.
+
+Copialos, pero revisá todo lo que te devuelve. La IA acelera; el criterio lo ponés vos.`,
+    tags: tags('ia'), youtube: 'video/clases/k6-prompts-ia-16x9.mp4' },
+
+  { semana: 8, dia: 'Lunes', tipo: 'Carrusel', pieza: 'carruseles/k4-oferta', titulo: 'La oferta que se vende (carrusel)',
+    texto: `La oferta que se vende: la fórmula, qué tiene que incluir, cómo pensar el precio y cómo sacarle el riesgo a la primera compra.
+
+Guardalo para cuando armes la tuya.`,
+    tags: tags('venta') },
+  { semana: 8, dia: 'Miércoles', tipo: 'Carrusel', pieza: 'carruseles/k5-plan-30-dias', titulo: 'El plan de 30 días (carrusel)',
+    texto: `El plan de 30 días, semana por semana.
+
+Guardalo y marcá en qué semana estás.`,
+    tags: tags('venta') },
+  { semana: 8, dia: 'Viernes', tipo: 'Carrusel', pieza: 'carruseles/k6-prompts-ia', titulo: '5 prompts de IA (carrusel)',
+    texto: `Los 5 prompts completos, listos para copiar.
+
+Guardalo y probalos esta semana.`,
+    tags: tags('ia') },
 ];
 
 export const notas = [
+  'Semanas 5 a 8: las clases. Cada una tiene su versión 16:9 para YouTube (y su miniatura): subila el mismo día que el Reel.',
   'Horario: probá dos franjas (12 a 13 h y 19 a 21 h) las dos primeras semanas y quedate con la que mejor rinda en las estadísticas de la cuenta.',
   'Los Reels llevan audio propio: subilos con su sonido original. Si se usa un audio en tendencia, bajá la música del video al 20% en el editor de Instagram.',
   'Cuadradas q3 y q5 quedan de reserva para cubrir un día o responder un comentario frecuente.',

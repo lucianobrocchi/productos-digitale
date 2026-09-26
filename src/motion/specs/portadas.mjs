@@ -41,8 +41,8 @@ function cover45(c) {
   };
 }
 
-function cover169(s) {
-  const id = `portada-16x9-${s.id}`;
+export function cover169(s, { prefix = "portada-16x9-", out = "portadas" } = {}) {
+  const id = `${prefix}${s.id}`;
   const body = `
   <img class="abs" id="${id}-lg" src="../../brand/logo/lockup-oscuro.png" style="left:72px;top:64px;height:62px">
   <div class="abs art" style="right:90px;top:180px;width:720px;height:720px">${library[s.art](`${id}-a`)}</div>
@@ -59,7 +59,7 @@ function cover169(s) {
   tw('.rule',{sx:[0,1]},1.4,.8,'expo'); document.querySelector('.rule').style.transformOrigin='0 50%';`;
   return {
     video: { id, w: 1920, h: 1080, dur: DUR, body, timeline, poster: 4, gx: s.gx, gy: s.gy,
-      out: `portadas/${id}.mp4` },
+      out: `${out}/${id}.mp4` },
     audio: { dur: DUR, sections: [{ t0: 0, t1: DUR, e: 1 }], musicLevel: .45,
       cues: [{ t: .6, type: 'hit', level: .4 }, { t: .76, type: 'tick', level: .6 }] },
   };

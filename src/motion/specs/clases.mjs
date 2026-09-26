@@ -1,0 +1,211 @@
+/* ------------------------------------------------------------------
+   Clases: piezas largas de valor, de 50 a 70 segundos.
+
+   Anclas en el material real de la marca:
+   - Las cuatro portadas del Drive (Introducción, Mentalidad, Principios
+     del marketing digital, La nueva economía digital) marcan los temas.
+   - El manual da la misión, el tono ("fe en el proceso, mentalidad
+     ganadora", "sin humo") y el enfoque: método, IA como acelerador,
+     orgánico + anuncios.
+   Los consejos concretos son buenas prácticas generales: no se presentan
+   como el programa de la marca ni prometen resultados.
+   ------------------------------------------------------------------ */
+
+const P = 15;   // pulsos por punto con ejemplo (7,5 s)
+
+export const clases = [
+
+/* ------------------------------------------------------------------ 1 */
+{
+  id: 'k1-economia-digital', mini: ['La nueva', 'economía digital'], titulo: 'La nueva economía digital', gx: 80, tema: 'La nueva economía digital',
+  scenes: [
+    { t: 'hook', len: 4, lines: ['Lo que sabés', 'ya se puede', 'vender.'], gold: [2], glitch: false },
+    { t: 'hook', len: 4, lines: ['Esta es la nueva', 'economía digital.'], gold: [1] },
+    { t: 'point', len: P, n: 1, of: 5, label: 'Clave', art: 'asset',
+      title: ['Se hace una vez,', 'se vende muchas'],
+      body: 'Un producto digital no tiene stock ni envío. Cada venta nueva casi no cuesta nada.',
+      ex: 'Una guía se descarga mil veces sin volver a escribirla.' },
+    { t: 'point', len: P, n: 2, of: 5, label: 'Clave', art: 'aiChip',
+      title: ['La IA bajó', 'el costo de crear'],
+      body: 'Estructura, guiones y materiales que llevaban meses hoy salen en horas.',
+      ex: 'Lo que la IA no hace: decidir qué vender y a quién.', exLabel: 'Ojo' },
+    { t: 'point', len: P, n: 3, of: 5, label: 'Clave', art: 'target',
+      title: ['No competís con', 'todo Internet'],
+      body: 'Competís en un problema puntual, para una persona puntual. Ahí hay lugar.',
+      ex: 'No: "curso de marketing". Sí: "primeros pacientes online para psicólogos".' },
+    { t: 'point', len: P, n: 4, of: 5, label: 'Clave', art: 'stairs',
+      title: ['Lo que sabés', 'vale para alguien'],
+      body: 'Para quien va dos pasos atrás, lo que para vos es obvio es justo lo que le falta.',
+      ex: 'Si te preguntan lo mismo tres veces, ahí hay un producto.' },
+    { t: 'point', len: P, n: 5, of: 5, label: 'Clave', art: 'income',
+      title: ['Lo que', 'no cambió'],
+      body: 'La gente no paga por información. Paga por un resultado y un camino ordenado.',
+      ex: 'Hay de todo gratis en Internet. Lo que se paga es el orden.' },
+    { t: 'list', len: 9, title: ['Qué se puede', 'vender'], items: ['Guías y plantillas', 'Cursos grabados',
+      'Talleres en vivo', 'Mentorías grupales', 'Comunidades pagas'] },
+    { t: 'statement', len: 8, art: 'shortcut', lines: ['La oportunidad', 'es real.', 'El atajo, no.'], gold: [2],
+      sub: 'Lo que hace falta es método.' },
+    { t: 'cta', len: 8, lines: ['¿Qué sabés vos', 'que otro', 'necesita?'], pill: 'Contanos', sub: 'Respondelo en comentarios.' },
+    { t: 'logo', len: 10, tag: false },
+  ],
+},
+
+/* ------------------------------------------------------------------ 2 */
+{
+  id: 'k2-mentalidad', mini: ['Mentalidad para', 'arrancar de cero'], titulo: 'Mentalidad para arrancar de cero', gx: 76, tema: 'Mentalidad',
+  scenes: [
+    { t: 'hook', len: 5, lines: ['El que arranca', 'de cero no pierde', 'por falta de talento.'], gold: [], glitch: false },
+    { t: 'hook', len: 4, lines: ['Pierde por', 'abandonar.'], gold: [1] },
+    { t: 'point', len: P, n: 1, of: 6, label: 'Idea', art: 'launch',
+      title: ['Publicá antes de', 'sentirte listo'],
+      body: 'Nadie se siente listo la primera vez. La confianza llega después de hacerlo.',
+      ex: 'Publicá esta semana con lo que tenés. Mejoralo la que viene.' },
+    { t: 'point', len: P, n: 2, of: 6, label: 'Idea', art: 'asset',
+      title: ['Tu primer producto', 'no es el final'],
+      body: 'Es el que te enseña qué quiere tu cliente. El segundo sale mejor gracias al primero.',
+      ex: 'Empezá chico: una guía o un taller, no una academia.' },
+    { t: 'point', len: P, n: 3, of: 6, label: 'Idea', art: 'growth',
+      title: ['Compará con vos', 'de hace un mes'],
+      body: 'Las cuentas grandes llevan años. Tu referencia es tu propio avance.',
+      ex: 'Cada viernes anotá: qué publicaste, qué vendiste, qué aprendiste.' },
+    { t: 'point', len: P, n: 4, of: 6, label: 'Idea', art: 'clock',
+      title: ['El sistema le gana', 'a la motivación'],
+      body: 'La motivación sube y baja. Un sistema te hace avanzar los días sin ganas.',
+      ex: 'Mismo día, misma hora, misma tarea: eso es un sistema.' },
+    { t: 'point', len: P, n: 5, of: 6, label: 'Idea', art: 'target',
+      title: ['Un "no"', 'es información'],
+      body: 'Cada objeción te dice qué ajustar: la promesa, el precio o a quién le hablás.',
+      ex: 'Preguntá siempre: ¿qué te frenó?' },
+    { t: 'point', len: P, n: 6, of: 6, label: 'Idea', art: 'hexRoute',
+      title: ['Fe en el proceso,', 'foco en el paso'],
+      body: 'No hace falta ver toda la escalera. Hace falta dar bien el próximo escalón.',
+      ex: '¿Cuál es tu próximo paso concreto? Uno solo.' },
+    { t: 'list', len: 10, title: ['Guardalo'], gold: [0], check: true,
+      items: ['Publicá antes de estar listo', 'Empezá chico', 'Medite contra vos', 'Armá un sistema',
+        'Escuchá los "no"', 'Un paso por vez'] },
+    { t: 'cta', len: 8, lines: ['Mentalidad', 'primero.', 'Método siempre.'], pill: 'Seguinos' },
+    { t: 'logo', len: 10, tag: false },
+  ],
+},
+
+/* ------------------------------------------------------------------ 3 */
+{
+  id: 'k3-principios-marketing', mini: ['7 principios del', 'marketing digital'], titulo: '7 principios del marketing digital', gx: 84, tema: 'Principios del marketing digital',
+  scenes: [
+    { t: 'hook', len: 6, kicker: 'Sin humo', lines: ['7 principios', 'del marketing', 'digital'], gold: [2] },
+    { t: 'point', len: 13, n: 1, of: 7, label: 'Principio', art: 'target',
+      title: ['Un dolor,', 'no un tema'], body: 'Los temas se consumen. Los dolores se pagan.',
+      ex: 'Tema: productividad. Dolor: "no llego a cumplir con mis clientes".', exAt: 5 },
+    { t: 'point', len: 13, n: 2, of: 7, label: 'Principio', art: 'magnet',
+      title: ['Una persona,', 'no "todos"'], body: 'Si le hablás a todos, nadie siente que es para él.',
+      ex: '"Para emprendedores" no alcanza. "Para nutricionistas que atienden online", sí.', exAt: 5 },
+    { t: 'point', len: 13, n: 3, of: 7, label: 'Principio', art: 'clock',
+      title: ['Una promesa', 'concreta'], body: 'Qué va a lograr, en cuánto tiempo y sin qué obstáculo.',
+      ex: '"Aprendé diseño" contra "tu feed listo en una tarde, sin diseñador".', exAt: 5 },
+    { t: 'point', len: 13, n: 4, of: 7, label: 'Principio', art: 'growth',
+      title: ['Mostrá,', 'no adjetives'], body: '"Increíble" y "transformador" no convencen. Un antes y un después, sí.',
+      ex: 'Mostrá el proceso, capturas y resultados reales.', exAt: 5 },
+    { t: 'point', len: 13, n: 5, of: 7, label: 'Principio', art: 'funnel',
+      title: ['Un ángulo,', 'repetido'], body: 'Cien ideas sueltas no construyen marca. Un mensaje dicho de diez formas, sí.',
+      ex: 'El nuestro: "Lo que hace falta es método".', exAt: 5 },
+    { t: 'point', len: 13, n: 6, of: 7, label: 'Principio', art: 'launch',
+      title: ['Orgánico para', 'confiar, anuncios', 'para escalar'],
+      body: 'El contenido construye confianza. Los anuncios la llevan a más gente.',
+      ex: 'Primero probá qué contenido funciona. Después, poné plata detrás.', exAt: 5 },
+    { t: 'point', len: 13, n: 7, of: 7, label: 'Principio', art: 'shortcut',
+      title: ['Siempre un', 'próximo paso'], body: 'Cada pieza termina en una acción: guardar, comentar, escribir, comprar.',
+      ex: 'Si no pedís nada, no pasa nada.', exAt: 5 },
+    { t: 'list', len: 11, title: ['Los 7, en', 'una pantalla'], check: true,
+      items: ['Un dolor', 'Una persona', 'Una promesa', 'Prueba', 'Un ángulo', 'Orgánico + anuncios', 'Próximo paso'] },
+    { t: 'cta', len: 8, lines: ['Guardalo y usalo', 'en tu próxima', 'publicación.'], pill: 'Guardalo' },
+    { t: 'logo', len: 10, tag: false },
+  ],
+},
+
+/* ------------------------------------------------------------------ 4 */
+{
+  id: 'k4-oferta', mini: ['La oferta', 'que se vende'], titulo: 'La oferta que se vende', gx: 82, tema: 'Principios del marketing digital',
+  scenes: [
+    { t: 'hook', len: 4, lines: ['Nadie compra', 'tu curso.'], gold: [], glitch: false },
+    { t: 'hook', len: 4, lines: ['Compran', 'tu oferta.'], gold: [1] },
+    { t: 'statement', len: 9, art: 'asset', lines: ['Una oferta es', 'más que', 'un producto.'], gold: [2],
+      sub: 'Es la respuesta completa a "¿por qué te compro esto, ahora?".' },
+    { t: 'template', len: 14, kicker: 'Plantilla', title: ['La frase', 'de tu oferta'],
+      parts: ['Ayudo a ', { b: 'quién', f: 'nutricionistas' }, ' a ', { b: 'resultado', f: 'conseguir pacientes online' },
+        ' en ', { b: 'tiempo', f: '8 semanas' }, ' sin ', { b: 'lo que temen', f: 'bailar en redes' }, '.'],
+      note: 'Completala con tu caso y dejala en comentarios.' },
+    { t: 'list', len: 10, title: ['Qué tiene', 'que incluir'], items: ['Para quién es (y para quién no)',
+      'El resultado concreto', 'Qué incluye, paso a paso', 'Prueba de que funciona', 'Precio y forma de pago',
+      'Qué pasa si no le sirve'] },
+    { t: 'point', len: P, n: 1, of: 2, label: 'Detalle', art: 'income',
+      title: ['El precio', 'comunica'],
+      body: 'Un precio bajo no saca la duda: la cambia por "¿será bueno?". Cobrá por el resultado.',
+      ex: 'Compará con lo que le cuesta seguir con el problema.' },
+    { t: 'point', len: P, n: 2, of: 2, label: 'Detalle', art: 'twoPaths',
+      title: ['Sacale', 'el riesgo'],
+      body: 'Una garantía clara baja la barrera de la primera compra.',
+      ex: '"Si en 7 días no te sirve, te devolvemos el dinero."' },
+    { t: 'cta', len: 8, lines: ['Escribí tu frase', 'de oferta', 'en comentarios.'], pill: 'Contanos' },
+    { t: 'logo', len: 10, tag: false },
+  ],
+},
+
+/* ------------------------------------------------------------------ 5 */
+{
+  id: 'k5-plan-30-dias', mini: ['El plan', 'de 30 días'], titulo: 'De idea a primera venta: un plan de 30 días', gx: 78, tema: 'Introducción',
+  scenes: [
+    { t: 'hook', len: 4, lines: ['De idea a', 'primera venta:'], gold: [], glitch: false },
+    { t: 'hook', len: 4, lines: ['un plan de', '30 días.'], gold: [1] },
+    { t: 'timeline', len: 14, title: ['El plan'], every: 3, items: [
+      { k: 'Semana 1', t: 'Investigar', d: 'Hablar con quien tiene el problema.' },
+      { k: 'Semana 2', t: 'Validar', d: 'Contar la promesa y medir la respuesta.' },
+      { k: 'Semana 3', t: 'Construir', d: 'Primera versión, con IA.' },
+      { k: 'Semana 4', t: 'Vender', d: 'Un ángulo, todos los días.' }] },
+    { t: 'point', len: P, n: 1, of: 4, label: 'Semana', art: 'target',
+      title: ['Investigar'], body: 'Hablá con 10 personas que tengan el problema. Preguntá qué intentaron y qué las frustró.',
+      ex: 'Anotá sus frases textuales: son tu texto de venta.' },
+    { t: 'point', len: P, n: 2, of: 4, label: 'Semana', art: 'twoPaths',
+      title: ['Validar'], body: 'Publicá la promesa y medí: mensajes, lista de espera o preventas.',
+      ex: 'Si nadie levanta la mano, ajustá la promesa antes de producir.' },
+    { t: 'point', len: P, n: 3, of: 4, label: 'Semana', art: 'aiChip',
+      title: ['Construir'], body: 'Con la IA armá estructura, guion y materiales. Terminado le gana a perfecto.',
+      ex: 'Versión 1: lo mínimo que resuelve el problema.' },
+    { t: 'point', len: P, n: 4, of: 4, label: 'Semana', art: 'income',
+      title: ['Vender'], body: 'Un ángulo, todos los días, con una llamada a la acción clara.',
+      ex: 'Contá el proceso, mostrá la prueba, invitá a comprar.' },
+    { t: 'statement', len: 8, art: 'stairs', lines: ['No es una promesa.', 'Es un orden.'], gold: [1],
+      sub: 'Lo que hace falta es método.' },
+    { t: 'cta', len: 8, lines: ['Guardá el plan', 'y arrancá', 'el lunes.'], pill: 'Guardalo' },
+    { t: 'logo', len: 10, tag: false },
+  ],
+},
+
+/* ------------------------------------------------------------------ 6 */
+{
+  id: 'k6-prompts-ia', mini: ['5 prompts de IA', 'para tu producto'], titulo: '5 prompts para crear tu producto con IA', gx: 86, tema: 'La nueva economía digital',
+  scenes: [
+    { t: 'hook', len: 6, kicker: 'Copialos', lines: ['5 prompts para', 'crear tu producto', 'con IA'], gold: [2] },
+    { t: 'statement', len: 8, art: 'aiChip', lines: ['La IA no piensa', 'por vos.'], gold: [1],
+      sub: 'Pero con el pedido correcto te ahorra semanas.' },
+    { t: 'prompt', len: 16, n: 1, of: 5, title: 'Encontrar el dolor',
+      prompt: 'Te paso 50 comentarios de mi audiencia. Agrupalos en los 5 problemas más repetidos y citá frases textuales de cada uno.',
+      note: 'Pegá los comentarios debajo del prompt.' },
+    { t: 'prompt', len: 16, n: 2, of: 5, title: 'Definir la promesa',
+      prompt: 'Con estos 5 problemas, proponé 10 promesas con el formato: ayudo a [quién] a [resultado] en [tiempo] sin [lo que temen].',
+      note: 'Elegí una y probala con tu audiencia.' },
+    { t: 'prompt', len: 16, n: 3, of: 5, title: 'Estructurar',
+      prompt: 'Armá el índice de un curso corto que cumpla esta promesa: módulos, lecciones y un ejercicio práctico por lección.',
+      note: 'Recortá todo lo que no lleve al resultado.' },
+    { t: 'prompt', len: 16, n: 4, of: 5, title: 'Guionar',
+      prompt: 'Escribí el guion de la lección 1 en tono cercano y directo, con un ejemplo real y una tarea al final.',
+      note: 'Después pasalo a tus palabras.' },
+    { t: 'prompt', len: 16, n: 5, of: 5, title: 'Crear contenido',
+      prompt: 'Dame 15 ideas de Reels con un solo ángulo: [tu ángulo]. Para cada una: gancho, 3 puntos y cierre.',
+      note: 'Grabá las 3 que más te representen.' },
+    { t: 'statement', len: 8, art: 'mindset', lines: ['Revisá todo', 'lo que te da.'], gold: [1],
+      sub: 'La IA acelera. El criterio lo ponés vos.' },
+    { t: 'cta', len: 8, lines: ['Copialos.', 'Guardalo.', 'Usalo hoy.'], pill: 'Guardalo' },
+    { t: 'logo', len: 10, tag: false },
+  ],
+},
+];

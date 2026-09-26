@@ -15,6 +15,8 @@ import { renderAll, ROOT } from './core.mjs';
 import { compose } from '../../src/motion/scenes.mjs';
 import { reels } from '../../src/motion/specs/reels.mjs';
 import { logoReveal, LOGO_CUES } from '../../src/motion/specs/logo.mjs';
+import { clases } from '../../src/motion/specs/clases.mjs';
+import { cover169 } from '../../src/motion/specs/portadas.mjs';
 
 const want = process.argv.slice(2);
 const has = g => !want.length || want.includes(g);
@@ -46,6 +48,21 @@ if (has('reels')) {
   const m = reels.find(r => r.id === 'r0-manifiesto');
   const { video, audio } = compose({ id: 'r0-manifiesto-16x9', w: 1920, h: 1080, scenes: m.scenes, gx: m.gx });
   jobs.push({ video: { ...video, out: 'reels/r0-manifiesto-16x9.mp4' }, audio });
+}
+
+/* ------------------------------ clases ------------------------------
+   Cada clase sale en Reel 9:16, en video 16:9 para YouTube y con su portada
+   animada 16:9 (el póster de la portada sirve de miniatura). */
+if (has('clases')) {
+  for (const k of clases) {
+    for (const [w, h, suf] of [[1080, 1920, ''], [1920, 1080, '-16x9']]) {
+      const { video, audio } = compose({ id: k.id + suf, w, h, scenes: k.scenes, gx: k.gx, progress: true });
+      jobs.push({ video: { ...video, out: `clases/${k.id}${suf}.mp4` }, audio });
+    }
+    const art = (k.scenes.find(s => s.art) || {}).art || 'hexRoute';
+    jobs.push(cover169({ id: k.id, h1: k.mini, art, gx: `${k.gx}%`, gy: '90%' },
+      { prefix: 'miniatura-', out: 'clases' }));
+  }
 }
 
 /* ----------------------------- el resto ----------------------------- */
