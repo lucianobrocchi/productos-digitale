@@ -115,7 +115,7 @@ export async function render(browser, spec, { log = () => {} } = {}) {
   const errors = [];
   pg.on('pageerror', e => errors.push(e.message));
   await pg.goto('file://' + html);
-  await pg.evaluate(async () => { await document.fonts.ready; });
+  await pg.evaluate(async () => { await document.fonts.ready; window.__ready?.(); });
   await pg.waitForTimeout(150);
   if (errors.length) throw new Error(`${spec.id}: ${errors.join(' | ')}`);
   await attachBgs(pg, bgmap);
@@ -126,12 +126,23 @@ export async function render(browser, spec, { log = () => {} } = {}) {
   mkdirSync(dirname(dest), { recursive: true });
 
   const silent = dest.replace(/\.(mp4|mov|webm)$/, '.silent.$1');
+  /* Desenfoque de movimiento real: cada cuadro es el promedio de `mb`
+     subcuadros repartidos en el obturador (0,5 = 180°, como en cine).
+     ffmpeg promedia de a `mb` y se queda con uno de cada `mb`. */
+  const mb = spec.alpha ? 1 : (spec.mb ?? 1);
+  const shutter = spec.shutter ?? .5;
+  const vf = [];
+  if (mb > 1) vf.push(`tmix=frames=${mb}`, `select='not(mod(n+1\\,${mb}))'`, `setpts=N/(${fps}*TB)`);
+  // brillo: solo las luces altas se difuminan y se suman en modo pantalla
+  if (spec.bloom) vf.push(`format=gbrp,split[a][b];[b]colorlevels=rimin=.58:gimin=.58:bimin=.58,` +
+    `gblur=sigma=${spec.bloomSigma ?? 38}[g];[a][g]blend=all_mode=screen:all_opacity=${spec.bloom}`);
   const enc = spec.alpha
     ? ffmpeg(['-f', 'image2pipe', '-framerate', String(fps), '-c:v', 'png', '-i', '-',
         // PNG dentro de MOV: sin pérdida, con alfa, y las zonas transparentes casi no pesan
         '-c:v', 'png', '-pix_fmt', 'rgba',
         spec.audio ? silent : dest])
-    : ffmpeg(['-f', 'image2pipe', '-framerate', String(fps), '-c:v', 'mjpeg', '-i', '-',
+    : ffmpeg(['-f', 'image2pipe', '-framerate', String(fps * mb), '-c:v', 'mjpeg', '-i', '-',
+        ...(vf.length ? ['-filter_complex', vf.join(',')] : []),
         '-c:v', 'libx264', '-preset', 'medium', '-crf', String(spec.crf ?? 18), '-pix_fmt', 'yuv420p',
         '-profile:v', 'high', '-movflags', '+faststart', '-r', String(fps),
         spec.audio ? silent : dest]);
@@ -141,11 +152,14 @@ export async function render(browser, spec, { log = () => {} } = {}) {
   let posterDone = false;
   for (let f = 0; f < frames; f++) {
     const t = f / fps;
-    await pg.evaluate(tt => window.__seek(tt), t);
-    if (spec.bgs?.length) await syncBgs(pg, t, fps);
-    const buf = await pg.screenshot(shot);
-    await write(enc.p.stdin, buf);
+    for (let k = 0; k < mb; k++) {
+      const ts = mb > 1 ? Math.max(0, t + ((k + .5) / mb - .5) * shutter / fps) : t;
+      await pg.evaluate(([tt, ff]) => window.__seek(tt, ff), [ts, f]);
+      if (spec.bgs?.length) await syncBgs(pg, ts, fps);
+      await write(enc.p.stdin, await pg.screenshot(shot));
+    }
     if (!posterDone && t >= posterAt) {
+      await pg.evaluate(([tt, ff]) => window.__seek(tt, ff), [t, f]);
       const pdst = dest.replace(/(\.silent)?\.(mp4|mov|webm)$/, '.jpg');
       await pg.screenshot({ path: pdst, type: 'jpeg', quality: 88 });
       posterDone = true;

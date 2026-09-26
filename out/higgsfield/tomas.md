@@ -10,12 +10,12 @@ Cada escena de los Relatos tiene su toma. Al generarla, guardala como
 
 ## Dos personas, el mismo día
 
-`h1-dos-personas` · 18.5 s · 9 tomas
+`h1-dos-personas` · 19 s · 9 tomas
 
 | # | Duración | Toma | Cámara |
 |---|---|---|---|
 | 01 | 2 s | Dos siluetas caminan en paralelo por una calle vacía al amanecer, a contraluz. | travelling lateral lento |
-| 02 | 2 s | Pantalla partida: a la izquierda, manos editando video; a la derecha, alguien en una llamada tomando notas. | fijo, luz que se enciende del lado derecho |
+| 02 | 2.5 s | Pantalla partida: a la izquierda, manos editando video; a la derecha, alguien en una llamada tomando notas. | fijo, luz que se enciende del lado derecho |
 | 03 | 2 s | Escritorio de noche, café frío, timeline de edición interminable en la pantalla. | dolly in lento hacia la pantalla |
 | 04 | 2 s | Libreta con frases subrayadas en dorado, una mano marca una con un círculo. | cenital, leve giro |
 | 05 | 2 s | Teléfono boca arriba sobre la mesa, pantalla sin notificaciones, luz que se apaga. | plano fijo, zoom muy lento |
@@ -26,27 +26,27 @@ Cada escena de los Relatos tiene su toma. Al generarla, guardala como
 
 ## Por qué existe Productos Digitales
 
-`h2-origen` · 22.5 s · 7 tomas
+`h2-origen` · 23 s · 7 tomas
 
 | # | Duración | Toma | Cámara |
 |---|---|---|---|
 | 01 | 3 s | Una ruleta girando en penumbra, reflejos dorados. | órbita lenta |
 | 02 | 2.5 s | Una caja fuerte cerrada con una grieta de luz dorada. | dolly in |
 | 03 | 1.5 s | La caja fuerte estalla en partículas doradas. | crash zoom |
-| 04 | 2.5 s | Hexágonos dorados que encajan uno con otro formando un camino. | cenital, sube despacio |
+| 04 | 3 s | Hexágonos dorados que encajan uno con otro formando un camino. | cenital, sube despacio |
 | 05 | 3 s | Tres escalones de luz que se encienden uno después del otro. | travelling ascendente |
 | 06 | 3 s | Reloj de arena cuya arena dorada cae a velocidad acelerada. | macro, timelapse |
 | 07 | 2.5 s | Hexágono dorado metálico girando lento sobre negro, brillo que lo recorre. | órbita lenta |
 
 ## Tenés una idea hace meses
 
-`h3-idea-hace-meses` · 19 s · 8 tomas
+`h3-idea-hace-meses` · 19.5 s · 8 tomas
 
 | # | Duración | Toma | Cámara |
 |---|---|---|---|
 | 01 | 2 s | Una lamparita apagada colgando en un cuarto oscuro, polvo dorado alrededor. | dolly in lento |
 | 02 | 2.5 s | Calendario cuyas hojas vuelan una tras otra. | fijo, timelapse |
-| 03 | 3.5 s | Silueta sentada en la cama mirando el techo, luz fría de la ventana. | cenital, leve rotación |
+| 03 | 4 s | Silueta sentada en la cama mirando el techo, luz fría de la ventana. | cenital, leve rotación |
 | 04 | 1.5 s | Papeles arrugados cayendo en cámara lenta, contraluz dorado. | cámara lenta |
 | 05 | 2.5 s | Piezas de dominó doradas que se acomodan en fila. | macro, travelling |
 | 06 | 3 s | Tres luces doradas que se encienden en secuencia en un pasillo oscuro. | travelling hacia adelante |
@@ -55,23 +55,23 @@ Cada escena de los Relatos tiene su toma. Al generarla, guardala como
 
 ## Seis meses grabando un curso
 
-`h4-seis-meses` · 18.5 s · 9 tomas
+`h4-seis-meses` · 19.5 s · 9 tomas
 
 | # | Duración | Toma | Cámara |
 |---|---|---|---|
-| 01 | 2 s | Luz roja de "grabando" encendida en una cámara, escritorio en penumbra. | dolly in |
+| 01 | 2.5 s | Luz roja de "grabando" encendida en una cámara, escritorio en penumbra. | dolly in |
 | 02 | 2 s | Barra de carga que llega al 100% con un brillo dorado. | macro sobre pantalla |
 | 03 | 1.5 s | Sala de cine vacía, butacas en penumbra. | travelling lento |
 | 04 | 2.5 s | Silueta con la cabeza entre las manos frente a la laptop. | fijo, contraluz |
 | 05 | 1.5 s | Un signo de pregunta dorado que se ilumina en la oscuridad. | crash zoom |
-| 06 | 2 s | Dos caminos que se bifurcan en un bosque oscuro, uno iluminado en dorado. | drone lento hacia el camino iluminado |
+| 06 | 2.5 s | Dos caminos que se bifurcan en un bosque oscuro, uno iluminado en dorado. | drone lento hacia el camino iluminado |
 | 07 | 2.5 s | Diez sillas vacías en ronda iluminadas desde arriba. | cenital |
 | 08 | 2.5 s | Una moneda dorada que gira sobre una mesa y cae. | macro, cámara lenta |
 | 09 | 2 s | La luz roja de "grabando" se apaga. | fijo |
 
 ## Tenés 3 segundos
 
-`h5-tres-segundos` · 16 s · 8 tomas
+`h5-tres-segundos` · 15.5 s · 8 tomas
 
 | # | Duración | Toma | Cámara |
 |---|---|---|---|
@@ -81,25 +81,24 @@ Cada escena de los Relatos tiene su toma. Al generarla, guardala como
 | 04 | 2.5 s | Un reflector que se enciende sobre un escenario vacío. | fijo |
 | 05 | 2.5 s | Tres fichas doradas caen una a una sobre una mesa negra. | cámara lenta |
 | 06 | 2.5 s | Una mano que señala a cámara, desenfocada, contraluz dorado. | dolly in |
-| 07 | 2 s | El cronómetro se detiene y brilla. | macro |
+| 07 | 1.5 s | El cronómetro se detiene y brilla. | macro |
 | 08 | 1.5 s | La aguja vuelve a cero. | fijo |
 
 ## POV: le explicás a tu familia
 
-`h6-pov-familia` · 16 s · 6 tomas
+`h6-pov-familia` · 16.5 s · 5 tomas
 
 | # | Duración | Toma | Cámara |
 |---|---|---|---|
 | 01 | 2.5 s | Mesa familiar de domingo vista desde arriba, luz cálida. | cenital, gira despacio |
-| 02 | 4 s | Tazas de café y manos gesticulando sobre la mesa. | plano medio, cámara en mano suave |
-| 03 | 3 s | Primer plano de una taza que se detiene a mitad de camino. | fijo |
-| 04 | 2 s | La mesa en silencio, un rayo de luz dorada entra por la ventana. | dolly in lento |
-| 05 | 2.5 s | Un libro abierto que emite una luz dorada suave. | macro |
-| 06 | 2 s | Un teléfono que envía un mensaje, destello dorado. | macro sobre pantalla |
+| 02 | 7.5 s | Tazas de café y manos gesticulando sobre la mesa. | plano medio, cámara en mano suave |
+| 03 | 2 s | La mesa en silencio, un rayo de luz dorada entra por la ventana. | dolly in lento |
+| 04 | 2.5 s | Un libro abierto que emite una luz dorada suave. | macro |
+| 05 | 2 s | Un teléfono que envía un mensaje, destello dorado. | macro sobre pantalla |
 
 ## 30 días en 20 segundos
 
-`h7-30-dias` · 15.5 s · 10 tomas
+`h7-30-dias` · 15 s · 10 tomas
 
 | # | Duración | Toma | Cámara |
 |---|---|---|---|
@@ -111,7 +110,7 @@ Cada escena de los Relatos tiene su toma. Al generarla, guardala como
 | 06 | 1.5 s | Líneas de texto dorado que se escriben solas en una pantalla. | macro, dolly in |
 | 07 | 1.5 s | Una silueta caminando con paso firme por un pasillo iluminado. | steadicam siguiendo |
 | 08 | 1.5 s | Silueta subiendo una escalera hacia una luz dorada. | contrapicado, sube |
-| 09 | 2 s | Hexágonos dorados encajando en un panal perfecto. | cenital, zoom out |
+| 09 | 1.5 s | Hexágonos dorados encajando en un panal perfecto. | cenital, zoom out |
 | 10 | 1.5 s | La primera hoja del calendario, iluminada. | fijo |
 
 ## Nadie te va a decir esto

@@ -405,10 +405,12 @@ const html = `<title>Piezas Productos Digitales</title>
 
 <main><div class="env">
   <h2 id="relatos">Relatos: historias rápidas para alcance</h2>
-  <p class="bajada" style="font-size:15.5px;margin-top:14px">Reels de 14 a 23 segundos con historia: algo en pantalla desde el
-    primer cuadro, cortes de un segundo, subtítulo palabra por palabra y un final que empalma con el principio para que se
-    vuelvan a ver. Sin testimonios ni resultados inventados: parábolas, historias en segunda persona y la historia de la marca.</p>
-  ${bloque(hex, 'Relatos', `${relatos.length} piezas · 1080 × 1920 · el personaje dorado es el protagonista`, relV, 'tira')}
+  <p class="bajada" style="font-size:15.5px;margin-top:14px">Reels de 15 a 25 segundos con historia, en la versión 2 del
+    lenguaje de movimiento: cada corte es un plano con su luz y su transición (barrido, zoom a través, iris hexagonal, franjas
+    doradas del glitch del isotipo), la tipografía entra letra por letra con resorte, los golpes caen en oro y sacuden el plano,
+    y todo tiene desenfoque de movimiento real. El protagonista es un personaje articulado con cabeza hexagonal que camina y
+    cambia de pose. Sin testimonios ni resultados inventados: parábolas, historias en segunda persona y la historia de la marca.</p>
+  ${bloque(hex, 'Relatos', `${relatos.length} piezas · 1080 × 1920 · motion v2`, relV, 'tira')}
   <section class="bloque">
     <header class="cab"><div class="idx">${hex}</div><div><h3>Listos para Higgsfield</h3>
       <p class="meta">Cada escena tiene su toma escrita. Cuando se genera, el clip entra de fondo solo y el texto queda

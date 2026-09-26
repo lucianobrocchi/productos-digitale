@@ -37,26 +37,47 @@ se reescriben en `clases.mjs` y se regenera todo.
 
 ### Relatos — `out/video/relatos/`
 
-Ocho Reels con historia, de 14 a 23 segundos, hechos para **alcance**: más
-rápidos que las clases y con un protagonista, un personaje dorado dibujado
-con la misma línea que las ilustraciones (`src/figure.mjs`, 9 poses).
+Ocho Reels con historia, de 15 a 25 segundos, hechos para **alcance**. Van
+en la **versión 2 del lenguaje de movimiento** (`src/motion/scenes2.mjs`):
+
+- **Cada corte es un plano.** Cada escena tiene su propia luz y entra con una
+  transición: barrido de cámara (whip), zoom a través, iris hexagonal con
+  el hexágono de la marca, franjas doradas (las líneas del glitch del
+  isotipo) o empuje vertical, como pasar de Reel.
+- **Tipografía cinética.** Cada línea se ajusta al ancho del cuadro como un
+  afiche; las letras suben desde una máscara con resorte y las palabras
+  clave son oro metálico con un barrido de luz. Detrás, la palabra clave en
+  contorno, gigante, en otra profundidad.
+- **Golpes en oro.** El fondo se vuelve oro, la palabra cae desde la cámara,
+  sacude el plano, se abre en separación de color y suelta una onda
+  hexagonal, con un sub grave debajo.
+- **Personaje articulado** (`src/figure.mjs`, `PD.rig` en el motor): cabeza
+  hexagonal, cuerpo de metal dorado, camina con un ciclo de pasos, cambia de
+  pose con resorte y respira. En gris es "el camino que no funciona".
+- **Escenas nuevas:** contador de días que rueda como odómetro con su barra
+  de avance, chat en un celular en 3D que escribe y sube, pantalla partida
+  con dos caminos, escenario con piso hexagonal en perspectiva y haz de luz,
+  lista en tarjetas con números que giran.
+- **Terminación de cine:** desenfoque de movimiento real (cada cuadro es el
+  promedio de 5 subcuadros con obturador de 180°), brillo suave en las luces
+  altas, grano animado y polvo dorado encima.
 
 | Relato | Gancho |
 |---|---|
-| Dos personas, el mismo día | la misma idea, dos caminos: uno graba un curso, el otro pregunta primero |
-| Por qué existe Productos Digitales | la historia de la marca, del manual, en 22 segundos |
-| Tenés una idea hace meses | la voz que frena, en globos de chat |
-| Seis meses grabando un curso | lo que pasa cuando nadie lo pidió |
+| Dos personas, el mismo día | caminan juntas; una graba, la otra pregunta; los días corren |
+| Por qué existe Productos Digitales | la historia de la marca, del manual, y cierra con el logo |
+| Tenés una idea hace meses | la voz que frena, en un chat de "Tu cabeza" |
+| Seis meses grabando un curso | el contador llega a 180 días y nadie compra |
 | Tenés 3 segundos | el gancho, explicado con el propio gancho |
-| POV: le explicás a tu familia | lo que ellos escuchan y lo que vos hacés |
-| 30 días en 20 segundos | un contador de días con el personaje avanzando |
-| Nadie te va a decir esto | 5 verdades en golpes de un segundo |
+| POV: le explicás a tu familia | el chat familiar, y el silencio en la mesa |
+| 30 días en 20 segundos | un odómetro de días con el personaje avanzando |
+| Nadie te va a decir esto | 5 verdades numeradas y un golpe: "Sin humo." |
 
 **Pensados para retener.** Hay texto desde el primer cuadro (sin negro de
-arranque), subtítulo palabra por palabra, cortes de uno a dos segundos, un
-golpe de pantalla cada tanto y un final que empalma con el principio para que
-el video se vuelva a ver. No son testimonios: son parábolas, historias en
-segunda persona o la historia de la marca contada en su manual.
+arranque), un corte cada 1,5 a 2,5 segundos, un golpe que rompe el patrón y
+un final que empalma con el principio para que el video se vuelva a ver. No
+son testimonios: son parábolas, historias en segunda persona o la historia
+de la marca contada en su manual.
 
 **Listos para Higgsfield.** Cada escena trae la toma que habría que generar
 (`shot`) y el movimiento de cámara (`cam`). Están todas en
@@ -176,7 +197,9 @@ node scripts/render.mjs clases   # solo los carruseles de las clases
 
 Para un solo grupo: `node scripts/video/build.mjs reels` (o `relatos`, `clases`,
 `logo`, `historias`, `portadas`, `citas`, `loops`, `kit`). Las destacadas:
-`node scripts/destacadas.mjs`.
+`node scripts/destacadas.mjs`. Un solo relato: `ONLY=h1-dos-personas node
+scripts/video/build.mjs relatos` (`MB=1` lo renderiza sin desenfoque de
+movimiento, cinco veces más rápido, para revisar).
 
 - **Copy de las piezas fijas** → `src/content.mjs`
 - **Guiones de los Reels** → `src/motion/specs/reels.mjs`
@@ -184,7 +207,7 @@ Para un solo grupo: `node scripts/video/build.mjs reels` (o `relatos`, `clases`,
 - **Guiones de los relatos y sus tomas** → `src/motion/specs/relatos.mjs`
 - **Personaje** → `src/figure.mjs`
 - **Plan de publicación** → `src/plan.mjs` (10 semanas, se exporta a `out/plan-de-publicacion.md`)
-- **Escenas y compositor** → `src/motion/scenes.mjs`
+- **Escenas y compositor** → `src/motion/scenes.mjs` (v1) y `src/motion/scenes2.mjs` (motion v2, relatos)
 - **Motor de animación** → `src/motion/engine.js`
 - **Síntesis de sonido** → `scripts/audio/synth.py`
 - **Color y tipografía** → `src/brand.css`

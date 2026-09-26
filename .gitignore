@@ -7,3 +7,4 @@ build/galeria-archivos.json
 build/*.log
 build/tanda-*.json
 build/web/
+__pycache__/

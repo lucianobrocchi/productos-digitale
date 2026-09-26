@@ -8,7 +8,7 @@ import { hexPath } from './illus.mjs';
 
 /* poses: [x,y] por articulación. h=cabeza n=cuello p=cadera
    e/h = codo/mano, k/f = rodilla/pie, L/R = izquierda/derecha del dibujo */
-const POSES = {
+export const POSES = {
   parado: { h: [200, 92], n: [200, 142], p: [200, 250],
     eL: [172, 198], hL: [166, 248], eR: [228, 198], hR: [234, 248],
     kL: [186, 304], fL: [180, 360], kR: [214, 304], fR: [220, 360] },
@@ -96,3 +96,52 @@ export function figure(pose = 'parado', id = 'f', { tono = 'oro', halo = true } 
 }
 
 export const POSE_NAMES = Object.keys(POSES);
+
+/* ------------------------------------------------------------------
+   Versión articulada para motion v2. Mismas proporciones, pero cada
+   parte es un trazo que el motor recalcula cuadro a cuadro (PD.rig).
+   Tres capas por parte: halo, cuerpo con degradado metálico y un filo
+   de luz arriba a la izquierda, que le da volumen de tubo de metal.
+   La cabeza es el hexágono de la marca.
+   ------------------------------------------------------------------ */
+export function rigFigure(id, { tono = 'oro', pose = 'parado', celular = false, halo = true } = {}) {
+  const P = POSES[pose] || POSES.parado;
+  const G = `rg-${id}`;
+  const oro = tono === 'oro';
+  const d = (...js) => 'M' + js.map(j => P[j].join(' ')).join(' L');
+  const parts = [['legL', d('p', 'kL', 'fL'), 22], ['legR', d('p', 'kR', 'fR'), 22], ['spine', d('n', 'p'), 30],
+    ['armL', d('n', 'eL', 'hL'), 18], ['armR', d('n', 'eR', 'hR'), 18]];
+  const use = (w, extra = '') => parts.map(([k, , sw]) => `<use href="#${G}-${k}" stroke-width="${sw + w}" ${extra}/>`).join('');
+  const body = oro ? `url(#${G}-m)` : '#57544D';
+  const hex = hexPath(0, 0, 33, .28);
+  return `<svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" class="rig" style="overflow:visible">
+  <defs>
+    <linearGradient id="${G}-m" gradientUnits="userSpaceOnUse" x1="140" y1="60" x2="270" y2="380">
+      <stop offset="0" stop-color="#FFF6CF"/><stop offset=".28" stop-color="#F0E281"/><stop offset=".62" stop-color="#D2A954"/>
+      <stop offset="1" stop-color="#8E6630"/>
+    </linearGradient>
+    <radialGradient id="${G}-h" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#F0E281" stop-opacity=".30"/><stop offset=".55" stop-color="#A37B3C" stop-opacity=".08"/>
+      <stop offset="1" stop-color="#A37B3C" stop-opacity="0"/></radialGradient>
+    <radialGradient id="${G}-s" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#000" stop-opacity=".75"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+    <filter id="${G}-b" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="14"/></filter>
+    ${parts.map(([k, dd]) => `<path id="${G}-${k}" data-part="${k}" d="${dd}"/>`).join('')}
+  </defs>
+  ${halo && oro ? `<circle cx="200" cy="215" r="200" fill="url(#${G}-h)"/>` : ''}
+  <g data-part="shadow"><ellipse cx="200" cy="364" rx="78" ry="12" fill="url(#${G}-s)"/>
+    ${oro ? `<ellipse cx="200" cy="364" rx="60" ry="5" fill="#F0E281" opacity=".22"/>` : ''}</g>
+  ${oro ? `<g stroke="#F0E281" stroke-linecap="round" stroke-linejoin="round" opacity=".42" filter="url(#${G}-b)">${use(10)}</g>` : ''}
+  <g stroke="${body}" stroke-linecap="round" stroke-linejoin="round">${use(0)}</g>
+  <g stroke="${oro ? '#FFFBE6' : '#7A766C'}" stroke-linecap="round" stroke-linejoin="round" opacity="${oro ? .55 : .5}"
+     transform="translate(-3.5 -3)">${use(-14)}</g>
+  <g data-part="head" transform="translate(${P.h[0]} ${P.h[1]})">
+    ${oro ? `<path d="${hexPath(0, 0, 44, .3)}" fill="#F0E281" opacity=".35" filter="url(#${G}-b)"/>` : ''}
+    <path d="${hex}" fill="${body}"/>
+    <path d="${hexPath(-4, -5, 20, .4)}" fill="${oro ? '#FFFBE6' : '#7A766C'}" opacity="${oro ? .35 : .3}"/>
+  </g>
+  ${celular ? `<g data-follow="hR"><g transform="translate(-14 -44) rotate(8)">
+    <rect width="30" height="50" rx="7" fill="#12171E" stroke="${oro ? '#F0E281' : '#7A766C'}" stroke-width="4"/>
+    <rect x="6" y="8" width="18" height="30" rx="3" fill="${oro ? '#F0E281' : '#57544D'}" opacity=".55"/></g></g>` : ''}
+</svg>`;
+}

@@ -18,9 +18,11 @@ import { logoReveal, LOGO_CUES } from '../../src/motion/specs/logo.mjs';
 import { clases } from '../../src/motion/specs/clases.mjs';
 import { cover169 } from '../../src/motion/specs/portadas.mjs';
 import { relatos, ESTILO_TOMAS } from '../../src/motion/specs/relatos.mjs';
+import { compose2 } from '../../src/motion/scenes2.mjs';
 import { existsSync } from 'node:fs';
 
 const want = process.argv.slice(2);
+const only = process.env.ONLY?.split(',');           // ONLY=h1-dos-personas,h2-origen → solo esos
 const has = g => !want.length || want.includes(g);
 const AUD = resolve(ROOT, 'build/audio');
 mkdirSync(AUD, { recursive: true });
@@ -70,7 +72,8 @@ if (has('clases')) {
 }
 
 /* ------------------------------ relatos ------------------------------
-   Ritmo rápido, contenido desde el primer cuadro y final en loop.
+   Motion v2 (scenes2.mjs): desenfoque de movimiento por subcuadros (MB=5),
+   ritmo rápido, contenido desde el primer cuadro y final en loop.
    Tomas generadas (Higgsfield u otra): si existe assets/tomas/<relato>/<NN>.mp4,
    entra de fondo en la escena NN sin tocar el guion. */
 if (has('relatos')) {
@@ -80,8 +83,8 @@ if (has('relatos')) {
       const clip = `assets/tomas/${k.id}/${String(i + 1).padStart(2, '0')}.mp4`;
       return existsSync(resolve(ROOT, clip)) ? { ...s, bg: clip } : s;
     });
-    const { video, audio } = compose({ id: k.id, w: 1080, h: 1920, scenes, gx: k.gx, fast: true, instant: true });
-    jobs.push({ video: { ...video, out: `relatos/${k.id}.mp4` }, audio });
+    const { video, audio } = compose2({ id: k.id, scenes, mb: +(process.env.MB || 5) });
+    if (!only || only.includes(k.id)) jobs.push({ video: { ...video, out: `relatos/${k.id}.mp4` }, audio });
     doc.push({ id: k.id, titulo: k.titulo, dur: video.dur, tomas: video.shots,
       conClip: video.bgs.length });
   }

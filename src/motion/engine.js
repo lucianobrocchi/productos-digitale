@@ -21,6 +21,14 @@
     back: t => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2); },
     backSoft: t => { const c1 = .9, c3 = c1 + 1; return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2); },
     sine: t => -(Math.cos(Math.PI * t) - 1) / 2,
+    /* resortes: pasan de largo y se asientan (seguimiento, como un objeto con peso) */
+    spring: t => (t >= 1 ? 1 : 1 - Math.exp(-7 * t) * Math.cos(14 * t)),
+    springSoft: t => (t >= 1 ? 1 : 1 - Math.exp(-8 * t) * Math.cos(10 * t)),
+    springHard: t => (t >= 1 ? 1 : 1 - Math.exp(-5.5 * t) * Math.cos(19 * t)),
+    /* anticipación: toma envión hacia atrás antes de salir */
+    anticip: t => t * t * (2.7 * t - 1.7),
+    smooth: t => (t < .5 ? 16 * t ** 5 : 1 - Math.pow(-2 * t + 2, 5) / 2),
+    expoInOut: t => (t <= 0 ? 0 : t >= 1 ? 1 : t < .5 ? Math.pow(2, 20 * t - 10) / 2 : (2 - Math.pow(2, -20 * t + 10)) / 2),
   };
 
   /* PRNG con semilla: el glitch y el polvo son "aleatorios" pero repetibles. */
@@ -82,9 +90,13 @@
     if ('opacity' in v) s.opacity = v.opacity;
 
     const tf = [];
-    if ('x' in v || 'y' in v) tf.push(`translate(${v.x || 0}px,${v.y || 0}px)`);
+    if ('z' in v) tf.push(`translate3d(${v.x || 0}px,${v.y || 0}px,${v.z}px)`);
+    else if ('x' in v || 'y' in v) tf.push(`translate(${v.x || 0}px,${v.y || 0}px)`);
     if ('xp' in v || 'yp' in v) tf.push(`translate(${v.xp || 0}%,${v.yp || 0}%)`);
+    if ('rx' in v) tf.push(`rotateX(${v.rx}deg)`);
+    if ('ry' in v) tf.push(`rotateY(${v.ry}deg)`);
     if ('rot' in v) tf.push(`rotate(${v.rot}deg)`);
+    if ('skx' in v) tf.push(`skewX(${v.skx}deg)`);
     if ('scale' in v) tf.push(`scale(${v.scale})`);
     if ('sx' in v || 'sy' in v) tf.push(`scale(${'sx' in v ? v.sx : 1},${'sy' in v ? v.sy : 1})`);
     if (tf.length) s.transform = tf.join(' ');
@@ -98,6 +110,15 @@
     if ('clipXr' in v) s.clipPath = `inset(-20% -2% -20% ${(1 - v.clipXr) * 100}%)`;
     if ('clipY' in v) s.clipPath = `inset(${(1 - v.clipY) * 100}% -10% -10% -10%)`;
     if ('circle' in v) s.clipPath = `circle(${v.circle}% at 50% 50%)`;
+    if ('hex' in v) {                         // iris hexagonal (hexágono de la marca, lados planos arriba)
+      const w = el.__w ??= el.offsetWidth, h = el.__h ??= el.offsetHeight;
+      const cx = w * (+(el.dataset.cx ?? 50)) / 100, cy = h * (+(el.dataset.cy ?? 50)) / 100;
+      const r = v.hex * Math.hypot(Math.max(cx, w - cx), Math.max(cy, h - cy)) * 1.16;
+      const pts = [];
+      for (let i = 0; i < 6; i++) { const a = i * Math.PI / 3; pts.push(`${cx + r * Math.cos(a)}px ${cy + r * Math.sin(a)}px`); }
+      s.clipPath = v.hex >= 1 ? 'none' : `polygon(${pts.join(',')})`;
+    }
+    if ('clipL' in v || 'clipR' in v) s.clipPath = `inset(-5% ${(v.clipR ?? 0) * 100}% -5% ${(v.clipL ?? 0) * 100}%)`;
 
     if ('draw' in v) {
       if (el.__len === undefined) {
@@ -148,8 +169,9 @@
     }
   }
 
+  let FRAME = null;
   function applyGlitches(t) {
-    const frame = Math.round(t * FPS);
+    const frame = FRAME ?? Math.round(t * FPS);
     const active = new Map();
     for (const g of glitches) if (t >= g.start && t < g.start + g.dur) active.set(g.el, g);
     const seen = new Set();
@@ -288,22 +310,135 @@
     });
   }
 
+  /** Sacudida de cámara: ruido que decae, precalculado por cuadro con semilla. */
+  function shake(sel, start, dur = .45, amp = 26, seed = 1, rotAmp = 1.2) {
+    const R = rand(seed * 4099 + 11);
+    const n = Math.max(1, Math.round(dur * FPS));
+    for (let f = 0; f <= n; f++) {
+      const t = start + f / FPS, env = f === n ? 0 : Math.pow(1 - f / n, 2.2);
+      const x = (R() - .5) * 2 * amp * env, y = (R() - .5) * 2 * amp * env, r = (R() - .5) * 2 * rotAmp * env;
+      tw(sel, { x: [x, x], y: [y, y], rot: [r, r] }, t, 0, 'linear');
+    }
+  }
+
+  /* ---------------------- personaje articulado ----------------------
+     El dibujo trae partes con data-part (piernas, columna, brazos, cabeza).
+     Cada cuadro se calcula la posición de las articulaciones: poses clave
+     interpoladas con resorte, ciclo de caminata procedural y respiración. */
+  const rigs = [];
+  const J = ['h', 'n', 'p', 'eL', 'hL', 'eR', 'hR', 'kL', 'fL', 'kR', 'fR'];
+  const lerpP = (a, b, k) => Object.fromEntries(J.map(j => [j, [a[j][0] + (b[j][0] - a[j][0]) * k, a[j][1] + (b[j][1] - a[j][1]) * k]]));
+
+  function walkPose(ph, stride = 1) {
+    const bob = Math.abs(Math.sin(ph)) * 7;
+    const p = [200, 246 - bob + 7], n = [203, 140 - bob + 7], h = [207, 90 - bob + 7];
+    const leg = (a) => {
+      const th = Math.sin(a) * .5 * stride;                  // muslo adelante/atrás
+      const bend = Math.max(0, -Math.cos(a)) * .95 * stride; // la rodilla se dobla al pasar
+      const k = [p[0] + Math.sin(th) * 57, p[1] + Math.cos(th) * 57];
+      const f = [k[0] + Math.sin(th - bend) * 57, k[1] + Math.cos(th - bend) * 57];
+      return [k, f];
+    };
+    const arm = (a) => {
+      const th = -Math.sin(a) * .45 * stride;
+      const e = [n[0] + Math.sin(th) * 60, n[1] + Math.cos(th) * 60];
+      const hh = [e[0] + Math.sin(th + .35 + Math.max(0, Math.sin(a)) * .5) * 50, e[1] + Math.cos(th + .35) * 50];
+      return [e, hh];
+    };
+    const [kL, fL] = leg(ph), [kR, fR] = leg(ph + Math.PI);
+    const [eL, hL] = arm(ph), [eR, hR] = arm(ph + Math.PI);
+    return { h, n, p, eL, hL, eR, hR, kL, fL, kR, fR };
+  }
+
+  function rig(svg, { poses, keys, walks = [], breathe = true }) {
+    const root = typeof svg === 'string' ? document.querySelector(svg) : svg;
+    if (!root) return;
+    const ks = keys.map(k => ({ t: k.t, d: k.dur ?? .4, e: EASE[k.ease || 'springSoft'], P: poses[k.pose] }));
+    ks.sort((a, b) => a.t - b.t);
+    const at = (t, upto) => {
+      let j = 0;
+      for (let i = 0; i < upto; i++) if (ks[i].t <= t) j = i;
+      const k = ks[j];
+      if (j === 0) return k.P;
+      const q = Math.min(1, Math.max(0, (t - k.t) / k.d));
+      return lerpP(k.F, k.P, k.e(q));
+    };
+    ks.forEach((k, i) => (k.F = i ? at(k.t, i) : k.P));
+    const parts = Object.fromEntries([...root.querySelectorAll('[data-part]')].map(e => [e.dataset.part, e]));
+    const follows = [...root.querySelectorAll('[data-follow]')];
+    rigs.push({ root, ks, walks, breathe, at: t => at(t, ks.length), parts, follows });
+    DUR = Math.max(DUR, ...ks.map(k => k.t + k.d));
+  }
+
+  function applyRigs(t) {
+    for (const r of rigs) {
+      let P = r.at(t);
+      for (const w of r.walks) {
+        if (t < w.t0 || t > w.t1) continue;
+        const k = Math.min(1, (t - w.t0) / .18, (w.t1 - t) / .18);
+        P = lerpP(P, walkPose((t - w.t0) * Math.PI * 2 * (w.cadence ?? 1.1), w.stride ?? 1), EASE.sine(Math.max(0, k)));
+      }
+      if (r.breathe) {
+        const b = Math.sin(t * Math.PI * 2 / 2.6) * 2.4;
+        P = { ...P, h: [P.h[0], P.h[1] + b], n: [P.n[0], P.n[1] + b * .8], eL: [P.eL[0], P.eL[1] + b * .5], eR: [P.eR[0], P.eR[1] + b * .5] };
+      }
+      const d = (...js) => 'M' + js.map(j => `${P[j][0].toFixed(1)} ${P[j][1].toFixed(1)}`).join(' L');
+      const pt = r.parts;
+      pt.legL?.setAttribute('d', d('p', 'kL', 'fL'));
+      pt.legR?.setAttribute('d', d('p', 'kR', 'fR'));
+      pt.spine?.setAttribute('d', d('n', 'p'));
+      pt.armL?.setAttribute('d', d('n', 'eL', 'hL'));
+      pt.armR?.setAttribute('d', d('n', 'eR', 'hR'));
+      if (pt.head) {
+        const a = Math.atan2(P.h[0] - P.n[0], P.n[1] - P.h[1]) * 180 / Math.PI;
+        pt.head.setAttribute('transform', `translate(${P.h[0].toFixed(1)} ${P.h[1].toFixed(1)}) rotate(${a.toFixed(1)})`);
+      }
+      for (const f of r.follows) {             // objetos en la mano (celular, etc.)
+        const [x, y] = P[f.dataset.follow];
+        f.setAttribute('transform', `translate(${x.toFixed(1)} ${y.toFixed(1)})`);
+      }
+      if (pt.shadow) pt.shadow.setAttribute('transform', `translate(${((P.fL[0] + P.fR[0]) / 2 - 200).toFixed(1)} 0)`);
+    }
+  }
+
+  /* Ajuste por línea: cada [data-fitw] toma el cuerpo que hace que su texto
+     ocupe el ancho de la caja (tope en data-max). Da titulares "justificados",
+     como un afiche: las líneas cortas salen enormes y las largas más chicas. */
+  function fitLines(root = document) {
+    root.querySelectorAll('[data-fitw]').forEach(el => {
+      const inner = el.firstElementChild;
+      const box = +(el.dataset.fitw) || el.getBoundingClientRect().width;
+      const max = +(el.dataset.max || 400), min = +(el.dataset.min || 20);
+      el.style.fontSize = '100px';
+      const w = inner.getBoundingClientRect().width || 1;
+      el.style.fontSize = Math.max(min, Math.min(max, 100 * box / w)) + 'px';
+    });
+  }
+
+  /* Tareas que necesitan las tipografías ya cargadas (medir texto). El
+     renderizador llama a __ready() después de document.fonts.ready. */
+  const readyFns = [];
+  window.__ready = () => { fit(); fitLines(); readyFns.forEach(f => f()); };
+
   /* ---------------------------- seek ---------------------------- */
   /* El grano se mueve cada frame: quieto parece suciedad en la lente. */
   function applyGrain(t) {
-    const r = rand(Math.round(t * FPS) * 7919 + 1);
+    const r = rand((FRAME ?? Math.round(t * FPS)) * 7919 + 1);
     document.querySelectorAll('.grain').forEach(g =>
       (g.style.backgroundPosition = `${Math.floor(r() * 220)}px ${Math.floor(r() * 220)}px`));
   }
 
-  function seek(t) {
+  function seek(t, frame) {
+    FRAME = frame ?? null;
     for (const [el, m] of tracks) apply(el, m, t);
+    applyRigs(t);
     applyGlitches(t);
     applyGrain(t);
     drawDust(t);
   }
 
-  window.PD = { tw, set, glitch, setupDust, drawArt, lines, breathe, rand, EASE, fit, tear,
+  window.PD = { tw, set, glitch, setupDust, drawArt, lines, breathe, rand, EASE, fit, tear, shake, rig, walkPose, fitLines,
+                ready: fn => readyFns.push(fn),
                 get dur() { return DUR; } };
   window.__seek = seek;
 })();

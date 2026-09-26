@@ -274,7 +274,53 @@ def sonic_logo(level=1.0):
     return wet * level
 
 
+def sub_drop(level=1.0):
+    """808 que cae: el peso debajo de un golpe."""
+    n = n_of(1.1)
+    t = np.arange(n) / SR
+    f = 38 + 70 * np.exp(-t / .06)
+    x = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t / .42)
+    x = np.tanh(x * 1.6) * .9
+    return np.stack([x, x], axis=1) * level * .6
+
+
+def swish(level=1.0, dur=.22, up=True):
+    """Aire corto y brillante para movimientos chicos (tarjetas, líneas)."""
+    n = n_of(dur)
+    k = np.arange(n) / n
+    x = bp(noise(n), 1800, 9000) * np.sin(np.pi * k) ** 2
+    y = hp(x, 2500 if up else 1200)
+    return np.stack([y * (1 - k * .5), y * (.5 + k * .5)], axis=1) * level * .35
+
+
+def whip(level=1.0):
+    """Barrido de cámara: ruido que pasa de izquierda a derecha con un sube-baja rápido."""
+    return whoosh(.32, level * 1.1, True, -.95, .95) + whoosh(.32, level * .5, False, .9, -.9) * .4
+
+
+def shimmer(level=1.0):
+    """Brillo metálico: campanitas agudas en La mayor que caen en cascada."""
+    buf = np.zeros((n_of(1.6), 2))
+    for k, m in enumerate((93, 97, 100, 105)):
+        add(buf, pan(bell(midi(m), 1.2, .5 - k * .07), -.5 + k * .33), k * .045)
+    return reverb(buf, IR_HALL, .5)[:len(buf)] * level * 1.5
+
+
+def pop(level=1.0, freq=700):
+    """Burbuja de chat: blip con subida de tono."""
+    n = n_of(.09)
+    t = np.arange(n) / SR
+    f = freq * (1 + 1.2 * (t / .09))
+    x = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t / .03)
+    return np.stack([x, x], axis=1) * level * .35
+
+
 SFX = {
+    'sub': lambda c: sub_drop(c.get('level', 1)),
+    'swish': lambda c: swish(c.get('level', 1), c.get('len', .22)),
+    'whip': lambda c: whip(c.get('level', 1)),
+    'shimmer': lambda c: shimmer(c.get('level', 1)),
+    'pop': lambda c: pop(c.get('level', 1), c.get('freq', 700)),
     'whoosh': lambda c: whoosh(c.get('len', .8), c.get('level', 1), c.get('up', True)),
     'riser': lambda c: riser(c.get('len', 2.0), c.get('level', 1)),
     'hit': lambda c: impact(c.get('level', .8)),

@@ -13,7 +13,7 @@ export async function preview(browser, spec, times, dest, { thumb = 480 } = {}) 
   const errs = [];
   pg.on('pageerror', e => errs.push(e.message));
   await pg.goto('file://' + html);
-  await pg.evaluate(async () => { await document.fonts.ready; });
+  await pg.evaluate(async () => { await document.fonts.ready; window.__ready?.(); });
   await pg.waitForTimeout(150);
   if (errs.length) throw new Error(errs.join(' | '));
   await attachBgs(pg, bgmap);
