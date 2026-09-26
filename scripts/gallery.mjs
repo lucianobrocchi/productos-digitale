@@ -167,9 +167,11 @@ const tomasHtml = tomasDoc.relatos.map(r => `
   </details>`).join('');
 
 /* ------------------------------ destacadas ------------------------------ */
-const destOrden = ['empeza-aca', 'metodo', 'clases', 'ia', 'ofertas', 'preguntas', 'recursos', 'nosotros'];
+const DEST_NOMBRES = { 'empeza-aca': 'Empezá acá', metodo: 'Método', clases: 'Clases', ia: 'IA', ofertas: 'Ofertas',
+  preguntas: 'Preguntas', recursos: 'Recursos', nosotros: 'Nosotros' };
+const destOrden = Object.keys(DEST_NOMBRES);
 const destV = destOrden.filter(k => existsSync(resolve(OUT, `destacadas/${k}.png`)))
-  .map(k => pic(`destacadas/${k}.png`, k.replace(/-/g, ' '), '9 / 16')).join('');
+  .map(k => pic(`destacadas/${k}.png`, DEST_NOMBRES[k], '9 / 16')).join('');
 
 /* ------------------------------- clases ------------------------------- */
 const K = 'video/clases';
@@ -403,7 +405,7 @@ const html = `<title>Piezas Productos Digitales</title>
 
 <main><div class="env">
   <h2 id="relatos">Relatos: historias rápidas para alcance</h2>
-  <p class="bajada" style="font-size:15.5px;margin-top:14px">Reels de 15 a 22 segundos con historia: algo en pantalla desde el
+  <p class="bajada" style="font-size:15.5px;margin-top:14px">Reels de 14 a 23 segundos con historia: algo en pantalla desde el
     primer cuadro, cortes de un segundo, subtítulo palabra por palabra y un final que empalma con el principio para que se
     vuelvan a ver. Sin testimonios ni resultados inventados: parábolas, historias en segunda persona y la historia de la marca.</p>
   ${bloque(hex, 'Relatos', `${relatos.length} piezas · 1080 × 1920 · el personaje dorado es el protagonista`, relV, 'tira')}
