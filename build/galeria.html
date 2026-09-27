@@ -97,7 +97,20 @@
 
   dialog.visor{border:0;padding:0;background:transparent;max-width:100vw;max-height:100vh;width:100%;height:100%;overflow:hidden}
   dialog.visor::backdrop{background:rgba(5,5,5,.95)}
-  .visor .caja{width:100%;height:100%;display:grid;place-items:center;padding:18px 14px 64px}
+  .visor .caja{width:100%;height:100%;display:grid;place-items:center;padding:18px 14px 124px}
+  .visor .acciones{position:fixed;left:0;right:0;bottom:calc(70px + env(safe-area-inset-bottom,0px));display:flex;
+    justify-content:center;gap:10px;padding-inline:14px}
+  .visor .acciones button,.visor .acciones a{font:600 14px var(--sans);border-radius:999px;padding:11px 18px;cursor:pointer;
+    text-decoration:none;white-space:nowrap}
+  .visor .guardar{color:#12171E;background:linear-gradient(140deg,var(--oro),var(--oro-hondo));border:0}
+  .visor .original{color:var(--oro);border:1px solid rgba(240,226,129,.4);background:rgba(14,14,14,.8)}
+  .descargas{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));margin-top:16px}
+  .descargas a{display:block;padding:16px 18px;border:1px solid var(--linea);border-radius:14px;background:var(--bg-2);
+    color:var(--papel);text-decoration:none}
+  .descargas a b{display:block;color:var(--oro);font-size:15.5px}
+  .descargas a span{display:block;margin-top:4px;font-size:13px;color:var(--apagado)}
+  .descargas a.zip{border-color:rgba(240,226,129,.45);background:linear-gradient(140deg,rgba(240,226,129,.12),rgba(163,123,60,.05))}
+  a.bajar{color:var(--oro)}
   .visor img,.visor video{max-width:min(1100px,96vw);max-height:84vh;width:auto;height:auto;border-radius:10px;
     border:1px solid rgba(240,226,129,.26);display:block;background:#000}
   .visor .alpha{background:repeating-conic-gradient(#2a2a2a 0 25%,#1c1c1c 0 50%) 0 0/28px 28px}
@@ -152,11 +165,25 @@
 </header>
 
 <nav class="sec" aria-label="Secciones"><div class="env">
-  <a href="#relatos">Relatos</a><a href="#clases">Clases</a><a href="#audiovisual">Audiovisual</a><a href="#kit">Kit de edición</a><a href="#iconos">Íconos</a><a href="#destacadas">Destacadas</a><a href="#sonido">Sonido</a><a href="#plan">Plan</a>
+  <a href="#descargas">Descargar</a><a href="#relatos">Relatos</a><a href="#clases">Clases</a><a href="#audiovisual">Audiovisual</a><a href="#kit">Kit de edición</a><a href="#iconos">Íconos</a><a href="#destacadas">Destacadas</a><a href="#sonido">Sonido</a><a href="#plan">Plan</a>
   <a href="#fijas">Piezas fijas</a><a href="#marca">De dónde sale</a>
 </div></nav>
 
 <main><div class="env">
+  <h2 id="descargas">Ver y descargar</h2>
+  <p class="bajada" style="font-size:15.5px;margin-top:14px">Tocá cualquier pieza para verla en grande; abajo del visor
+    está <b>Guardar en el celu</b> y <b>Original en alta</b>, que baja el archivo de entrega. También se puede bajar todo junto
+    o por carpeta.</p>
+  <div class="descargas">
+    <a class="zip" href="https://github.com/lucianobrocchi/productos-digitale/archive/refs/heads/claude/google-drive-folder-access-151e0o.zip" target="_blank" rel="noopener"><b>Todo en un ZIP ↓</b><span>Todas las piezas en alta, el código y
+      los materiales de marca. Pesa cerca de 500 MB: mejor con wifi.</span></a>
+    <a href="https://github.com/lucianobrocchi/productos-digitale/tree/claude/google-drive-folder-access-151e0o/out/video/relatos" target="_blank" rel="noopener"><b>Relatos ↗</b><span>Los 8 Reels con historia, 1080 × 1920</span></a>
+    <a href="https://github.com/lucianobrocchi/productos-digitale/tree/claude/google-drive-folder-access-151e0o/out/video" target="_blank" rel="noopener"><b>Videos ↗</b><span>Reels, clases, logo, historias, portadas, loops y kit</span></a>
+    <a href="https://github.com/lucianobrocchi/productos-digitale/tree/claude/google-drive-folder-access-151e0o/out/carruseles" target="_blank" rel="noopener"><b>Carruseles ↗</b><span>PNG 1080 × 1350, listos para subir</span></a>
+    <a href="https://github.com/lucianobrocchi/productos-digitale/tree/claude/google-drive-folder-access-151e0o/out/iconos" target="_blank" rel="noopener"><b>Íconos ↗</b><span>SVG y PNG, en tinta y en oro</span></a>
+    <a href="https://github.com/lucianobrocchi/productos-digitale/tree/claude/google-drive-folder-access-151e0o/out" target="_blank" rel="noopener"><b>Todas las carpetas ↗</b><span>Historias, cuadradas, portadas, destacadas, audio y plan</span></a>
+  </div>
+
   <h2 id="relatos">Relatos: historias rápidas para alcance</h2>
   <p class="bajada" style="font-size:15.5px;margin-top:14px">Reels de 15 a 25 segundos con historia, en la versión 2 del
     lenguaje de movimiento: cada corte es un plano con su luz y su transición (barrido, zoom a través, iris hexagonal, franjas
@@ -171,7 +198,7 @@
     </header>
     <div class="tira" style="--w:240px">
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot vid" data-kind="video" data-full="video/relatos/h1-dos-personas.mp4" data-cap="Dos personas, el mismo día" aria-label="Reproducir Dos personas, el mismo día">
+    <button class="shot vid" data-kind="video" data-full="video/relatos/h1-dos-personas.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/relatos/h1-dos-personas.mp4" data-cap="Dos personas, el mismo día" aria-label="Reproducir Dos personas, el mismo día">
       <img src="video/relatos/h1-dos-personas.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:19</span>
@@ -179,7 +206,7 @@
     <figcaption>Dos personas, el mismo día</figcaption>
   </figure>
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot vid" data-kind="video" data-full="video/relatos/h2-origen.mp4" data-cap="Por qué existe Productos Digitales" aria-label="Reproducir Por qué existe Productos Digitales">
+    <button class="shot vid" data-kind="video" data-full="video/relatos/h2-origen.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/relatos/h2-origen.mp4" data-cap="Por qué existe Productos Digitales" aria-label="Reproducir Por qué existe Productos Digitales">
       <img src="video/relatos/h2-origen.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:23</span>
@@ -187,7 +214,7 @@
     <figcaption>Por qué existe Productos Digitales</figcaption>
   </figure>
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot vid" data-kind="video" data-full="video/relatos/h3-idea-hace-meses.mp4" data-cap="Tenés una idea hace meses" aria-label="Reproducir Tenés una idea hace meses">
+    <button class="shot vid" data-kind="video" data-full="video/relatos/h3-idea-hace-meses.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/relatos/h3-idea-hace-meses.mp4" data-cap="Tenés una idea hace meses" aria-label="Reproducir Tenés una idea hace meses">
       <img src="video/relatos/h3-idea-hace-meses.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:20</span>
@@ -195,7 +222,7 @@
     <figcaption>Tenés una idea hace meses</figcaption>
   </figure>
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot vid" data-kind="video" data-full="video/relatos/h4-seis-meses.mp4" data-cap="Seis meses grabando un curso" aria-label="Reproducir Seis meses grabando un curso">
+    <button class="shot vid" data-kind="video" data-full="video/relatos/h4-seis-meses.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/relatos/h4-seis-meses.mp4" data-cap="Seis meses grabando un curso" aria-label="Reproducir Seis meses grabando un curso">
       <img src="video/relatos/h4-seis-meses.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:20</span>
@@ -203,7 +230,7 @@
     <figcaption>Seis meses grabando un curso</figcaption>
   </figure>
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot vid" data-kind="video" data-full="video/relatos/h5-tres-segundos.mp4" data-cap="Tenés 3 segundos" aria-label="Reproducir Tenés 3 segundos">
+    <button class="shot vid" data-kind="video" data-full="video/relatos/h5-tres-segundos.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/relatos/h5-tres-segundos.mp4" data-cap="Tenés 3 segundos" aria-label="Reproducir Tenés 3 segundos">
       <img src="video/relatos/h5-tres-segundos.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:16</span>
@@ -211,7 +238,7 @@
     <figcaption>Tenés 3 segundos</figcaption>
   </figure>
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot vid" data-kind="video" data-full="video/relatos/h6-pov-familia.mp4" data-cap="POV: le explicás a tu familia" aria-label="Reproducir POV: le explicás a tu familia">
+    <button class="shot vid" data-kind="video" data-full="video/relatos/h6-pov-familia.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/relatos/h6-pov-familia.mp4" data-cap="POV: le explicás a tu familia" aria-label="Reproducir POV: le explicás a tu familia">
       <img src="video/relatos/h6-pov-familia.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:17</span>
@@ -219,7 +246,7 @@
     <figcaption>POV: le explicás a tu familia</figcaption>
   </figure>
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot vid" data-kind="video" data-full="video/relatos/h7-30-dias.mp4" data-cap="30 días en 20 segundos" aria-label="Reproducir 30 días en 20 segundos">
+    <button class="shot vid" data-kind="video" data-full="video/relatos/h7-30-dias.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/relatos/h7-30-dias.mp4" data-cap="30 días en 20 segundos" aria-label="Reproducir 30 días en 20 segundos">
       <img src="video/relatos/h7-30-dias.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:15</span>
@@ -227,7 +254,7 @@
     <figcaption>30 días en 20 segundos</figcaption>
   </figure>
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot vid" data-kind="video" data-full="video/relatos/h8-nadie-te-dice.mp4" data-cap="Nadie te va a decir esto" aria-label="Reproducir Nadie te va a decir esto">
+    <button class="shot vid" data-kind="video" data-full="video/relatos/h8-nadie-te-dice.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/relatos/h8-nadie-te-dice.mp4" data-cap="Nadie te va a decir esto" aria-label="Reproducir Nadie te va a decir esto">
       <img src="video/relatos/h8-nadie-te-dice.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:17</span>
@@ -277,7 +304,7 @@
     <div class="clase">
       <div class="c-reel">
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot vid" data-kind="video" data-full="video/clases/k1-economia-digital.mp4" data-cap="Reel 9:16" aria-label="Reproducir Reel 9:16">
+    <button class="shot vid" data-kind="video" data-full="video/clases/k1-economia-digital.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/clases/k1-economia-digital.mp4" data-cap="Reel 9:16" aria-label="Reproducir Reel 9:16">
       <img src="video/clases/k1-economia-digital.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:59</span>
@@ -286,7 +313,7 @@
   </figure></div>
       <div class="c-h">
   <figure class="pz" style="--r:16 / 9">
-    <button class="shot vid" data-kind="video" data-full="video/clases/k1-economia-digital-16x9.mp4" data-cap="YouTube 16:9" aria-label="Reproducir YouTube 16:9">
+    <button class="shot vid" data-kind="video" data-full="video/clases/k1-economia-digital-16x9.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/clases/k1-economia-digital-16x9.mp4" data-cap="YouTube 16:9" aria-label="Reproducir YouTube 16:9">
       <img src="video/clases/k1-economia-digital-16x9.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:59</span>
@@ -294,7 +321,7 @@
     <figcaption>YouTube 16:9 <span>· vista previa 720p</span></figcaption>
   </figure>
   <figure class="pz" style="--r:16 / 9">
-    <button class="shot" data-kind="img" data-full="video/clases/miniatura-k1-economia-digital.jpg" data-cap="Miniatura" aria-label="Ver Miniatura">
+    <button class="shot" data-kind="img" data-full="video/clases/miniatura-k1-economia-digital.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/clases/miniatura-k1-economia-digital.jpg" data-cap="Miniatura" aria-label="Ver Miniatura">
       <img src="video/clases/miniatura-k1-economia-digital.jpg" alt="Miniatura" loading="lazy" decoding="async">
     </button>
     <figcaption>Miniatura</figcaption>
@@ -302,55 +329,55 @@
     </div>
     <div class="tira" style="margin-top:18px">
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k1-economia-digital/01.jpg" data-cap="01 / 09" aria-label="Ver 01 / 09">
+    <button class="shot" data-kind="img" data-full="carruseles/k1-economia-digital/01.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k1-economia-digital/01.png" data-cap="01 / 09" aria-label="Ver 01 / 09">
       <img src="carruseles/k1-economia-digital/01.jpg" alt="01 / 09" loading="lazy" decoding="async">
     </button>
     <figcaption>01 / 09</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k1-economia-digital/02.jpg" data-cap="02 / 09" aria-label="Ver 02 / 09">
+    <button class="shot" data-kind="img" data-full="carruseles/k1-economia-digital/02.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k1-economia-digital/02.png" data-cap="02 / 09" aria-label="Ver 02 / 09">
       <img src="carruseles/k1-economia-digital/02.jpg" alt="02 / 09" loading="lazy" decoding="async">
     </button>
     <figcaption>02 / 09</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k1-economia-digital/03.jpg" data-cap="03 / 09" aria-label="Ver 03 / 09">
+    <button class="shot" data-kind="img" data-full="carruseles/k1-economia-digital/03.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k1-economia-digital/03.png" data-cap="03 / 09" aria-label="Ver 03 / 09">
       <img src="carruseles/k1-economia-digital/03.jpg" alt="03 / 09" loading="lazy" decoding="async">
     </button>
     <figcaption>03 / 09</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k1-economia-digital/04.jpg" data-cap="04 / 09" aria-label="Ver 04 / 09">
+    <button class="shot" data-kind="img" data-full="carruseles/k1-economia-digital/04.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k1-economia-digital/04.png" data-cap="04 / 09" aria-label="Ver 04 / 09">
       <img src="carruseles/k1-economia-digital/04.jpg" alt="04 / 09" loading="lazy" decoding="async">
     </button>
     <figcaption>04 / 09</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k1-economia-digital/05.jpg" data-cap="05 / 09" aria-label="Ver 05 / 09">
+    <button class="shot" data-kind="img" data-full="carruseles/k1-economia-digital/05.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k1-economia-digital/05.png" data-cap="05 / 09" aria-label="Ver 05 / 09">
       <img src="carruseles/k1-economia-digital/05.jpg" alt="05 / 09" loading="lazy" decoding="async">
     </button>
     <figcaption>05 / 09</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k1-economia-digital/06.jpg" data-cap="06 / 09" aria-label="Ver 06 / 09">
+    <button class="shot" data-kind="img" data-full="carruseles/k1-economia-digital/06.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k1-economia-digital/06.png" data-cap="06 / 09" aria-label="Ver 06 / 09">
       <img src="carruseles/k1-economia-digital/06.jpg" alt="06 / 09" loading="lazy" decoding="async">
     </button>
     <figcaption>06 / 09</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k1-economia-digital/07.jpg" data-cap="07 / 09" aria-label="Ver 07 / 09">
+    <button class="shot" data-kind="img" data-full="carruseles/k1-economia-digital/07.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k1-economia-digital/07.png" data-cap="07 / 09" aria-label="Ver 07 / 09">
       <img src="carruseles/k1-economia-digital/07.jpg" alt="07 / 09" loading="lazy" decoding="async">
     </button>
     <figcaption>07 / 09</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k1-economia-digital/08.jpg" data-cap="08 / 09" aria-label="Ver 08 / 09">
+    <button class="shot" data-kind="img" data-full="carruseles/k1-economia-digital/08.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k1-economia-digital/08.png" data-cap="08 / 09" aria-label="Ver 08 / 09">
       <img src="carruseles/k1-economia-digital/08.jpg" alt="08 / 09" loading="lazy" decoding="async">
     </button>
     <figcaption>08 / 09</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k1-economia-digital/09.jpg" data-cap="09 / 09" aria-label="Ver 09 / 09">
+    <button class="shot" data-kind="img" data-full="carruseles/k1-economia-digital/09.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k1-economia-digital/09.png" data-cap="09 / 09" aria-label="Ver 09 / 09">
       <img src="carruseles/k1-economia-digital/09.jpg" alt="09 / 09" loading="lazy" decoding="async">
     </button>
     <figcaption>09 / 09</figcaption>
@@ -362,7 +389,7 @@
     <div class="clase">
       <div class="c-reel">
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot vid" data-kind="video" data-full="video/clases/k2-mentalidad.mp4" data-cap="Reel 9:16" aria-label="Reproducir Reel 9:16">
+    <button class="shot vid" data-kind="video" data-full="video/clases/k2-mentalidad.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/clases/k2-mentalidad.mp4" data-cap="Reel 9:16" aria-label="Reproducir Reel 9:16">
       <img src="video/clases/k2-mentalidad.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">1:04</span>
@@ -371,7 +398,7 @@
   </figure></div>
       <div class="c-h">
   <figure class="pz" style="--r:16 / 9">
-    <button class="shot vid" data-kind="video" data-full="video/clases/k2-mentalidad-16x9.mp4" data-cap="YouTube 16:9" aria-label="Reproducir YouTube 16:9">
+    <button class="shot vid" data-kind="video" data-full="video/clases/k2-mentalidad-16x9.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/clases/k2-mentalidad-16x9.mp4" data-cap="YouTube 16:9" aria-label="Reproducir YouTube 16:9">
       <img src="video/clases/k2-mentalidad-16x9.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">1:04</span>
@@ -379,7 +406,7 @@
     <figcaption>YouTube 16:9 <span>· vista previa 720p</span></figcaption>
   </figure>
   <figure class="pz" style="--r:16 / 9">
-    <button class="shot" data-kind="img" data-full="video/clases/miniatura-k2-mentalidad.jpg" data-cap="Miniatura" aria-label="Ver Miniatura">
+    <button class="shot" data-kind="img" data-full="video/clases/miniatura-k2-mentalidad.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/clases/miniatura-k2-mentalidad.jpg" data-cap="Miniatura" aria-label="Ver Miniatura">
       <img src="video/clases/miniatura-k2-mentalidad.jpg" alt="Miniatura" loading="lazy" decoding="async">
     </button>
     <figcaption>Miniatura</figcaption>
@@ -387,55 +414,55 @@
     </div>
     <div class="tira" style="margin-top:18px">
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k2-mentalidad/01.jpg" data-cap="01 / 09" aria-label="Ver 01 / 09">
+    <button class="shot" data-kind="img" data-full="carruseles/k2-mentalidad/01.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k2-mentalidad/01.png" data-cap="01 / 09" aria-label="Ver 01 / 09">
       <img src="carruseles/k2-mentalidad/01.jpg" alt="01 / 09" loading="lazy" decoding="async">
     </button>
     <figcaption>01 / 09</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k2-mentalidad/02.jpg" data-cap="02 / 09" aria-label="Ver 02 / 09">
+    <button class="shot" data-kind="img" data-full="carruseles/k2-mentalidad/02.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k2-mentalidad/02.png" data-cap="02 / 09" aria-label="Ver 02 / 09">
       <img src="carruseles/k2-mentalidad/02.jpg" alt="02 / 09" loading="lazy" decoding="async">
     </button>
     <figcaption>02 / 09</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k2-mentalidad/03.jpg" data-cap="03 / 09" aria-label="Ver 03 / 09">
+    <button class="shot" data-kind="img" data-full="carruseles/k2-mentalidad/03.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k2-mentalidad/03.png" data-cap="03 / 09" aria-label="Ver 03 / 09">
       <img src="carruseles/k2-mentalidad/03.jpg" alt="03 / 09" loading="lazy" decoding="async">
     </button>
     <figcaption>03 / 09</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k2-mentalidad/04.jpg" data-cap="04 / 09" aria-label="Ver 04 / 09">
+    <button class="shot" data-kind="img" data-full="carruseles/k2-mentalidad/04.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k2-mentalidad/04.png" data-cap="04 / 09" aria-label="Ver 04 / 09">
       <img src="carruseles/k2-mentalidad/04.jpg" alt="04 / 09" loading="lazy" decoding="async">
     </button>
     <figcaption>04 / 09</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k2-mentalidad/05.jpg" data-cap="05 / 09" aria-label="Ver 05 / 09">
+    <button class="shot" data-kind="img" data-full="carruseles/k2-mentalidad/05.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k2-mentalidad/05.png" data-cap="05 / 09" aria-label="Ver 05 / 09">
       <img src="carruseles/k2-mentalidad/05.jpg" alt="05 / 09" loading="lazy" decoding="async">
     </button>
     <figcaption>05 / 09</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k2-mentalidad/06.jpg" data-cap="06 / 09" aria-label="Ver 06 / 09">
+    <button class="shot" data-kind="img" data-full="carruseles/k2-mentalidad/06.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k2-mentalidad/06.png" data-cap="06 / 09" aria-label="Ver 06 / 09">
       <img src="carruseles/k2-mentalidad/06.jpg" alt="06 / 09" loading="lazy" decoding="async">
     </button>
     <figcaption>06 / 09</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k2-mentalidad/07.jpg" data-cap="07 / 09" aria-label="Ver 07 / 09">
+    <button class="shot" data-kind="img" data-full="carruseles/k2-mentalidad/07.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k2-mentalidad/07.png" data-cap="07 / 09" aria-label="Ver 07 / 09">
       <img src="carruseles/k2-mentalidad/07.jpg" alt="07 / 09" loading="lazy" decoding="async">
     </button>
     <figcaption>07 / 09</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k2-mentalidad/08.jpg" data-cap="08 / 09" aria-label="Ver 08 / 09">
+    <button class="shot" data-kind="img" data-full="carruseles/k2-mentalidad/08.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k2-mentalidad/08.png" data-cap="08 / 09" aria-label="Ver 08 / 09">
       <img src="carruseles/k2-mentalidad/08.jpg" alt="08 / 09" loading="lazy" decoding="async">
     </button>
     <figcaption>08 / 09</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k2-mentalidad/09.jpg" data-cap="09 / 09" aria-label="Ver 09 / 09">
+    <button class="shot" data-kind="img" data-full="carruseles/k2-mentalidad/09.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k2-mentalidad/09.png" data-cap="09 / 09" aria-label="Ver 09 / 09">
       <img src="carruseles/k2-mentalidad/09.jpg" alt="09 / 09" loading="lazy" decoding="async">
     </button>
     <figcaption>09 / 09</figcaption>
@@ -447,7 +474,7 @@
     <div class="clase">
       <div class="c-reel">
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot vid" data-kind="video" data-full="video/clases/k3-principios-marketing.mp4" data-cap="Reel 9:16" aria-label="Reproducir Reel 9:16">
+    <button class="shot vid" data-kind="video" data-full="video/clases/k3-principios-marketing.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/clases/k3-principios-marketing.mp4" data-cap="Reel 9:16" aria-label="Reproducir Reel 9:16">
       <img src="video/clases/k3-principios-marketing.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">1:03</span>
@@ -456,7 +483,7 @@
   </figure></div>
       <div class="c-h">
   <figure class="pz" style="--r:16 / 9">
-    <button class="shot vid" data-kind="video" data-full="video/clases/k3-principios-marketing-16x9.mp4" data-cap="YouTube 16:9" aria-label="Reproducir YouTube 16:9">
+    <button class="shot vid" data-kind="video" data-full="video/clases/k3-principios-marketing-16x9.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/clases/k3-principios-marketing-16x9.mp4" data-cap="YouTube 16:9" aria-label="Reproducir YouTube 16:9">
       <img src="video/clases/k3-principios-marketing-16x9.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">1:03</span>
@@ -464,7 +491,7 @@
     <figcaption>YouTube 16:9 <span>· vista previa 720p</span></figcaption>
   </figure>
   <figure class="pz" style="--r:16 / 9">
-    <button class="shot" data-kind="img" data-full="video/clases/miniatura-k3-principios-marketing.jpg" data-cap="Miniatura" aria-label="Ver Miniatura">
+    <button class="shot" data-kind="img" data-full="video/clases/miniatura-k3-principios-marketing.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/clases/miniatura-k3-principios-marketing.jpg" data-cap="Miniatura" aria-label="Ver Miniatura">
       <img src="video/clases/miniatura-k3-principios-marketing.jpg" alt="Miniatura" loading="lazy" decoding="async">
     </button>
     <figcaption>Miniatura</figcaption>
@@ -472,61 +499,61 @@
     </div>
     <div class="tira" style="margin-top:18px">
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k3-principios-marketing/01.jpg" data-cap="01 / 10" aria-label="Ver 01 / 10">
+    <button class="shot" data-kind="img" data-full="carruseles/k3-principios-marketing/01.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k3-principios-marketing/01.png" data-cap="01 / 10" aria-label="Ver 01 / 10">
       <img src="carruseles/k3-principios-marketing/01.jpg" alt="01 / 10" loading="lazy" decoding="async">
     </button>
     <figcaption>01 / 10</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k3-principios-marketing/02.jpg" data-cap="02 / 10" aria-label="Ver 02 / 10">
+    <button class="shot" data-kind="img" data-full="carruseles/k3-principios-marketing/02.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k3-principios-marketing/02.png" data-cap="02 / 10" aria-label="Ver 02 / 10">
       <img src="carruseles/k3-principios-marketing/02.jpg" alt="02 / 10" loading="lazy" decoding="async">
     </button>
     <figcaption>02 / 10</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k3-principios-marketing/03.jpg" data-cap="03 / 10" aria-label="Ver 03 / 10">
+    <button class="shot" data-kind="img" data-full="carruseles/k3-principios-marketing/03.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k3-principios-marketing/03.png" data-cap="03 / 10" aria-label="Ver 03 / 10">
       <img src="carruseles/k3-principios-marketing/03.jpg" alt="03 / 10" loading="lazy" decoding="async">
     </button>
     <figcaption>03 / 10</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k3-principios-marketing/04.jpg" data-cap="04 / 10" aria-label="Ver 04 / 10">
+    <button class="shot" data-kind="img" data-full="carruseles/k3-principios-marketing/04.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k3-principios-marketing/04.png" data-cap="04 / 10" aria-label="Ver 04 / 10">
       <img src="carruseles/k3-principios-marketing/04.jpg" alt="04 / 10" loading="lazy" decoding="async">
     </button>
     <figcaption>04 / 10</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k3-principios-marketing/05.jpg" data-cap="05 / 10" aria-label="Ver 05 / 10">
+    <button class="shot" data-kind="img" data-full="carruseles/k3-principios-marketing/05.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k3-principios-marketing/05.png" data-cap="05 / 10" aria-label="Ver 05 / 10">
       <img src="carruseles/k3-principios-marketing/05.jpg" alt="05 / 10" loading="lazy" decoding="async">
     </button>
     <figcaption>05 / 10</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k3-principios-marketing/06.jpg" data-cap="06 / 10" aria-label="Ver 06 / 10">
+    <button class="shot" data-kind="img" data-full="carruseles/k3-principios-marketing/06.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k3-principios-marketing/06.png" data-cap="06 / 10" aria-label="Ver 06 / 10">
       <img src="carruseles/k3-principios-marketing/06.jpg" alt="06 / 10" loading="lazy" decoding="async">
     </button>
     <figcaption>06 / 10</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k3-principios-marketing/07.jpg" data-cap="07 / 10" aria-label="Ver 07 / 10">
+    <button class="shot" data-kind="img" data-full="carruseles/k3-principios-marketing/07.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k3-principios-marketing/07.png" data-cap="07 / 10" aria-label="Ver 07 / 10">
       <img src="carruseles/k3-principios-marketing/07.jpg" alt="07 / 10" loading="lazy" decoding="async">
     </button>
     <figcaption>07 / 10</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k3-principios-marketing/08.jpg" data-cap="08 / 10" aria-label="Ver 08 / 10">
+    <button class="shot" data-kind="img" data-full="carruseles/k3-principios-marketing/08.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k3-principios-marketing/08.png" data-cap="08 / 10" aria-label="Ver 08 / 10">
       <img src="carruseles/k3-principios-marketing/08.jpg" alt="08 / 10" loading="lazy" decoding="async">
     </button>
     <figcaption>08 / 10</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k3-principios-marketing/09.jpg" data-cap="09 / 10" aria-label="Ver 09 / 10">
+    <button class="shot" data-kind="img" data-full="carruseles/k3-principios-marketing/09.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k3-principios-marketing/09.png" data-cap="09 / 10" aria-label="Ver 09 / 10">
       <img src="carruseles/k3-principios-marketing/09.jpg" alt="09 / 10" loading="lazy" decoding="async">
     </button>
     <figcaption>09 / 10</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k3-principios-marketing/10.jpg" data-cap="10 / 10" aria-label="Ver 10 / 10">
+    <button class="shot" data-kind="img" data-full="carruseles/k3-principios-marketing/10.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k3-principios-marketing/10.png" data-cap="10 / 10" aria-label="Ver 10 / 10">
       <img src="carruseles/k3-principios-marketing/10.jpg" alt="10 / 10" loading="lazy" decoding="async">
     </button>
     <figcaption>10 / 10</figcaption>
@@ -538,7 +565,7 @@
     <div class="clase">
       <div class="c-reel">
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot vid" data-kind="video" data-full="video/clases/k4-oferta.mp4" data-cap="Reel 9:16" aria-label="Reproducir Reel 9:16">
+    <button class="shot vid" data-kind="video" data-full="video/clases/k4-oferta.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/clases/k4-oferta.mp4" data-cap="Reel 9:16" aria-label="Reproducir Reel 9:16">
       <img src="video/clases/k4-oferta.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:45</span>
@@ -547,7 +574,7 @@
   </figure></div>
       <div class="c-h">
   <figure class="pz" style="--r:16 / 9">
-    <button class="shot vid" data-kind="video" data-full="video/clases/k4-oferta-16x9.mp4" data-cap="YouTube 16:9" aria-label="Reproducir YouTube 16:9">
+    <button class="shot vid" data-kind="video" data-full="video/clases/k4-oferta-16x9.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/clases/k4-oferta-16x9.mp4" data-cap="YouTube 16:9" aria-label="Reproducir YouTube 16:9">
       <img src="video/clases/k4-oferta-16x9.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:45</span>
@@ -555,7 +582,7 @@
     <figcaption>YouTube 16:9 <span>· vista previa 720p</span></figcaption>
   </figure>
   <figure class="pz" style="--r:16 / 9">
-    <button class="shot" data-kind="img" data-full="video/clases/miniatura-k4-oferta.jpg" data-cap="Miniatura" aria-label="Ver Miniatura">
+    <button class="shot" data-kind="img" data-full="video/clases/miniatura-k4-oferta.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/clases/miniatura-k4-oferta.jpg" data-cap="Miniatura" aria-label="Ver Miniatura">
       <img src="video/clases/miniatura-k4-oferta.jpg" alt="Miniatura" loading="lazy" decoding="async">
     </button>
     <figcaption>Miniatura</figcaption>
@@ -563,43 +590,43 @@
     </div>
     <div class="tira" style="margin-top:18px">
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k4-oferta/01.jpg" data-cap="01 / 07" aria-label="Ver 01 / 07">
+    <button class="shot" data-kind="img" data-full="carruseles/k4-oferta/01.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k4-oferta/01.png" data-cap="01 / 07" aria-label="Ver 01 / 07">
       <img src="carruseles/k4-oferta/01.jpg" alt="01 / 07" loading="lazy" decoding="async">
     </button>
     <figcaption>01 / 07</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k4-oferta/02.jpg" data-cap="02 / 07" aria-label="Ver 02 / 07">
+    <button class="shot" data-kind="img" data-full="carruseles/k4-oferta/02.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k4-oferta/02.png" data-cap="02 / 07" aria-label="Ver 02 / 07">
       <img src="carruseles/k4-oferta/02.jpg" alt="02 / 07" loading="lazy" decoding="async">
     </button>
     <figcaption>02 / 07</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k4-oferta/03.jpg" data-cap="03 / 07" aria-label="Ver 03 / 07">
+    <button class="shot" data-kind="img" data-full="carruseles/k4-oferta/03.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k4-oferta/03.png" data-cap="03 / 07" aria-label="Ver 03 / 07">
       <img src="carruseles/k4-oferta/03.jpg" alt="03 / 07" loading="lazy" decoding="async">
     </button>
     <figcaption>03 / 07</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k4-oferta/04.jpg" data-cap="04 / 07" aria-label="Ver 04 / 07">
+    <button class="shot" data-kind="img" data-full="carruseles/k4-oferta/04.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k4-oferta/04.png" data-cap="04 / 07" aria-label="Ver 04 / 07">
       <img src="carruseles/k4-oferta/04.jpg" alt="04 / 07" loading="lazy" decoding="async">
     </button>
     <figcaption>04 / 07</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k4-oferta/05.jpg" data-cap="05 / 07" aria-label="Ver 05 / 07">
+    <button class="shot" data-kind="img" data-full="carruseles/k4-oferta/05.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k4-oferta/05.png" data-cap="05 / 07" aria-label="Ver 05 / 07">
       <img src="carruseles/k4-oferta/05.jpg" alt="05 / 07" loading="lazy" decoding="async">
     </button>
     <figcaption>05 / 07</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k4-oferta/06.jpg" data-cap="06 / 07" aria-label="Ver 06 / 07">
+    <button class="shot" data-kind="img" data-full="carruseles/k4-oferta/06.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k4-oferta/06.png" data-cap="06 / 07" aria-label="Ver 06 / 07">
       <img src="carruseles/k4-oferta/06.jpg" alt="06 / 07" loading="lazy" decoding="async">
     </button>
     <figcaption>06 / 07</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k4-oferta/07.jpg" data-cap="07 / 07" aria-label="Ver 07 / 07">
+    <button class="shot" data-kind="img" data-full="carruseles/k4-oferta/07.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k4-oferta/07.png" data-cap="07 / 07" aria-label="Ver 07 / 07">
       <img src="carruseles/k4-oferta/07.jpg" alt="07 / 07" loading="lazy" decoding="async">
     </button>
     <figcaption>07 / 07</figcaption>
@@ -611,7 +638,7 @@
     <div class="clase">
       <div class="c-reel">
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot vid" data-kind="video" data-full="video/clases/k5-plan-30-dias.mp4" data-cap="Reel 9:16" aria-label="Reproducir Reel 9:16">
+    <button class="shot vid" data-kind="video" data-full="video/clases/k5-plan-30-dias.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/clases/k5-plan-30-dias.mp4" data-cap="Reel 9:16" aria-label="Reproducir Reel 9:16">
       <img src="video/clases/k5-plan-30-dias.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:54</span>
@@ -620,7 +647,7 @@
   </figure></div>
       <div class="c-h">
   <figure class="pz" style="--r:16 / 9">
-    <button class="shot vid" data-kind="video" data-full="video/clases/k5-plan-30-dias-16x9.mp4" data-cap="YouTube 16:9" aria-label="Reproducir YouTube 16:9">
+    <button class="shot vid" data-kind="video" data-full="video/clases/k5-plan-30-dias-16x9.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/clases/k5-plan-30-dias-16x9.mp4" data-cap="YouTube 16:9" aria-label="Reproducir YouTube 16:9">
       <img src="video/clases/k5-plan-30-dias-16x9.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:54</span>
@@ -628,7 +655,7 @@
     <figcaption>YouTube 16:9 <span>· vista previa 720p</span></figcaption>
   </figure>
   <figure class="pz" style="--r:16 / 9">
-    <button class="shot" data-kind="img" data-full="video/clases/miniatura-k5-plan-30-dias.jpg" data-cap="Miniatura" aria-label="Ver Miniatura">
+    <button class="shot" data-kind="img" data-full="video/clases/miniatura-k5-plan-30-dias.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/clases/miniatura-k5-plan-30-dias.jpg" data-cap="Miniatura" aria-label="Ver Miniatura">
       <img src="video/clases/miniatura-k5-plan-30-dias.jpg" alt="Miniatura" loading="lazy" decoding="async">
     </button>
     <figcaption>Miniatura</figcaption>
@@ -636,49 +663,49 @@
     </div>
     <div class="tira" style="margin-top:18px">
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k5-plan-30-dias/01.jpg" data-cap="01 / 08" aria-label="Ver 01 / 08">
+    <button class="shot" data-kind="img" data-full="carruseles/k5-plan-30-dias/01.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k5-plan-30-dias/01.png" data-cap="01 / 08" aria-label="Ver 01 / 08">
       <img src="carruseles/k5-plan-30-dias/01.jpg" alt="01 / 08" loading="lazy" decoding="async">
     </button>
     <figcaption>01 / 08</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k5-plan-30-dias/02.jpg" data-cap="02 / 08" aria-label="Ver 02 / 08">
+    <button class="shot" data-kind="img" data-full="carruseles/k5-plan-30-dias/02.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k5-plan-30-dias/02.png" data-cap="02 / 08" aria-label="Ver 02 / 08">
       <img src="carruseles/k5-plan-30-dias/02.jpg" alt="02 / 08" loading="lazy" decoding="async">
     </button>
     <figcaption>02 / 08</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k5-plan-30-dias/03.jpg" data-cap="03 / 08" aria-label="Ver 03 / 08">
+    <button class="shot" data-kind="img" data-full="carruseles/k5-plan-30-dias/03.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k5-plan-30-dias/03.png" data-cap="03 / 08" aria-label="Ver 03 / 08">
       <img src="carruseles/k5-plan-30-dias/03.jpg" alt="03 / 08" loading="lazy" decoding="async">
     </button>
     <figcaption>03 / 08</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k5-plan-30-dias/04.jpg" data-cap="04 / 08" aria-label="Ver 04 / 08">
+    <button class="shot" data-kind="img" data-full="carruseles/k5-plan-30-dias/04.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k5-plan-30-dias/04.png" data-cap="04 / 08" aria-label="Ver 04 / 08">
       <img src="carruseles/k5-plan-30-dias/04.jpg" alt="04 / 08" loading="lazy" decoding="async">
     </button>
     <figcaption>04 / 08</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k5-plan-30-dias/05.jpg" data-cap="05 / 08" aria-label="Ver 05 / 08">
+    <button class="shot" data-kind="img" data-full="carruseles/k5-plan-30-dias/05.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k5-plan-30-dias/05.png" data-cap="05 / 08" aria-label="Ver 05 / 08">
       <img src="carruseles/k5-plan-30-dias/05.jpg" alt="05 / 08" loading="lazy" decoding="async">
     </button>
     <figcaption>05 / 08</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k5-plan-30-dias/06.jpg" data-cap="06 / 08" aria-label="Ver 06 / 08">
+    <button class="shot" data-kind="img" data-full="carruseles/k5-plan-30-dias/06.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k5-plan-30-dias/06.png" data-cap="06 / 08" aria-label="Ver 06 / 08">
       <img src="carruseles/k5-plan-30-dias/06.jpg" alt="06 / 08" loading="lazy" decoding="async">
     </button>
     <figcaption>06 / 08</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k5-plan-30-dias/07.jpg" data-cap="07 / 08" aria-label="Ver 07 / 08">
+    <button class="shot" data-kind="img" data-full="carruseles/k5-plan-30-dias/07.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k5-plan-30-dias/07.png" data-cap="07 / 08" aria-label="Ver 07 / 08">
       <img src="carruseles/k5-plan-30-dias/07.jpg" alt="07 / 08" loading="lazy" decoding="async">
     </button>
     <figcaption>07 / 08</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k5-plan-30-dias/08.jpg" data-cap="08 / 08" aria-label="Ver 08 / 08">
+    <button class="shot" data-kind="img" data-full="carruseles/k5-plan-30-dias/08.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k5-plan-30-dias/08.png" data-cap="08 / 08" aria-label="Ver 08 / 08">
       <img src="carruseles/k5-plan-30-dias/08.jpg" alt="08 / 08" loading="lazy" decoding="async">
     </button>
     <figcaption>08 / 08</figcaption>
@@ -690,7 +717,7 @@
     <div class="clase">
       <div class="c-reel">
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot vid" data-kind="video" data-full="video/clases/k6-prompts-ia.mp4" data-cap="Reel 9:16" aria-label="Reproducir Reel 9:16">
+    <button class="shot vid" data-kind="video" data-full="video/clases/k6-prompts-ia.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/clases/k6-prompts-ia.mp4" data-cap="Reel 9:16" aria-label="Reproducir Reel 9:16">
       <img src="video/clases/k6-prompts-ia.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">1:00</span>
@@ -699,7 +726,7 @@
   </figure></div>
       <div class="c-h">
   <figure class="pz" style="--r:16 / 9">
-    <button class="shot vid" data-kind="video" data-full="video/clases/k6-prompts-ia-16x9.mp4" data-cap="YouTube 16:9" aria-label="Reproducir YouTube 16:9">
+    <button class="shot vid" data-kind="video" data-full="video/clases/k6-prompts-ia-16x9.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/clases/k6-prompts-ia-16x9.mp4" data-cap="YouTube 16:9" aria-label="Reproducir YouTube 16:9">
       <img src="video/clases/k6-prompts-ia-16x9.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">1:00</span>
@@ -707,7 +734,7 @@
     <figcaption>YouTube 16:9 <span>· vista previa 720p</span></figcaption>
   </figure>
   <figure class="pz" style="--r:16 / 9">
-    <button class="shot" data-kind="img" data-full="video/clases/miniatura-k6-prompts-ia.jpg" data-cap="Miniatura" aria-label="Ver Miniatura">
+    <button class="shot" data-kind="img" data-full="video/clases/miniatura-k6-prompts-ia.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/clases/miniatura-k6-prompts-ia.jpg" data-cap="Miniatura" aria-label="Ver Miniatura">
       <img src="video/clases/miniatura-k6-prompts-ia.jpg" alt="Miniatura" loading="lazy" decoding="async">
     </button>
     <figcaption>Miniatura</figcaption>
@@ -715,55 +742,55 @@
     </div>
     <div class="tira" style="margin-top:18px">
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k6-prompts-ia/01.jpg" data-cap="01 / 09" aria-label="Ver 01 / 09">
+    <button class="shot" data-kind="img" data-full="carruseles/k6-prompts-ia/01.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k6-prompts-ia/01.png" data-cap="01 / 09" aria-label="Ver 01 / 09">
       <img src="carruseles/k6-prompts-ia/01.jpg" alt="01 / 09" loading="lazy" decoding="async">
     </button>
     <figcaption>01 / 09</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k6-prompts-ia/02.jpg" data-cap="02 / 09" aria-label="Ver 02 / 09">
+    <button class="shot" data-kind="img" data-full="carruseles/k6-prompts-ia/02.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k6-prompts-ia/02.png" data-cap="02 / 09" aria-label="Ver 02 / 09">
       <img src="carruseles/k6-prompts-ia/02.jpg" alt="02 / 09" loading="lazy" decoding="async">
     </button>
     <figcaption>02 / 09</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k6-prompts-ia/03.jpg" data-cap="03 / 09" aria-label="Ver 03 / 09">
+    <button class="shot" data-kind="img" data-full="carruseles/k6-prompts-ia/03.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k6-prompts-ia/03.png" data-cap="03 / 09" aria-label="Ver 03 / 09">
       <img src="carruseles/k6-prompts-ia/03.jpg" alt="03 / 09" loading="lazy" decoding="async">
     </button>
     <figcaption>03 / 09</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k6-prompts-ia/04.jpg" data-cap="04 / 09" aria-label="Ver 04 / 09">
+    <button class="shot" data-kind="img" data-full="carruseles/k6-prompts-ia/04.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k6-prompts-ia/04.png" data-cap="04 / 09" aria-label="Ver 04 / 09">
       <img src="carruseles/k6-prompts-ia/04.jpg" alt="04 / 09" loading="lazy" decoding="async">
     </button>
     <figcaption>04 / 09</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k6-prompts-ia/05.jpg" data-cap="05 / 09" aria-label="Ver 05 / 09">
+    <button class="shot" data-kind="img" data-full="carruseles/k6-prompts-ia/05.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k6-prompts-ia/05.png" data-cap="05 / 09" aria-label="Ver 05 / 09">
       <img src="carruseles/k6-prompts-ia/05.jpg" alt="05 / 09" loading="lazy" decoding="async">
     </button>
     <figcaption>05 / 09</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k6-prompts-ia/06.jpg" data-cap="06 / 09" aria-label="Ver 06 / 09">
+    <button class="shot" data-kind="img" data-full="carruseles/k6-prompts-ia/06.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k6-prompts-ia/06.png" data-cap="06 / 09" aria-label="Ver 06 / 09">
       <img src="carruseles/k6-prompts-ia/06.jpg" alt="06 / 09" loading="lazy" decoding="async">
     </button>
     <figcaption>06 / 09</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k6-prompts-ia/07.jpg" data-cap="07 / 09" aria-label="Ver 07 / 09">
+    <button class="shot" data-kind="img" data-full="carruseles/k6-prompts-ia/07.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k6-prompts-ia/07.png" data-cap="07 / 09" aria-label="Ver 07 / 09">
       <img src="carruseles/k6-prompts-ia/07.jpg" alt="07 / 09" loading="lazy" decoding="async">
     </button>
     <figcaption>07 / 09</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k6-prompts-ia/08.jpg" data-cap="08 / 09" aria-label="Ver 08 / 09">
+    <button class="shot" data-kind="img" data-full="carruseles/k6-prompts-ia/08.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k6-prompts-ia/08.png" data-cap="08 / 09" aria-label="Ver 08 / 09">
       <img src="carruseles/k6-prompts-ia/08.jpg" alt="08 / 09" loading="lazy" decoding="async">
     </button>
     <figcaption>08 / 09</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/k6-prompts-ia/09.jpg" data-cap="09 / 09" aria-label="Ver 09 / 09">
+    <button class="shot" data-kind="img" data-full="carruseles/k6-prompts-ia/09.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/k6-prompts-ia/09.png" data-cap="09 / 09" aria-label="Ver 09 / 09">
       <img src="carruseles/k6-prompts-ia/09.jpg" alt="09 / 09" loading="lazy" decoding="async">
     </button>
     <figcaption>09 / 09</figcaption>
@@ -779,7 +806,7 @@
     </header>
     <div class="tira" style="--w:240px">
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot vid" data-kind="video" data-full="video/reels/r0-manifiesto.mp4" data-cap="Manifiesto de marca" aria-label="Reproducir Manifiesto de marca">
+    <button class="shot vid" data-kind="video" data-full="video/reels/r0-manifiesto.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/reels/r0-manifiesto.mp4" data-cap="Manifiesto de marca" aria-label="Reproducir Manifiesto de marca">
       <img src="video/reels/r0-manifiesto.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:24</span>
@@ -787,7 +814,7 @@
     <figcaption>Manifiesto de marca</figcaption>
   </figure>
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot vid" data-kind="video" data-full="video/reels/r1-metodo.mp4" data-cap="No te falta talento" aria-label="Reproducir No te falta talento">
+    <button class="shot vid" data-kind="video" data-full="video/reels/r1-metodo.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/reels/r1-metodo.mp4" data-cap="No te falta talento" aria-label="Reproducir No te falta talento">
       <img src="video/reels/r1-metodo.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:22</span>
@@ -795,7 +822,7 @@
     <figcaption>No te falta talento</figcaption>
   </figure>
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot vid" data-kind="video" data-full="video/reels/r2-mentiras.mp4" data-cap="5 mentiras sobre vivir de Internet" aria-label="Reproducir 5 mentiras sobre vivir de Internet">
+    <button class="shot vid" data-kind="video" data-full="video/reels/r2-mentiras.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/reels/r2-mentiras.mp4" data-cap="5 mentiras sobre vivir de Internet" aria-label="Reproducir 5 mentiras sobre vivir de Internet">
       <img src="video/reels/r2-mentiras.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:29</span>
@@ -803,7 +830,7 @@
     <figcaption>5 mentiras sobre vivir de Internet</figcaption>
   </figure>
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot vid" data-kind="video" data-full="video/reels/r3-seis-pasos.mp4" data-cap="De cero a tu primer producto" aria-label="Reproducir De cero a tu primer producto">
+    <button class="shot vid" data-kind="video" data-full="video/reels/r3-seis-pasos.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/reels/r3-seis-pasos.mp4" data-cap="De cero a tu primer producto" aria-label="Reproducir De cero a tu primer producto">
       <img src="video/reels/r3-seis-pasos.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:30</span>
@@ -811,7 +838,7 @@
     <figcaption>De cero a tu primer producto</figcaption>
   </figure>
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot vid" data-kind="video" data-full="video/reels/r4-oferta.mp4" data-cap="Oferta antes que audiencia" aria-label="Reproducir Oferta antes que audiencia">
+    <button class="shot vid" data-kind="video" data-full="video/reels/r4-oferta.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/reels/r4-oferta.mp4" data-cap="Oferta antes que audiencia" aria-label="Reproducir Oferta antes que audiencia">
       <img src="video/reels/r4-oferta.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:24</span>
@@ -819,7 +846,7 @@
     <figcaption>Oferta antes que audiencia</figcaption>
   </figure>
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot vid" data-kind="video" data-full="video/reels/r5-ia.mp4" data-cap="La IA acelera, no reemplaza" aria-label="Reproducir La IA acelera, no reemplaza">
+    <button class="shot vid" data-kind="video" data-full="video/reels/r5-ia.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/reels/r5-ia.mp4" data-cap="La IA acelera, no reemplaza" aria-label="Reproducir La IA acelera, no reemplaza">
       <img src="video/reels/r5-ia.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:23</span>
@@ -827,7 +854,7 @@
     <figcaption>La IA acelera, no reemplaza</figcaption>
   </figure>
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot vid" data-kind="video" data-full="video/reels/r6-dolor.mp4" data-cap="El dolor que la gente paga" aria-label="Reproducir El dolor que la gente paga">
+    <button class="shot vid" data-kind="video" data-full="video/reels/r6-dolor.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/reels/r6-dolor.mp4" data-cap="El dolor que la gente paga" aria-label="Reproducir El dolor que la gente paga">
       <img src="video/reels/r6-dolor.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:20</span>
@@ -843,7 +870,7 @@
     </header>
     <div class="rejilla" style="--w:220px">
   <figure class="pz" style="--r:16 / 9">
-    <button class="shot vid" data-kind="video" data-full="video/logo/logo-16x9.mp4" data-cap="16:9" aria-label="Reproducir 16:9">
+    <button class="shot vid" data-kind="video" data-full="video/logo/logo-16x9.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/logo/logo-16x9.mp4" data-cap="16:9" aria-label="Reproducir 16:9">
       <img src="video/logo/logo-16x9.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:06</span>
@@ -851,7 +878,7 @@
     <figcaption>16:9</figcaption>
   </figure>
   <figure class="pz" style="--r:1 / 1">
-    <button class="shot vid" data-kind="video" data-full="video/logo/logo-1x1.mp4" data-cap="1:1" aria-label="Reproducir 1:1">
+    <button class="shot vid" data-kind="video" data-full="video/logo/logo-1x1.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/logo/logo-1x1.mp4" data-cap="1:1" aria-label="Reproducir 1:1">
       <img src="video/logo/logo-1x1.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:06</span>
@@ -859,7 +886,7 @@
     <figcaption>1:1</figcaption>
   </figure>
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot vid" data-kind="video" data-full="video/logo/logo-9x16.mp4" data-cap="9:16" aria-label="Reproducir 9:16">
+    <button class="shot vid" data-kind="video" data-full="video/logo/logo-9x16.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/logo/logo-9x16.mp4" data-cap="9:16" aria-label="Reproducir 9:16">
       <img src="video/logo/logo-9x16.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:06</span>
@@ -875,7 +902,7 @@
     </header>
     <div class="rejilla" style="--w:150px">
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot vid" data-kind="video" data-full="video/historias/historia-s1.mp4" data-cap="Historia 1" aria-label="Reproducir Historia 1">
+    <button class="shot vid" data-kind="video" data-full="video/historias/historia-s1.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/historias/historia-s1.mp4" data-cap="Historia 1" aria-label="Reproducir Historia 1">
       <img src="video/historias/historia-s1.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:07</span>
@@ -883,7 +910,7 @@
     <figcaption>Historia 1</figcaption>
   </figure>
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot vid" data-kind="video" data-full="video/historias/historia-s2.mp4" data-cap="Historia 2" aria-label="Reproducir Historia 2">
+    <button class="shot vid" data-kind="video" data-full="video/historias/historia-s2.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/historias/historia-s2.mp4" data-cap="Historia 2" aria-label="Reproducir Historia 2">
       <img src="video/historias/historia-s2.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:07</span>
@@ -891,7 +918,7 @@
     <figcaption>Historia 2</figcaption>
   </figure>
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot vid" data-kind="video" data-full="video/historias/historia-s3.mp4" data-cap="Historia 3" aria-label="Reproducir Historia 3">
+    <button class="shot vid" data-kind="video" data-full="video/historias/historia-s3.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/historias/historia-s3.mp4" data-cap="Historia 3" aria-label="Reproducir Historia 3">
       <img src="video/historias/historia-s3.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:07</span>
@@ -899,7 +926,7 @@
     <figcaption>Historia 3</figcaption>
   </figure>
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot vid" data-kind="video" data-full="video/historias/historia-s4.mp4" data-cap="Historia 4" aria-label="Reproducir Historia 4">
+    <button class="shot vid" data-kind="video" data-full="video/historias/historia-s4.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/historias/historia-s4.mp4" data-cap="Historia 4" aria-label="Reproducir Historia 4">
       <img src="video/historias/historia-s4.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:07</span>
@@ -907,7 +934,7 @@
     <figcaption>Historia 4</figcaption>
   </figure>
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot vid" data-kind="video" data-full="video/historias/historia-s5.mp4" data-cap="Historia 5" aria-label="Reproducir Historia 5">
+    <button class="shot vid" data-kind="video" data-full="video/historias/historia-s5.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/historias/historia-s5.mp4" data-cap="Historia 5" aria-label="Reproducir Historia 5">
       <img src="video/historias/historia-s5.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:07</span>
@@ -915,7 +942,7 @@
     <figcaption>Historia 5</figcaption>
   </figure>
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot vid" data-kind="video" data-full="video/historias/historia-s6.mp4" data-cap="Historia 6" aria-label="Reproducir Historia 6">
+    <button class="shot vid" data-kind="video" data-full="video/historias/historia-s6.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/historias/historia-s6.mp4" data-cap="Historia 6" aria-label="Reproducir Historia 6">
       <img src="video/historias/historia-s6.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:07</span>
@@ -931,7 +958,7 @@
     </header>
     <div class="rejilla" style="--w:190px">
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot vid" data-kind="video" data-full="video/portadas/portada-c1-metodo.mp4" data-cap="El método de 6 pasos" aria-label="Reproducir El método de 6 pasos">
+    <button class="shot vid" data-kind="video" data-full="video/portadas/portada-c1-metodo.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/portadas/portada-c1-metodo.mp4" data-cap="El método de 6 pasos" aria-label="Reproducir El método de 6 pasos">
       <img src="video/portadas/portada-c1-metodo.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:06</span>
@@ -939,7 +966,7 @@
     <figcaption>El método de 6 pasos</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot vid" data-kind="video" data-full="video/portadas/portada-c2-mentiras.mp4" data-cap="5 mentiras que te frenan" aria-label="Reproducir 5 mentiras que te frenan">
+    <button class="shot vid" data-kind="video" data-full="video/portadas/portada-c2-mentiras.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/portadas/portada-c2-mentiras.mp4" data-cap="5 mentiras que te frenan" aria-label="Reproducir 5 mentiras que te frenan">
       <img src="video/portadas/portada-c2-mentiras.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:06</span>
@@ -947,7 +974,7 @@
     <figcaption>5 mentiras que te frenan</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot vid" data-kind="video" data-full="video/portadas/portada-c3-oferta.mp4" data-cap="Oferta antes que audiencia" aria-label="Reproducir Oferta antes que audiencia">
+    <button class="shot vid" data-kind="video" data-full="video/portadas/portada-c3-oferta.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/portadas/portada-c3-oferta.mp4" data-cap="Oferta antes que audiencia" aria-label="Reproducir Oferta antes que audiencia">
       <img src="video/portadas/portada-c3-oferta.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:06</span>
@@ -955,7 +982,7 @@
     <figcaption>Oferta antes que audiencia</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot vid" data-kind="video" data-full="video/portadas/portada-c4-dolor.mp4" data-cap="Encontrar el dolor que se paga" aria-label="Reproducir Encontrar el dolor que se paga">
+    <button class="shot vid" data-kind="video" data-full="video/portadas/portada-c4-dolor.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/portadas/portada-c4-dolor.mp4" data-cap="Encontrar el dolor que se paga" aria-label="Reproducir Encontrar el dolor que se paga">
       <img src="video/portadas/portada-c4-dolor.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:06</span>
@@ -963,7 +990,7 @@
     <figcaption>Encontrar el dolor que se paga</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot vid" data-kind="video" data-full="video/portadas/portada-c5-ia.mp4" data-cap="La IA acelera, no reemplaza" aria-label="Reproducir La IA acelera, no reemplaza">
+    <button class="shot vid" data-kind="video" data-full="video/portadas/portada-c5-ia.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/portadas/portada-c5-ia.mp4" data-cap="La IA acelera, no reemplaza" aria-label="Reproducir La IA acelera, no reemplaza">
       <img src="video/portadas/portada-c5-ia.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:06</span>
@@ -979,7 +1006,7 @@
     </header>
     <div class="rejilla" style="--w:300px">
   <figure class="pz" style="--r:16 / 9">
-    <button class="shot vid" data-kind="video" data-full="video/portadas/portada-16x9-p1.mp4" data-cap="Cómo crear tu primer producto digital" aria-label="Reproducir Cómo crear tu primer producto digital">
+    <button class="shot vid" data-kind="video" data-full="video/portadas/portada-16x9-p1.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/portadas/portada-16x9-p1.mp4" data-cap="Cómo crear tu primer producto digital" aria-label="Reproducir Cómo crear tu primer producto digital">
       <img src="video/portadas/portada-16x9-p1.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:06</span>
@@ -987,7 +1014,7 @@
     <figcaption>Cómo crear tu primer producto digital</figcaption>
   </figure>
   <figure class="pz" style="--r:16 / 9">
-    <button class="shot vid" data-kind="video" data-full="video/portadas/portada-16x9-p2.mp4" data-cap="Oferta antes que audiencia" aria-label="Reproducir Oferta antes que audiencia">
+    <button class="shot vid" data-kind="video" data-full="video/portadas/portada-16x9-p2.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/portadas/portada-16x9-p2.mp4" data-cap="Oferta antes que audiencia" aria-label="Reproducir Oferta antes que audiencia">
       <img src="video/portadas/portada-16x9-p2.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:06</span>
@@ -995,7 +1022,7 @@
     <figcaption>Oferta antes que audiencia</figcaption>
   </figure>
   <figure class="pz" style="--r:16 / 9">
-    <button class="shot vid" data-kind="video" data-full="video/portadas/portada-16x9-p3.mp4" data-cap="Vender con inteligencia artificial" aria-label="Reproducir Vender con inteligencia artificial">
+    <button class="shot vid" data-kind="video" data-full="video/portadas/portada-16x9-p3.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/portadas/portada-16x9-p3.mp4" data-cap="Vender con inteligencia artificial" aria-label="Reproducir Vender con inteligencia artificial">
       <img src="video/portadas/portada-16x9-p3.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:06</span>
@@ -1003,7 +1030,7 @@
     <figcaption>Vender con inteligencia artificial</figcaption>
   </figure>
   <figure class="pz" style="--r:16 / 9">
-    <button class="shot vid" data-kind="video" data-full="video/portadas/portada-16x9-p4.mp4" data-cap="El dolor que la gente paga por resolver" aria-label="Reproducir El dolor que la gente paga por resolver">
+    <button class="shot vid" data-kind="video" data-full="video/portadas/portada-16x9-p4.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/portadas/portada-16x9-p4.mp4" data-cap="El dolor que la gente paga por resolver" aria-label="Reproducir El dolor que la gente paga por resolver">
       <img src="video/portadas/portada-16x9-p4.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:06</span>
@@ -1019,7 +1046,7 @@
     </header>
     <div class="rejilla" style="--w:220px">
   <figure class="pz" style="--r:1 / 1">
-    <button class="shot vid" data-kind="video" data-full="video/citas/cita-q1.mp4" data-cap="Un tema da likes. Un dolor da ventas." aria-label="Reproducir Un tema da likes. Un dolor da ventas.">
+    <button class="shot vid" data-kind="video" data-full="video/citas/cita-q1.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/citas/cita-q1.mp4" data-cap="Un tema da likes. Un dolor da ventas." aria-label="Reproducir Un tema da likes. Un dolor da ventas.">
       <img src="video/citas/cita-q1.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:07</span>
@@ -1027,7 +1054,7 @@
     <figcaption>Un tema da likes. Un dolor da ventas.</figcaption>
   </figure>
   <figure class="pz" style="--r:1 / 1">
-    <button class="shot vid" data-kind="video" data-full="video/citas/cita-q2.mp4" data-cap="Nadie paga por un PDF. Pagan por un resultado." aria-label="Reproducir Nadie paga por un PDF. Pagan por un resultado.">
+    <button class="shot vid" data-kind="video" data-full="video/citas/cita-q2.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/citas/cita-q2.mp4" data-cap="Nadie paga por un PDF. Pagan por un resultado." aria-label="Reproducir Nadie paga por un PDF. Pagan por un resultado.">
       <img src="video/citas/cita-q2.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:07</span>
@@ -1035,7 +1062,7 @@
     <figcaption>Nadie paga por un PDF. Pagan por un resultado.</figcaption>
   </figure>
   <figure class="pz" style="--r:1 / 1">
-    <button class="shot vid" data-kind="video" data-full="video/citas/cita-q3.mp4" data-cap="La IA te da velocidad. El rumbo lo ponés vos." aria-label="Reproducir La IA te da velocidad. El rumbo lo ponés vos.">
+    <button class="shot vid" data-kind="video" data-full="video/citas/cita-q3.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/citas/cita-q3.mp4" data-cap="La IA te da velocidad. El rumbo lo ponés vos." aria-label="Reproducir La IA te da velocidad. El rumbo lo ponés vos.">
       <img src="video/citas/cita-q3.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:07</span>
@@ -1043,7 +1070,7 @@
     <figcaption>La IA te da velocidad. El rumbo lo ponés vos.</figcaption>
   </figure>
   <figure class="pz" style="--r:1 / 1">
-    <button class="shot vid" data-kind="video" data-full="video/citas/cita-q4.mp4" data-cap="Audiencia sin oferta es una tribuna vacía." aria-label="Reproducir Audiencia sin oferta es una tribuna vacía.">
+    <button class="shot vid" data-kind="video" data-full="video/citas/cita-q4.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/citas/cita-q4.mp4" data-cap="Audiencia sin oferta es una tribuna vacía." aria-label="Reproducir Audiencia sin oferta es una tribuna vacía.">
       <img src="video/citas/cita-q4.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:07</span>
@@ -1051,7 +1078,7 @@
     <figcaption>Audiencia sin oferta es una tribuna vacía.</figcaption>
   </figure>
   <figure class="pz" style="--r:1 / 1">
-    <button class="shot vid" data-kind="video" data-full="video/citas/cita-q5.mp4" data-cap="Una oferta que no se menciona no existe." aria-label="Reproducir Una oferta que no se menciona no existe.">
+    <button class="shot vid" data-kind="video" data-full="video/citas/cita-q5.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/citas/cita-q5.mp4" data-cap="Una oferta que no se menciona no existe." aria-label="Reproducir Una oferta que no se menciona no existe.">
       <img src="video/citas/cita-q5.jpg" alt="" loading="lazy" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       <span class="dur">0:07</span>
@@ -1067,112 +1094,112 @@
     </header>
     <div class="rejilla" style="--w:150px">
   <figure class="pz" style="--r:1 / 1">
-    <button class="shot " data-kind="video" data-full="video/loops/loop-aiChip.mp4" data-cap="aiChip" aria-label="Ver aiChip">
+    <button class="shot " data-kind="video" data-full="video/loops/loop-aiChip.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/loops/loop-aiChip.mp4" data-cap="aiChip" aria-label="Ver aiChip">
       <video class="auto" src="video/loops/loop-aiChip.mp4" muted loop playsinline preload="none"
         poster="video/loops/loop-aiChip.jpg"></video>
     </button>
     <figcaption>aiChip</figcaption>
   </figure>
   <figure class="pz" style="--r:1 / 1">
-    <button class="shot " data-kind="video" data-full="video/loops/loop-asset.mp4" data-cap="asset" aria-label="Ver asset">
+    <button class="shot " data-kind="video" data-full="video/loops/loop-asset.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/loops/loop-asset.mp4" data-cap="asset" aria-label="Ver asset">
       <video class="auto" src="video/loops/loop-asset.mp4" muted loop playsinline preload="none"
         poster="video/loops/loop-asset.jpg"></video>
     </button>
     <figcaption>asset</figcaption>
   </figure>
   <figure class="pz" style="--r:1 / 1">
-    <button class="shot " data-kind="video" data-full="video/loops/loop-clock.mp4" data-cap="clock" aria-label="Ver clock">
+    <button class="shot " data-kind="video" data-full="video/loops/loop-clock.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/loops/loop-clock.mp4" data-cap="clock" aria-label="Ver clock">
       <video class="auto" src="video/loops/loop-clock.mp4" muted loop playsinline preload="none"
         poster="video/loops/loop-clock.jpg"></video>
     </button>
     <figcaption>clock</figcaption>
   </figure>
   <figure class="pz" style="--r:1 / 1">
-    <button class="shot " data-kind="video" data-full="video/loops/loop-funnel.mp4" data-cap="funnel" aria-label="Ver funnel">
+    <button class="shot " data-kind="video" data-full="video/loops/loop-funnel.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/loops/loop-funnel.mp4" data-cap="funnel" aria-label="Ver funnel">
       <video class="auto" src="video/loops/loop-funnel.mp4" muted loop playsinline preload="none"
         poster="video/loops/loop-funnel.jpg"></video>
     </button>
     <figcaption>funnel</figcaption>
   </figure>
   <figure class="pz" style="--r:1 / 1">
-    <button class="shot " data-kind="video" data-full="video/loops/loop-growth.mp4" data-cap="growth" aria-label="Ver growth">
+    <button class="shot " data-kind="video" data-full="video/loops/loop-growth.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/loops/loop-growth.mp4" data-cap="growth" aria-label="Ver growth">
       <video class="auto" src="video/loops/loop-growth.mp4" muted loop playsinline preload="none"
         poster="video/loops/loop-growth.jpg"></video>
     </button>
     <figcaption>growth</figcaption>
   </figure>
   <figure class="pz" style="--r:1 / 1">
-    <button class="shot " data-kind="video" data-full="video/loops/loop-hexRoute.mp4" data-cap="hexRoute" aria-label="Ver hexRoute">
+    <button class="shot " data-kind="video" data-full="video/loops/loop-hexRoute.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/loops/loop-hexRoute.mp4" data-cap="hexRoute" aria-label="Ver hexRoute">
       <video class="auto" src="video/loops/loop-hexRoute.mp4" muted loop playsinline preload="none"
         poster="video/loops/loop-hexRoute.jpg"></video>
     </button>
     <figcaption>hexRoute</figcaption>
   </figure>
   <figure class="pz" style="--r:1 / 1">
-    <button class="shot " data-kind="video" data-full="video/loops/loop-ideaSystem.mp4" data-cap="ideaSystem" aria-label="Ver ideaSystem">
+    <button class="shot " data-kind="video" data-full="video/loops/loop-ideaSystem.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/loops/loop-ideaSystem.mp4" data-cap="ideaSystem" aria-label="Ver ideaSystem">
       <video class="auto" src="video/loops/loop-ideaSystem.mp4" muted loop playsinline preload="none"
         poster="video/loops/loop-ideaSystem.jpg"></video>
     </button>
     <figcaption>ideaSystem</figcaption>
   </figure>
   <figure class="pz" style="--r:1 / 1">
-    <button class="shot " data-kind="video" data-full="video/loops/loop-income.mp4" data-cap="income" aria-label="Ver income">
+    <button class="shot " data-kind="video" data-full="video/loops/loop-income.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/loops/loop-income.mp4" data-cap="income" aria-label="Ver income">
       <video class="auto" src="video/loops/loop-income.mp4" muted loop playsinline preload="none"
         poster="video/loops/loop-income.jpg"></video>
     </button>
     <figcaption>income</figcaption>
   </figure>
   <figure class="pz" style="--r:1 / 1">
-    <button class="shot " data-kind="video" data-full="video/loops/loop-launch.mp4" data-cap="launch" aria-label="Ver launch">
+    <button class="shot " data-kind="video" data-full="video/loops/loop-launch.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/loops/loop-launch.mp4" data-cap="launch" aria-label="Ver launch">
       <video class="auto" src="video/loops/loop-launch.mp4" muted loop playsinline preload="none"
         poster="video/loops/loop-launch.jpg"></video>
     </button>
     <figcaption>launch</figcaption>
   </figure>
   <figure class="pz" style="--r:1 / 1">
-    <button class="shot " data-kind="video" data-full="video/loops/loop-magnet.mp4" data-cap="magnet" aria-label="Ver magnet">
+    <button class="shot " data-kind="video" data-full="video/loops/loop-magnet.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/loops/loop-magnet.mp4" data-cap="magnet" aria-label="Ver magnet">
       <video class="auto" src="video/loops/loop-magnet.mp4" muted loop playsinline preload="none"
         poster="video/loops/loop-magnet.jpg"></video>
     </button>
     <figcaption>magnet</figcaption>
   </figure>
   <figure class="pz" style="--r:1 / 1">
-    <button class="shot " data-kind="video" data-full="video/loops/loop-mindset.mp4" data-cap="mindset" aria-label="Ver mindset">
+    <button class="shot " data-kind="video" data-full="video/loops/loop-mindset.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/loops/loop-mindset.mp4" data-cap="mindset" aria-label="Ver mindset">
       <video class="auto" src="video/loops/loop-mindset.mp4" muted loop playsinline preload="none"
         poster="video/loops/loop-mindset.jpg"></video>
     </button>
     <figcaption>mindset</figcaption>
   </figure>
   <figure class="pz" style="--r:1 / 1">
-    <button class="shot " data-kind="video" data-full="video/loops/loop-product.mp4" data-cap="product" aria-label="Ver product">
+    <button class="shot " data-kind="video" data-full="video/loops/loop-product.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/loops/loop-product.mp4" data-cap="product" aria-label="Ver product">
       <video class="auto" src="video/loops/loop-product.mp4" muted loop playsinline preload="none"
         poster="video/loops/loop-product.jpg"></video>
     </button>
     <figcaption>product</figcaption>
   </figure>
   <figure class="pz" style="--r:1 / 1">
-    <button class="shot " data-kind="video" data-full="video/loops/loop-shortcut.mp4" data-cap="shortcut" aria-label="Ver shortcut">
+    <button class="shot " data-kind="video" data-full="video/loops/loop-shortcut.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/loops/loop-shortcut.mp4" data-cap="shortcut" aria-label="Ver shortcut">
       <video class="auto" src="video/loops/loop-shortcut.mp4" muted loop playsinline preload="none"
         poster="video/loops/loop-shortcut.jpg"></video>
     </button>
     <figcaption>shortcut</figcaption>
   </figure>
   <figure class="pz" style="--r:1 / 1">
-    <button class="shot " data-kind="video" data-full="video/loops/loop-stairs.mp4" data-cap="stairs" aria-label="Ver stairs">
+    <button class="shot " data-kind="video" data-full="video/loops/loop-stairs.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/loops/loop-stairs.mp4" data-cap="stairs" aria-label="Ver stairs">
       <video class="auto" src="video/loops/loop-stairs.mp4" muted loop playsinline preload="none"
         poster="video/loops/loop-stairs.jpg"></video>
     </button>
     <figcaption>stairs</figcaption>
   </figure>
   <figure class="pz" style="--r:1 / 1">
-    <button class="shot " data-kind="video" data-full="video/loops/loop-target.mp4" data-cap="target" aria-label="Ver target">
+    <button class="shot " data-kind="video" data-full="video/loops/loop-target.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/loops/loop-target.mp4" data-cap="target" aria-label="Ver target">
       <video class="auto" src="video/loops/loop-target.mp4" muted loop playsinline preload="none"
         poster="video/loops/loop-target.jpg"></video>
     </button>
     <figcaption>target</figcaption>
   </figure>
   <figure class="pz" style="--r:1 / 1">
-    <button class="shot " data-kind="video" data-full="video/loops/loop-twoPaths.mp4" data-cap="twoPaths" aria-label="Ver twoPaths">
+    <button class="shot " data-kind="video" data-full="video/loops/loop-twoPaths.mp4" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/loops/loop-twoPaths.mp4" data-cap="twoPaths" aria-label="Ver twoPaths">
       <video class="auto" src="video/loops/loop-twoPaths.mp4" muted loop playsinline preload="none"
         poster="video/loops/loop-twoPaths.jpg"></video>
     </button>
@@ -1189,21 +1216,21 @@
     </header>
     <div class="rejilla" style="--w:300px">
   <figure class="pz" style="--r:16 / 9">
-    <button class="shot alpha" data-kind="video" data-full="video/kit/kit-logo-16x9.webm" data-cap="Logo animado &lt;span>· 16:9 · 6 s&lt;/span>" aria-label="Ver Logo animado &lt;span>· 16:9 · 6 s&lt;/span>">
+    <button class="shot alpha" data-kind="video" data-full="video/kit/kit-logo-16x9.webm" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/kit/kit-logo-16x9.mov" data-cap="Logo animado &lt;span>· 16:9 · 6 s&lt;/span>" aria-label="Ver Logo animado &lt;span>· 16:9 · 6 s&lt;/span>">
       <video class="auto" src="video/kit/kit-logo-16x9.webm" muted loop playsinline preload="none"
         poster="video/kit/kit-logo-16x9.jpg"></video>
     </button>
     <figcaption>Logo animado <span>· 16:9 · 6 s</span></figcaption>
   </figure>
   <figure class="pz" style="--r:16 / 9">
-    <button class="shot alpha" data-kind="video" data-full="video/kit/kit-transicion-16x9.webm" data-cap="Transición glitch &lt;span>· 16:9 · 1 s&lt;/span>" aria-label="Ver Transición glitch &lt;span>· 16:9 · 1 s&lt;/span>">
+    <button class="shot alpha" data-kind="video" data-full="video/kit/kit-transicion-16x9.webm" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/kit/kit-transicion-16x9.mov" data-cap="Transición glitch &lt;span>· 16:9 · 1 s&lt;/span>" aria-label="Ver Transición glitch &lt;span>· 16:9 · 1 s&lt;/span>">
       <video class="auto" src="video/kit/kit-transicion-16x9.webm" muted loop playsinline preload="none"
         poster="video/kit/kit-transicion-16x9.jpg"></video>
     </button>
     <figcaption>Transición glitch <span>· 16:9 · 1 s</span></figcaption>
   </figure>
   <figure class="pz" style="--r:16 / 9">
-    <button class="shot alpha" data-kind="video" data-full="video/kit/kit-zocalo-16x9.webm" data-cap="Zócalo de nombre &lt;span>· 16:9 · 5 s&lt;/span>" aria-label="Ver Zócalo de nombre &lt;span>· 16:9 · 5 s&lt;/span>">
+    <button class="shot alpha" data-kind="video" data-full="video/kit/kit-zocalo-16x9.webm" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/kit/kit-zocalo-16x9.mov" data-cap="Zócalo de nombre &lt;span>· 16:9 · 5 s&lt;/span>" aria-label="Ver Zócalo de nombre &lt;span>· 16:9 · 5 s&lt;/span>">
       <video class="auto" src="video/kit/kit-zocalo-16x9.webm" muted loop playsinline preload="none"
         poster="video/kit/kit-zocalo-16x9.jpg"></video>
     </button>
@@ -1218,28 +1245,28 @@
     </header>
     <div class="rejilla" style="--w:170px">
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot alpha" data-kind="video" data-full="video/kit/kit-guardalo-9x16.webm" data-cap="“Guardá este video” &lt;span>· 9:16 · 3,5 s&lt;/span>" aria-label="Ver “Guardá este video” &lt;span>· 9:16 · 3,5 s&lt;/span>">
+    <button class="shot alpha" data-kind="video" data-full="video/kit/kit-guardalo-9x16.webm" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/kit/kit-guardalo-9x16.mov" data-cap="“Guardá este video” &lt;span>· 9:16 · 3,5 s&lt;/span>" aria-label="Ver “Guardá este video” &lt;span>· 9:16 · 3,5 s&lt;/span>">
       <video class="auto" src="video/kit/kit-guardalo-9x16.webm" muted loop playsinline preload="none"
         poster="video/kit/kit-guardalo-9x16.jpg"></video>
     </button>
     <figcaption>“Guardá este video” <span>· 9:16 · 3,5 s</span></figcaption>
   </figure>
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot alpha" data-kind="video" data-full="video/kit/kit-seguinos-9x16.webm" data-cap="Cierre “Seguinos” &lt;span>· 9:16 · 4 s&lt;/span>" aria-label="Ver Cierre “Seguinos” &lt;span>· 9:16 · 4 s&lt;/span>">
+    <button class="shot alpha" data-kind="video" data-full="video/kit/kit-seguinos-9x16.webm" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/kit/kit-seguinos-9x16.mov" data-cap="Cierre “Seguinos” &lt;span>· 9:16 · 4 s&lt;/span>" aria-label="Ver Cierre “Seguinos” &lt;span>· 9:16 · 4 s&lt;/span>">
       <video class="auto" src="video/kit/kit-seguinos-9x16.webm" muted loop playsinline preload="none"
         poster="video/kit/kit-seguinos-9x16.jpg"></video>
     </button>
     <figcaption>Cierre “Seguinos” <span>· 9:16 · 4 s</span></figcaption>
   </figure>
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot alpha" data-kind="video" data-full="video/kit/kit-transicion-9x16.webm" data-cap="Transición glitch &lt;span>· 9:16 · 1 s&lt;/span>" aria-label="Ver Transición glitch &lt;span>· 9:16 · 1 s&lt;/span>">
+    <button class="shot alpha" data-kind="video" data-full="video/kit/kit-transicion-9x16.webm" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/kit/kit-transicion-9x16.mov" data-cap="Transición glitch &lt;span>· 9:16 · 1 s&lt;/span>" aria-label="Ver Transición glitch &lt;span>· 9:16 · 1 s&lt;/span>">
       <video class="auto" src="video/kit/kit-transicion-9x16.webm" muted loop playsinline preload="none"
         poster="video/kit/kit-transicion-9x16.jpg"></video>
     </button>
     <figcaption>Transición glitch <span>· 9:16 · 1 s</span></figcaption>
   </figure>
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot alpha" data-kind="video" data-full="video/kit/kit-zocalo-9x16.webm" data-cap="Zócalo de nombre &lt;span>· 9:16 · 5 s&lt;/span>" aria-label="Ver Zócalo de nombre &lt;span>· 9:16 · 5 s&lt;/span>">
+    <button class="shot alpha" data-kind="video" data-full="video/kit/kit-zocalo-9x16.webm" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/video/kit/kit-zocalo-9x16.mov" data-cap="Zócalo de nombre &lt;span>· 9:16 · 5 s&lt;/span>" aria-label="Ver Zócalo de nombre &lt;span>· 9:16 · 5 s&lt;/span>">
       <video class="auto" src="video/kit/kit-zocalo-9x16.webm" muted loop playsinline preload="none"
         poster="video/kit/kit-zocalo-9x16.jpg"></video>
     </button>
@@ -1254,7 +1281,7 @@
         y en oro metálico para las piezas, en SVG y PNG con transparencia.</p></div></header>
     
   <figure class="pz" style="--r:16 / 9">
-    <button class="shot" data-kind="img" data-full="iconos/galeria-de-iconos.jpg" data-cap="Galería de íconos · versión oscura" aria-label="Ver Galería de íconos · versión oscura">
+    <button class="shot" data-kind="img" data-full="iconos/galeria-de-iconos.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/iconos/galeria-de-iconos.png" data-cap="Galería de íconos · versión oscura" aria-label="Ver Galería de íconos · versión oscura">
       <img src="iconos/galeria-de-iconos.jpg" alt="Galería de íconos · versión oscura" loading="lazy" decoding="async">
     </button>
     <figcaption>Galería de íconos · versión oscura</figcaption>
@@ -1322,7 +1349,7 @@
     <figcaption style="font-size:12px;letter-spacing:.08em;text-transform:uppercase;opacity:.7">Bienestar</figcaption></figure></div>
     <div style="margin-top:18px">
   <figure class="pz" style="--r:16 / 9">
-    <button class="shot" data-kind="img" data-full="iconos/galeria-de-iconos-claro.jpg" data-cap="Galería de íconos · versión clara, como el manual" aria-label="Ver Galería de íconos · versión clara, como el manual">
+    <button class="shot" data-kind="img" data-full="iconos/galeria-de-iconos-claro.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/iconos/galeria-de-iconos-claro.png" data-cap="Galería de íconos · versión clara, como el manual" aria-label="Ver Galería de íconos · versión clara, como el manual">
       <img src="iconos/galeria-de-iconos-claro.jpg" alt="Galería de íconos · versión clara, como el manual" loading="lazy" decoding="async">
     </button>
     <figcaption>Galería de íconos · versión clara, como el manual</figcaption>
@@ -1338,49 +1365,49 @@
       style="width:100%;max-width:100%;border-radius:12px;border:1px solid var(--linea);display:block;margin-bottom:18px">
     <div class="rejilla" style="--w:120px">
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot" data-kind="img" data-full="destacadas/manual/empeza-aca.jpg" data-cap="Empezá acá" aria-label="Ver Empezá acá">
+    <button class="shot" data-kind="img" data-full="destacadas/manual/empeza-aca.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/destacadas/manual/empeza-aca.png" data-cap="Empezá acá" aria-label="Ver Empezá acá">
       <img src="destacadas/manual/empeza-aca.jpg" alt="Empezá acá" loading="lazy" decoding="async">
     </button>
     <figcaption>Empezá acá</figcaption>
   </figure>
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot" data-kind="img" data-full="destacadas/manual/metodo.jpg" data-cap="Método" aria-label="Ver Método">
+    <button class="shot" data-kind="img" data-full="destacadas/manual/metodo.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/destacadas/manual/metodo.png" data-cap="Método" aria-label="Ver Método">
       <img src="destacadas/manual/metodo.jpg" alt="Método" loading="lazy" decoding="async">
     </button>
     <figcaption>Método</figcaption>
   </figure>
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot" data-kind="img" data-full="destacadas/manual/clases.jpg" data-cap="Clases" aria-label="Ver Clases">
+    <button class="shot" data-kind="img" data-full="destacadas/manual/clases.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/destacadas/manual/clases.png" data-cap="Clases" aria-label="Ver Clases">
       <img src="destacadas/manual/clases.jpg" alt="Clases" loading="lazy" decoding="async">
     </button>
     <figcaption>Clases</figcaption>
   </figure>
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot" data-kind="img" data-full="destacadas/manual/ia.jpg" data-cap="IA" aria-label="Ver IA">
+    <button class="shot" data-kind="img" data-full="destacadas/manual/ia.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/destacadas/manual/ia.png" data-cap="IA" aria-label="Ver IA">
       <img src="destacadas/manual/ia.jpg" alt="IA" loading="lazy" decoding="async">
     </button>
     <figcaption>IA</figcaption>
   </figure>
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot" data-kind="img" data-full="destacadas/manual/ofertas.jpg" data-cap="Ofertas" aria-label="Ver Ofertas">
+    <button class="shot" data-kind="img" data-full="destacadas/manual/ofertas.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/destacadas/manual/ofertas.png" data-cap="Ofertas" aria-label="Ver Ofertas">
       <img src="destacadas/manual/ofertas.jpg" alt="Ofertas" loading="lazy" decoding="async">
     </button>
     <figcaption>Ofertas</figcaption>
   </figure>
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot" data-kind="img" data-full="destacadas/manual/preguntas.jpg" data-cap="Preguntas" aria-label="Ver Preguntas">
+    <button class="shot" data-kind="img" data-full="destacadas/manual/preguntas.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/destacadas/manual/preguntas.png" data-cap="Preguntas" aria-label="Ver Preguntas">
       <img src="destacadas/manual/preguntas.jpg" alt="Preguntas" loading="lazy" decoding="async">
     </button>
     <figcaption>Preguntas</figcaption>
   </figure>
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot" data-kind="img" data-full="destacadas/manual/recursos.jpg" data-cap="Recursos" aria-label="Ver Recursos">
+    <button class="shot" data-kind="img" data-full="destacadas/manual/recursos.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/destacadas/manual/recursos.png" data-cap="Recursos" aria-label="Ver Recursos">
       <img src="destacadas/manual/recursos.jpg" alt="Recursos" loading="lazy" decoding="async">
     </button>
     <figcaption>Recursos</figcaption>
   </figure>
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot" data-kind="img" data-full="destacadas/manual/nosotros.jpg" data-cap="Nosotros" aria-label="Ver Nosotros">
+    <button class="shot" data-kind="img" data-full="destacadas/manual/nosotros.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/destacadas/manual/nosotros.png" data-cap="Nosotros" aria-label="Ver Nosotros">
       <img src="destacadas/manual/nosotros.jpg" alt="Nosotros" loading="lazy" decoding="async">
     </button>
     <figcaption>Nosotros</figcaption>
@@ -1393,49 +1420,49 @@
       style="width:100%;max-width:100%;border-radius:12px;border:1px solid var(--linea);display:block;margin-bottom:18px">
     <div class="rejilla" style="--w:120px">
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot" data-kind="img" data-full="destacadas/empeza-aca.jpg" data-cap="Empezá acá" aria-label="Ver Empezá acá">
+    <button class="shot" data-kind="img" data-full="destacadas/empeza-aca.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/destacadas/empeza-aca.png" data-cap="Empezá acá" aria-label="Ver Empezá acá">
       <img src="destacadas/empeza-aca.jpg" alt="Empezá acá" loading="lazy" decoding="async">
     </button>
     <figcaption>Empezá acá</figcaption>
   </figure>
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot" data-kind="img" data-full="destacadas/metodo.jpg" data-cap="Método" aria-label="Ver Método">
+    <button class="shot" data-kind="img" data-full="destacadas/metodo.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/destacadas/metodo.png" data-cap="Método" aria-label="Ver Método">
       <img src="destacadas/metodo.jpg" alt="Método" loading="lazy" decoding="async">
     </button>
     <figcaption>Método</figcaption>
   </figure>
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot" data-kind="img" data-full="destacadas/clases.jpg" data-cap="Clases" aria-label="Ver Clases">
+    <button class="shot" data-kind="img" data-full="destacadas/clases.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/destacadas/clases.png" data-cap="Clases" aria-label="Ver Clases">
       <img src="destacadas/clases.jpg" alt="Clases" loading="lazy" decoding="async">
     </button>
     <figcaption>Clases</figcaption>
   </figure>
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot" data-kind="img" data-full="destacadas/ia.jpg" data-cap="IA" aria-label="Ver IA">
+    <button class="shot" data-kind="img" data-full="destacadas/ia.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/destacadas/ia.png" data-cap="IA" aria-label="Ver IA">
       <img src="destacadas/ia.jpg" alt="IA" loading="lazy" decoding="async">
     </button>
     <figcaption>IA</figcaption>
   </figure>
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot" data-kind="img" data-full="destacadas/ofertas.jpg" data-cap="Ofertas" aria-label="Ver Ofertas">
+    <button class="shot" data-kind="img" data-full="destacadas/ofertas.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/destacadas/ofertas.png" data-cap="Ofertas" aria-label="Ver Ofertas">
       <img src="destacadas/ofertas.jpg" alt="Ofertas" loading="lazy" decoding="async">
     </button>
     <figcaption>Ofertas</figcaption>
   </figure>
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot" data-kind="img" data-full="destacadas/preguntas.jpg" data-cap="Preguntas" aria-label="Ver Preguntas">
+    <button class="shot" data-kind="img" data-full="destacadas/preguntas.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/destacadas/preguntas.png" data-cap="Preguntas" aria-label="Ver Preguntas">
       <img src="destacadas/preguntas.jpg" alt="Preguntas" loading="lazy" decoding="async">
     </button>
     <figcaption>Preguntas</figcaption>
   </figure>
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot" data-kind="img" data-full="destacadas/recursos.jpg" data-cap="Recursos" aria-label="Ver Recursos">
+    <button class="shot" data-kind="img" data-full="destacadas/recursos.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/destacadas/recursos.png" data-cap="Recursos" aria-label="Ver Recursos">
       <img src="destacadas/recursos.jpg" alt="Recursos" loading="lazy" decoding="async">
     </button>
     <figcaption>Recursos</figcaption>
   </figure>
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot" data-kind="img" data-full="destacadas/nosotros.jpg" data-cap="Nosotros" aria-label="Ver Nosotros">
+    <button class="shot" data-kind="img" data-full="destacadas/nosotros.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/destacadas/nosotros.png" data-cap="Nosotros" aria-label="Ver Nosotros">
       <img src="destacadas/nosotros.jpg" alt="Nosotros" loading="lazy" decoding="async">
     </button>
     <figcaption>Nosotros</figcaption>
@@ -1452,62 +1479,62 @@
         <audio controls preload="none" src="audio/efectos/logo-sonoro.mp3"></audio></li>
       
   <li class="aud">
-    <div><b>Calma</b><span>64 s · loop exacto · base-1-calma.mp3</span></div>
+    <div><b>Calma</b><span>64 s · loop exacto · base-1-calma.mp3 · <a class="bajar" href="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/audio/musica/base-1-calma.mp3" target="_blank" rel="noopener">descargar</a></span></div>
     <audio controls preload="none" src="audio/musica/base-1-calma.mp3"></audio>
   </li>
   <li class="aud">
-    <div><b>Pulso</b><span>64 s · loop exacto · base-2-pulso.mp3</span></div>
+    <div><b>Pulso</b><span>64 s · loop exacto · base-2-pulso.mp3 · <a class="bajar" href="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/audio/musica/base-2-pulso.mp3" target="_blank" rel="noopener">descargar</a></span></div>
     <audio controls preload="none" src="audio/musica/base-2-pulso.mp3"></audio>
   </li>
   <li class="aud">
-    <div><b>Groove</b><span>64 s · loop exacto · base-3-groove.mp3</span></div>
+    <div><b>Groove</b><span>64 s · loop exacto · base-3-groove.mp3 · <a class="bajar" href="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/audio/musica/base-3-groove.mp3" target="_blank" rel="noopener">descargar</a></span></div>
     <audio controls preload="none" src="audio/musica/base-3-groove.mp3"></audio>
   </li>
   <li class="aud">
-    <div><b>Subida</b><span>64 s · loop exacto · base-4-subida.mp3</span></div>
+    <div><b>Subida</b><span>64 s · loop exacto · base-4-subida.mp3 · <a class="bajar" href="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/audio/musica/base-4-subida.mp3" target="_blank" rel="noopener">descargar</a></span></div>
     <audio controls preload="none" src="audio/musica/base-4-subida.mp3"></audio>
   </li>
     </ul>
     <h3 style="margin-top:34px;font-size:18px">Efectos</h3>
     <ul class="auds" style="margin-top:14px">
   <li class="aud">
-    <div><b>glitch corto</b><span>glitch-corto.mp3</span></div>
+    <div><b>glitch corto</b><span>glitch-corto.mp3 · <a class="bajar" href="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/audio/efectos/glitch-corto.mp3" target="_blank" rel="noopener">descargar</a></span></div>
     <audio controls preload="none" src="audio/efectos/glitch-corto.mp3"></audio>
   </li>
   <li class="aud">
-    <div><b>glitch largo</b><span>glitch-largo.mp3</span></div>
+    <div><b>glitch largo</b><span>glitch-largo.mp3 · <a class="bajar" href="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/audio/efectos/glitch-largo.mp3" target="_blank" rel="noopener">descargar</a></span></div>
     <audio controls preload="none" src="audio/efectos/glitch-largo.mp3"></audio>
   </li>
   <li class="aud">
-    <div><b>impacto</b><span>impacto.mp3</span></div>
+    <div><b>impacto</b><span>impacto.mp3 · <a class="bajar" href="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/audio/efectos/impacto.mp3" target="_blank" rel="noopener">descargar</a></span></div>
     <audio controls preload="none" src="audio/efectos/impacto.mp3"></audio>
   </li>
   <li class="aud">
-    <div><b>logo sonoro</b><span>logo-sonoro.mp3</span></div>
+    <div><b>logo sonoro</b><span>logo-sonoro.mp3 · <a class="bajar" href="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/audio/efectos/logo-sonoro.mp3" target="_blank" rel="noopener">descargar</a></span></div>
     <audio controls preload="none" src="audio/efectos/logo-sonoro.mp3"></audio>
   </li>
   <li class="aud">
-    <div><b>riser 2s</b><span>riser-2s.mp3</span></div>
+    <div><b>riser 2s</b><span>riser-2s.mp3 · <a class="bajar" href="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/audio/efectos/riser-2s.mp3" target="_blank" rel="noopener">descargar</a></span></div>
     <audio controls preload="none" src="audio/efectos/riser-2s.mp3"></audio>
   </li>
   <li class="aud">
-    <div><b>riser 4s</b><span>riser-4s.mp3</span></div>
+    <div><b>riser 4s</b><span>riser-4s.mp3 · <a class="bajar" href="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/audio/efectos/riser-4s.mp3" target="_blank" rel="noopener">descargar</a></span></div>
     <audio controls preload="none" src="audio/efectos/riser-4s.mp3"></audio>
   </li>
   <li class="aud">
-    <div><b>tick agudo</b><span>tick-agudo.mp3</span></div>
+    <div><b>tick agudo</b><span>tick-agudo.mp3 · <a class="bajar" href="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/audio/efectos/tick-agudo.mp3" target="_blank" rel="noopener">descargar</a></span></div>
     <audio controls preload="none" src="audio/efectos/tick-agudo.mp3"></audio>
   </li>
   <li class="aud">
-    <div><b>tick</b><span>tick.mp3</span></div>
+    <div><b>tick</b><span>tick.mp3 · <a class="bajar" href="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/audio/efectos/tick.mp3" target="_blank" rel="noopener">descargar</a></span></div>
     <audio controls preload="none" src="audio/efectos/tick.mp3"></audio>
   </li>
   <li class="aud">
-    <div><b>whoosh bajada</b><span>whoosh-bajada.mp3</span></div>
+    <div><b>whoosh bajada</b><span>whoosh-bajada.mp3 · <a class="bajar" href="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/audio/efectos/whoosh-bajada.mp3" target="_blank" rel="noopener">descargar</a></span></div>
     <audio controls preload="none" src="audio/efectos/whoosh-bajada.mp3"></audio>
   </li>
   <li class="aud">
-    <div><b>whoosh subida</b><span>whoosh-subida.mp3</span></div>
+    <div><b>whoosh subida</b><span>whoosh-subida.mp3 · <a class="bajar" href="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/audio/efectos/whoosh-subida.mp3" target="_blank" rel="noopener">descargar</a></span></div>
     <audio controls preload="none" src="audio/efectos/whoosh-subida.mp3"></audio>
   </li></ul>
   </section>
@@ -2059,55 +2086,55 @@ Guardalo. Mañana puede ser el día 1.
       <div><h3>El método de 6 pasos</h3><p class="meta">9 placas · 1080 × 1350</p></div></header>
     <div class="tira">
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/c1-metodo/01.jpg" data-cap="01 / 09" aria-label="Ver 01 / 09">
+    <button class="shot" data-kind="img" data-full="carruseles/c1-metodo/01.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/c1-metodo/01.png" data-cap="01 / 09" aria-label="Ver 01 / 09">
       <img src="carruseles/c1-metodo/01.jpg" alt="01 / 09" loading="lazy" decoding="async">
     </button>
     <figcaption>01 / 09</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/c1-metodo/02.jpg" data-cap="02 / 09" aria-label="Ver 02 / 09">
+    <button class="shot" data-kind="img" data-full="carruseles/c1-metodo/02.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/c1-metodo/02.png" data-cap="02 / 09" aria-label="Ver 02 / 09">
       <img src="carruseles/c1-metodo/02.jpg" alt="02 / 09" loading="lazy" decoding="async">
     </button>
     <figcaption>02 / 09</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/c1-metodo/03.jpg" data-cap="03 / 09" aria-label="Ver 03 / 09">
+    <button class="shot" data-kind="img" data-full="carruseles/c1-metodo/03.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/c1-metodo/03.png" data-cap="03 / 09" aria-label="Ver 03 / 09">
       <img src="carruseles/c1-metodo/03.jpg" alt="03 / 09" loading="lazy" decoding="async">
     </button>
     <figcaption>03 / 09</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/c1-metodo/04.jpg" data-cap="04 / 09" aria-label="Ver 04 / 09">
+    <button class="shot" data-kind="img" data-full="carruseles/c1-metodo/04.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/c1-metodo/04.png" data-cap="04 / 09" aria-label="Ver 04 / 09">
       <img src="carruseles/c1-metodo/04.jpg" alt="04 / 09" loading="lazy" decoding="async">
     </button>
     <figcaption>04 / 09</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/c1-metodo/05.jpg" data-cap="05 / 09" aria-label="Ver 05 / 09">
+    <button class="shot" data-kind="img" data-full="carruseles/c1-metodo/05.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/c1-metodo/05.png" data-cap="05 / 09" aria-label="Ver 05 / 09">
       <img src="carruseles/c1-metodo/05.jpg" alt="05 / 09" loading="lazy" decoding="async">
     </button>
     <figcaption>05 / 09</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/c1-metodo/06.jpg" data-cap="06 / 09" aria-label="Ver 06 / 09">
+    <button class="shot" data-kind="img" data-full="carruseles/c1-metodo/06.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/c1-metodo/06.png" data-cap="06 / 09" aria-label="Ver 06 / 09">
       <img src="carruseles/c1-metodo/06.jpg" alt="06 / 09" loading="lazy" decoding="async">
     </button>
     <figcaption>06 / 09</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/c1-metodo/07.jpg" data-cap="07 / 09" aria-label="Ver 07 / 09">
+    <button class="shot" data-kind="img" data-full="carruseles/c1-metodo/07.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/c1-metodo/07.png" data-cap="07 / 09" aria-label="Ver 07 / 09">
       <img src="carruseles/c1-metodo/07.jpg" alt="07 / 09" loading="lazy" decoding="async">
     </button>
     <figcaption>07 / 09</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/c1-metodo/08.jpg" data-cap="08 / 09" aria-label="Ver 08 / 09">
+    <button class="shot" data-kind="img" data-full="carruseles/c1-metodo/08.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/c1-metodo/08.png" data-cap="08 / 09" aria-label="Ver 08 / 09">
       <img src="carruseles/c1-metodo/08.jpg" alt="08 / 09" loading="lazy" decoding="async">
     </button>
     <figcaption>08 / 09</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/c1-metodo/09.jpg" data-cap="09 / 09" aria-label="Ver 09 / 09">
+    <button class="shot" data-kind="img" data-full="carruseles/c1-metodo/09.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/c1-metodo/09.png" data-cap="09 / 09" aria-label="Ver 09 / 09">
       <img src="carruseles/c1-metodo/09.jpg" alt="09 / 09" loading="lazy" decoding="async">
     </button>
     <figcaption>09 / 09</figcaption>
@@ -2118,43 +2145,43 @@ Guardalo. Mañana puede ser el día 1.
       <div><h3>5 mentiras que te frenan</h3><p class="meta">7 placas · 1080 × 1350</p></div></header>
     <div class="tira">
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/c2-mentiras/01.jpg" data-cap="01 / 07" aria-label="Ver 01 / 07">
+    <button class="shot" data-kind="img" data-full="carruseles/c2-mentiras/01.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/c2-mentiras/01.png" data-cap="01 / 07" aria-label="Ver 01 / 07">
       <img src="carruseles/c2-mentiras/01.jpg" alt="01 / 07" loading="lazy" decoding="async">
     </button>
     <figcaption>01 / 07</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/c2-mentiras/02.jpg" data-cap="02 / 07" aria-label="Ver 02 / 07">
+    <button class="shot" data-kind="img" data-full="carruseles/c2-mentiras/02.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/c2-mentiras/02.png" data-cap="02 / 07" aria-label="Ver 02 / 07">
       <img src="carruseles/c2-mentiras/02.jpg" alt="02 / 07" loading="lazy" decoding="async">
     </button>
     <figcaption>02 / 07</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/c2-mentiras/03.jpg" data-cap="03 / 07" aria-label="Ver 03 / 07">
+    <button class="shot" data-kind="img" data-full="carruseles/c2-mentiras/03.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/c2-mentiras/03.png" data-cap="03 / 07" aria-label="Ver 03 / 07">
       <img src="carruseles/c2-mentiras/03.jpg" alt="03 / 07" loading="lazy" decoding="async">
     </button>
     <figcaption>03 / 07</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/c2-mentiras/04.jpg" data-cap="04 / 07" aria-label="Ver 04 / 07">
+    <button class="shot" data-kind="img" data-full="carruseles/c2-mentiras/04.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/c2-mentiras/04.png" data-cap="04 / 07" aria-label="Ver 04 / 07">
       <img src="carruseles/c2-mentiras/04.jpg" alt="04 / 07" loading="lazy" decoding="async">
     </button>
     <figcaption>04 / 07</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/c2-mentiras/05.jpg" data-cap="05 / 07" aria-label="Ver 05 / 07">
+    <button class="shot" data-kind="img" data-full="carruseles/c2-mentiras/05.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/c2-mentiras/05.png" data-cap="05 / 07" aria-label="Ver 05 / 07">
       <img src="carruseles/c2-mentiras/05.jpg" alt="05 / 07" loading="lazy" decoding="async">
     </button>
     <figcaption>05 / 07</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/c2-mentiras/06.jpg" data-cap="06 / 07" aria-label="Ver 06 / 07">
+    <button class="shot" data-kind="img" data-full="carruseles/c2-mentiras/06.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/c2-mentiras/06.png" data-cap="06 / 07" aria-label="Ver 06 / 07">
       <img src="carruseles/c2-mentiras/06.jpg" alt="06 / 07" loading="lazy" decoding="async">
     </button>
     <figcaption>06 / 07</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/c2-mentiras/07.jpg" data-cap="07 / 07" aria-label="Ver 07 / 07">
+    <button class="shot" data-kind="img" data-full="carruseles/c2-mentiras/07.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/c2-mentiras/07.png" data-cap="07 / 07" aria-label="Ver 07 / 07">
       <img src="carruseles/c2-mentiras/07.jpg" alt="07 / 07" loading="lazy" decoding="async">
     </button>
     <figcaption>07 / 07</figcaption>
@@ -2165,43 +2192,43 @@ Guardalo. Mañana puede ser el día 1.
       <div><h3>Oferta antes que audiencia</h3><p class="meta">7 placas · 1080 × 1350</p></div></header>
     <div class="tira">
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/c3-oferta/01.jpg" data-cap="01 / 07" aria-label="Ver 01 / 07">
+    <button class="shot" data-kind="img" data-full="carruseles/c3-oferta/01.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/c3-oferta/01.png" data-cap="01 / 07" aria-label="Ver 01 / 07">
       <img src="carruseles/c3-oferta/01.jpg" alt="01 / 07" loading="lazy" decoding="async">
     </button>
     <figcaption>01 / 07</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/c3-oferta/02.jpg" data-cap="02 / 07" aria-label="Ver 02 / 07">
+    <button class="shot" data-kind="img" data-full="carruseles/c3-oferta/02.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/c3-oferta/02.png" data-cap="02 / 07" aria-label="Ver 02 / 07">
       <img src="carruseles/c3-oferta/02.jpg" alt="02 / 07" loading="lazy" decoding="async">
     </button>
     <figcaption>02 / 07</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/c3-oferta/03.jpg" data-cap="03 / 07" aria-label="Ver 03 / 07">
+    <button class="shot" data-kind="img" data-full="carruseles/c3-oferta/03.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/c3-oferta/03.png" data-cap="03 / 07" aria-label="Ver 03 / 07">
       <img src="carruseles/c3-oferta/03.jpg" alt="03 / 07" loading="lazy" decoding="async">
     </button>
     <figcaption>03 / 07</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/c3-oferta/04.jpg" data-cap="04 / 07" aria-label="Ver 04 / 07">
+    <button class="shot" data-kind="img" data-full="carruseles/c3-oferta/04.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/c3-oferta/04.png" data-cap="04 / 07" aria-label="Ver 04 / 07">
       <img src="carruseles/c3-oferta/04.jpg" alt="04 / 07" loading="lazy" decoding="async">
     </button>
     <figcaption>04 / 07</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/c3-oferta/05.jpg" data-cap="05 / 07" aria-label="Ver 05 / 07">
+    <button class="shot" data-kind="img" data-full="carruseles/c3-oferta/05.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/c3-oferta/05.png" data-cap="05 / 07" aria-label="Ver 05 / 07">
       <img src="carruseles/c3-oferta/05.jpg" alt="05 / 07" loading="lazy" decoding="async">
     </button>
     <figcaption>05 / 07</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/c3-oferta/06.jpg" data-cap="06 / 07" aria-label="Ver 06 / 07">
+    <button class="shot" data-kind="img" data-full="carruseles/c3-oferta/06.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/c3-oferta/06.png" data-cap="06 / 07" aria-label="Ver 06 / 07">
       <img src="carruseles/c3-oferta/06.jpg" alt="06 / 07" loading="lazy" decoding="async">
     </button>
     <figcaption>06 / 07</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/c3-oferta/07.jpg" data-cap="07 / 07" aria-label="Ver 07 / 07">
+    <button class="shot" data-kind="img" data-full="carruseles/c3-oferta/07.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/c3-oferta/07.png" data-cap="07 / 07" aria-label="Ver 07 / 07">
       <img src="carruseles/c3-oferta/07.jpg" alt="07 / 07" loading="lazy" decoding="async">
     </button>
     <figcaption>07 / 07</figcaption>
@@ -2212,43 +2239,43 @@ Guardalo. Mañana puede ser el día 1.
       <div><h3>Encontrar el dolor que se paga</h3><p class="meta">7 placas · 1080 × 1350</p></div></header>
     <div class="tira">
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/c4-dolor/01.jpg" data-cap="01 / 07" aria-label="Ver 01 / 07">
+    <button class="shot" data-kind="img" data-full="carruseles/c4-dolor/01.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/c4-dolor/01.png" data-cap="01 / 07" aria-label="Ver 01 / 07">
       <img src="carruseles/c4-dolor/01.jpg" alt="01 / 07" loading="lazy" decoding="async">
     </button>
     <figcaption>01 / 07</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/c4-dolor/02.jpg" data-cap="02 / 07" aria-label="Ver 02 / 07">
+    <button class="shot" data-kind="img" data-full="carruseles/c4-dolor/02.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/c4-dolor/02.png" data-cap="02 / 07" aria-label="Ver 02 / 07">
       <img src="carruseles/c4-dolor/02.jpg" alt="02 / 07" loading="lazy" decoding="async">
     </button>
     <figcaption>02 / 07</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/c4-dolor/03.jpg" data-cap="03 / 07" aria-label="Ver 03 / 07">
+    <button class="shot" data-kind="img" data-full="carruseles/c4-dolor/03.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/c4-dolor/03.png" data-cap="03 / 07" aria-label="Ver 03 / 07">
       <img src="carruseles/c4-dolor/03.jpg" alt="03 / 07" loading="lazy" decoding="async">
     </button>
     <figcaption>03 / 07</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/c4-dolor/04.jpg" data-cap="04 / 07" aria-label="Ver 04 / 07">
+    <button class="shot" data-kind="img" data-full="carruseles/c4-dolor/04.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/c4-dolor/04.png" data-cap="04 / 07" aria-label="Ver 04 / 07">
       <img src="carruseles/c4-dolor/04.jpg" alt="04 / 07" loading="lazy" decoding="async">
     </button>
     <figcaption>04 / 07</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/c4-dolor/05.jpg" data-cap="05 / 07" aria-label="Ver 05 / 07">
+    <button class="shot" data-kind="img" data-full="carruseles/c4-dolor/05.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/c4-dolor/05.png" data-cap="05 / 07" aria-label="Ver 05 / 07">
       <img src="carruseles/c4-dolor/05.jpg" alt="05 / 07" loading="lazy" decoding="async">
     </button>
     <figcaption>05 / 07</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/c4-dolor/06.jpg" data-cap="06 / 07" aria-label="Ver 06 / 07">
+    <button class="shot" data-kind="img" data-full="carruseles/c4-dolor/06.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/c4-dolor/06.png" data-cap="06 / 07" aria-label="Ver 06 / 07">
       <img src="carruseles/c4-dolor/06.jpg" alt="06 / 07" loading="lazy" decoding="async">
     </button>
     <figcaption>06 / 07</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/c4-dolor/07.jpg" data-cap="07 / 07" aria-label="Ver 07 / 07">
+    <button class="shot" data-kind="img" data-full="carruseles/c4-dolor/07.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/c4-dolor/07.png" data-cap="07 / 07" aria-label="Ver 07 / 07">
       <img src="carruseles/c4-dolor/07.jpg" alt="07 / 07" loading="lazy" decoding="async">
     </button>
     <figcaption>07 / 07</figcaption>
@@ -2259,43 +2286,43 @@ Guardalo. Mañana puede ser el día 1.
       <div><h3>La IA acelera, no reemplaza</h3><p class="meta">7 placas · 1080 × 1350</p></div></header>
     <div class="tira">
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/c5-ia/01.jpg" data-cap="01 / 07" aria-label="Ver 01 / 07">
+    <button class="shot" data-kind="img" data-full="carruseles/c5-ia/01.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/c5-ia/01.png" data-cap="01 / 07" aria-label="Ver 01 / 07">
       <img src="carruseles/c5-ia/01.jpg" alt="01 / 07" loading="lazy" decoding="async">
     </button>
     <figcaption>01 / 07</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/c5-ia/02.jpg" data-cap="02 / 07" aria-label="Ver 02 / 07">
+    <button class="shot" data-kind="img" data-full="carruseles/c5-ia/02.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/c5-ia/02.png" data-cap="02 / 07" aria-label="Ver 02 / 07">
       <img src="carruseles/c5-ia/02.jpg" alt="02 / 07" loading="lazy" decoding="async">
     </button>
     <figcaption>02 / 07</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/c5-ia/03.jpg" data-cap="03 / 07" aria-label="Ver 03 / 07">
+    <button class="shot" data-kind="img" data-full="carruseles/c5-ia/03.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/c5-ia/03.png" data-cap="03 / 07" aria-label="Ver 03 / 07">
       <img src="carruseles/c5-ia/03.jpg" alt="03 / 07" loading="lazy" decoding="async">
     </button>
     <figcaption>03 / 07</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/c5-ia/04.jpg" data-cap="04 / 07" aria-label="Ver 04 / 07">
+    <button class="shot" data-kind="img" data-full="carruseles/c5-ia/04.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/c5-ia/04.png" data-cap="04 / 07" aria-label="Ver 04 / 07">
       <img src="carruseles/c5-ia/04.jpg" alt="04 / 07" loading="lazy" decoding="async">
     </button>
     <figcaption>04 / 07</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/c5-ia/05.jpg" data-cap="05 / 07" aria-label="Ver 05 / 07">
+    <button class="shot" data-kind="img" data-full="carruseles/c5-ia/05.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/c5-ia/05.png" data-cap="05 / 07" aria-label="Ver 05 / 07">
       <img src="carruseles/c5-ia/05.jpg" alt="05 / 07" loading="lazy" decoding="async">
     </button>
     <figcaption>05 / 07</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/c5-ia/06.jpg" data-cap="06 / 07" aria-label="Ver 06 / 07">
+    <button class="shot" data-kind="img" data-full="carruseles/c5-ia/06.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/c5-ia/06.png" data-cap="06 / 07" aria-label="Ver 06 / 07">
       <img src="carruseles/c5-ia/06.jpg" alt="06 / 07" loading="lazy" decoding="async">
     </button>
     <figcaption>06 / 07</figcaption>
   </figure>
   <figure class="pz" style="--r:4 / 5">
-    <button class="shot" data-kind="img" data-full="carruseles/c5-ia/07.jpg" data-cap="07 / 07" aria-label="Ver 07 / 07">
+    <button class="shot" data-kind="img" data-full="carruseles/c5-ia/07.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/carruseles/c5-ia/07.png" data-cap="07 / 07" aria-label="Ver 07 / 07">
       <img src="carruseles/c5-ia/07.jpg" alt="07 / 07" loading="lazy" decoding="async">
     </button>
     <figcaption>07 / 07</figcaption>
@@ -2309,37 +2336,37 @@ Guardalo. Mañana puede ser el día 1.
     </header>
     <div class="rejilla" style="--w:150px">
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot" data-kind="img" data-full="historias/s1.jpg" data-cap="s1" aria-label="Ver s1">
+    <button class="shot" data-kind="img" data-full="historias/s1.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/historias/s1.png" data-cap="s1" aria-label="Ver s1">
       <img src="historias/s1.jpg" alt="s1" loading="lazy" decoding="async">
     </button>
     <figcaption>s1</figcaption>
   </figure>
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot" data-kind="img" data-full="historias/s2.jpg" data-cap="s2" aria-label="Ver s2">
+    <button class="shot" data-kind="img" data-full="historias/s2.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/historias/s2.png" data-cap="s2" aria-label="Ver s2">
       <img src="historias/s2.jpg" alt="s2" loading="lazy" decoding="async">
     </button>
     <figcaption>s2</figcaption>
   </figure>
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot" data-kind="img" data-full="historias/s3.jpg" data-cap="s3" aria-label="Ver s3">
+    <button class="shot" data-kind="img" data-full="historias/s3.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/historias/s3.png" data-cap="s3" aria-label="Ver s3">
       <img src="historias/s3.jpg" alt="s3" loading="lazy" decoding="async">
     </button>
     <figcaption>s3</figcaption>
   </figure>
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot" data-kind="img" data-full="historias/s4.jpg" data-cap="s4" aria-label="Ver s4">
+    <button class="shot" data-kind="img" data-full="historias/s4.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/historias/s4.png" data-cap="s4" aria-label="Ver s4">
       <img src="historias/s4.jpg" alt="s4" loading="lazy" decoding="async">
     </button>
     <figcaption>s4</figcaption>
   </figure>
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot" data-kind="img" data-full="historias/s5.jpg" data-cap="s5" aria-label="Ver s5">
+    <button class="shot" data-kind="img" data-full="historias/s5.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/historias/s5.png" data-cap="s5" aria-label="Ver s5">
       <img src="historias/s5.jpg" alt="s5" loading="lazy" decoding="async">
     </button>
     <figcaption>s5</figcaption>
   </figure>
   <figure class="pz" style="--r:9 / 16">
-    <button class="shot" data-kind="img" data-full="historias/s6.jpg" data-cap="s6" aria-label="Ver s6">
+    <button class="shot" data-kind="img" data-full="historias/s6.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/historias/s6.png" data-cap="s6" aria-label="Ver s6">
       <img src="historias/s6.jpg" alt="s6" loading="lazy" decoding="async">
     </button>
     <figcaption>s6</figcaption>
@@ -2353,31 +2380,31 @@ Guardalo. Mañana puede ser el día 1.
     </header>
     <div class="rejilla" style="--w:220px">
   <figure class="pz" style="--r:1 / 1">
-    <button class="shot" data-kind="img" data-full="cuadradas/q1.jpg" data-cap="q1" aria-label="Ver q1">
+    <button class="shot" data-kind="img" data-full="cuadradas/q1.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/cuadradas/q1.png" data-cap="q1" aria-label="Ver q1">
       <img src="cuadradas/q1.jpg" alt="q1" loading="lazy" decoding="async">
     </button>
     <figcaption>q1</figcaption>
   </figure>
   <figure class="pz" style="--r:1 / 1">
-    <button class="shot" data-kind="img" data-full="cuadradas/q2.jpg" data-cap="q2" aria-label="Ver q2">
+    <button class="shot" data-kind="img" data-full="cuadradas/q2.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/cuadradas/q2.png" data-cap="q2" aria-label="Ver q2">
       <img src="cuadradas/q2.jpg" alt="q2" loading="lazy" decoding="async">
     </button>
     <figcaption>q2</figcaption>
   </figure>
   <figure class="pz" style="--r:1 / 1">
-    <button class="shot" data-kind="img" data-full="cuadradas/q3.jpg" data-cap="q3" aria-label="Ver q3">
+    <button class="shot" data-kind="img" data-full="cuadradas/q3.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/cuadradas/q3.png" data-cap="q3" aria-label="Ver q3">
       <img src="cuadradas/q3.jpg" alt="q3" loading="lazy" decoding="async">
     </button>
     <figcaption>q3</figcaption>
   </figure>
   <figure class="pz" style="--r:1 / 1">
-    <button class="shot" data-kind="img" data-full="cuadradas/q4.jpg" data-cap="q4" aria-label="Ver q4">
+    <button class="shot" data-kind="img" data-full="cuadradas/q4.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/cuadradas/q4.png" data-cap="q4" aria-label="Ver q4">
       <img src="cuadradas/q4.jpg" alt="q4" loading="lazy" decoding="async">
     </button>
     <figcaption>q4</figcaption>
   </figure>
   <figure class="pz" style="--r:1 / 1">
-    <button class="shot" data-kind="img" data-full="cuadradas/q5.jpg" data-cap="q5" aria-label="Ver q5">
+    <button class="shot" data-kind="img" data-full="cuadradas/q5.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/cuadradas/q5.png" data-cap="q5" aria-label="Ver q5">
       <img src="cuadradas/q5.jpg" alt="q5" loading="lazy" decoding="async">
     </button>
     <figcaption>q5</figcaption>
@@ -2391,25 +2418,25 @@ Guardalo. Mañana puede ser el día 1.
     </header>
     <div class="rejilla" style="--w:300px">
   <figure class="pz" style="--r:16 / 9">
-    <button class="shot" data-kind="img" data-full="portadas/p1.jpg" data-cap="p1" aria-label="Ver p1">
+    <button class="shot" data-kind="img" data-full="portadas/p1.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/portadas/p1.png" data-cap="p1" aria-label="Ver p1">
       <img src="portadas/p1.jpg" alt="p1" loading="lazy" decoding="async">
     </button>
     <figcaption>p1</figcaption>
   </figure>
   <figure class="pz" style="--r:16 / 9">
-    <button class="shot" data-kind="img" data-full="portadas/p2.jpg" data-cap="p2" aria-label="Ver p2">
+    <button class="shot" data-kind="img" data-full="portadas/p2.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/portadas/p2.png" data-cap="p2" aria-label="Ver p2">
       <img src="portadas/p2.jpg" alt="p2" loading="lazy" decoding="async">
     </button>
     <figcaption>p2</figcaption>
   </figure>
   <figure class="pz" style="--r:16 / 9">
-    <button class="shot" data-kind="img" data-full="portadas/p3.jpg" data-cap="p3" aria-label="Ver p3">
+    <button class="shot" data-kind="img" data-full="portadas/p3.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/portadas/p3.png" data-cap="p3" aria-label="Ver p3">
       <img src="portadas/p3.jpg" alt="p3" loading="lazy" decoding="async">
     </button>
     <figcaption>p3</figcaption>
   </figure>
   <figure class="pz" style="--r:16 / 9">
-    <button class="shot" data-kind="img" data-full="portadas/p4.jpg" data-cap="p4" aria-label="Ver p4">
+    <button class="shot" data-kind="img" data-full="portadas/p4.jpg" data-orig="https://raw.githubusercontent.com/lucianobrocchi/productos-digitale/refs/heads/claude/google-drive-folder-access-151e0o/out/portadas/p4.png" data-cap="p4" aria-label="Ver p4">
       <img src="portadas/p4.jpg" alt="p4" loading="lazy" decoding="async">
     </button>
     <figcaption>p4</figcaption>
@@ -2445,6 +2472,8 @@ Guardalo. Mañana puede ser el día 1.
 <dialog class="visor" aria-label="Visor">
   <button class="cerrar" aria-label="Cerrar">×</button>
   <div class="caja"></div>
+  <div class="acciones"><button class="guardar" hidden>Guardar en el celu</button>
+    <a class="original" target="_blank" rel="noopener">Original en alta ↗</a></div>
   <div class="barra"><button class="nav prev" aria-label="Anterior">‹</button><div class="pie"></div>
     <button class="nav next" aria-label="Siguiente">›</button></div>
 </dialog>
@@ -2471,7 +2500,30 @@ Guardalo. Mañana puede ser el día 1.
     caja.appendChild(el);
     if (el.play) el.play().catch(() => {});
     pie.innerHTML = b.dataset.cap.replace(/<[^>]+>/g, '') + '  ·  ' + (pos + 1) + ' de ' + lista.length;
+    orig.hidden = !b.dataset.orig;
+    if (b.dataset.orig) orig.href = b.dataset.orig;
+    guardar.textContent = 'Guardar en el celu';
   }
+
+  /* Guardar: baja lo que se está viendo (las fotos en JPG a tamaño completo; los videos tal cual, salvo
+     relatos y clases 16:9, que acá van en 720p). "Original en alta" abre el archivo de entrega en GitHub. */
+  const guardar = visor.querySelector('.guardar'), orig = visor.querySelector('.original');
+  let bajadas = null;
+  if (window.claude && window.claude.use) window.claude.use('downloads').then(d => { bajadas = d; guardar.hidden = !d; });
+  guardar.addEventListener('click', async () => {
+    const b = lista[pos];
+    if (!bajadas || !b) return;
+    const ruta = b.dataset.full;
+    const nombre = 'productos-digitales-' + ruta.replace('video/', '').split('/').join('-');
+    guardar.textContent = 'Preparando…';
+    try {
+      const blob = await (await fetch(ruta)).blob();
+      await bajadas.save({ filename: nombre, data: blob });
+      guardar.textContent = 'Listo';
+    } catch (e) {
+      guardar.textContent = e && e.code === 'declined' ? 'Guardar en el celu' : 'Usá "Original en alta"';
+    }
+  });
   function abrir(b) {
     const grupo = b.closest('.rejilla, .tira');
     lista = grupo ? [...grupo.querySelectorAll('.shot')] : shots();

@@ -30,6 +30,12 @@ const esc = s => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replac
 const WEB = resolve(root, 'build/web');
 const archivos = new Map([['marca/lockup-oscuro.png', 'out/marca/lockup-oscuro.png']]);
 const use = (p, src = `out/${p}`) => { archivos.set(p, src); return p; };
+/* Los originales en alta viven en el repositorio de GitHub (público): cada pieza lleva el enlace a su archivo. */
+const REPO = 'lucianobrocchi/productos-digitale', RAMA = 'claude/google-drive-folder-access-151e0o';
+const RAW = `https://raw.githubusercontent.com/${REPO}/refs/heads/${RAMA}/`;
+const ZIP = `https://github.com/${REPO}/archive/refs/heads/${RAMA}.zip`;
+const CARPETA = p => `https://github.com/${REPO}/tree/${RAMA}/${p}`;
+const orig = p => `data-orig="${RAW}out/${p}"`;
 const webImg = p => {                         // carruseles/x/01.png → carruseles/x/01.jpg (vista previa)
   const j = p.replace(/\.png$/, '.jpg');
   return existsSync(resolve(WEB, j)) ? use(j, `build/web/${j}`) : use(p);
@@ -54,7 +60,7 @@ const hex = `<svg class="hex" viewBox="0 0 24 24" aria-hidden="true"><path d="M1
 
 const pic = (src, cap, ratio, eager = false) => `
   <figure class="pz" style="--r:${ratio}">
-    <button class="shot" data-kind="img" data-full="${webImg(src)}" data-cap="${esc(cap)}" aria-label="Ver ${esc(cap)}">
+    <button class="shot" data-kind="img" data-full="${webImg(src)}" ${orig(src)} data-cap="${esc(cap)}" aria-label="Ver ${esc(cap)}">
       <img src="${webImg(src)}" alt="${esc(cap)}" ${eager ? '' : 'loading="lazy"'} decoding="async">
     </button>
     <figcaption>${cap}</figcaption>
@@ -67,7 +73,7 @@ const vid = (src, cap, ratio, sub = '', from) => {
   const d = dur(src);
   return `
   <figure class="pz" style="--r:${ratio}">
-    <button class="shot vid" data-kind="video" data-full="${use(src, from)}" data-cap="${esc(cap)}" aria-label="Reproducir ${esc(cap)}">
+    <button class="shot vid" data-kind="video" data-full="${use(src, from)}" ${orig(src)} data-cap="${esc(cap)}" aria-label="Reproducir ${esc(cap)}">
       ${hasPoster ? `<img src="${use(poster)}" alt="" loading="lazy" decoding="async">` : ''}
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5Z"/></svg></span>
       ${d ? `<span class="dur">${d}</span>` : ''}
@@ -79,7 +85,7 @@ const vid = (src, cap, ratio, sub = '', from) => {
 /** Loop mudo que se reproduce solo cuando está a la vista. */
 const loop = (src, cap, ratio, alpha = false) => `
   <figure class="pz" style="--r:${ratio}">
-    <button class="shot ${alpha ? 'alpha' : ''}" data-kind="video" data-full="${use(src)}" data-cap="${esc(cap)}" aria-label="Ver ${esc(cap)}">
+    <button class="shot ${alpha ? 'alpha' : ''}" data-kind="video" data-full="${use(src)}" ${orig(alpha ? src.replace(/\.webm$/, '.mov') : src)} data-cap="${esc(cap)}" aria-label="Ver ${esc(cap)}">
       <video class="auto" src="${src}" muted loop playsinline preload="none"
         ${existsSync(resolve(OUT, src.replace(/\.(mp4|webm)$/, '.jpg'))) ? `poster="${use(src.replace(/\.(mp4|webm)$/, '.jpg'))}"` : ''}></video>
     </button>
@@ -88,7 +94,7 @@ const loop = (src, cap, ratio, alpha = false) => `
 
 const aud = (src, cap, meta) => `
   <li class="aud">
-    <div><b>${cap}</b><span>${meta}</span></div>
+    <div><b>${cap}</b><span>${meta} · <a class="bajar" href="${RAW}out/${src}" target="_blank" rel="noopener">descargar</a></span></div>
     <audio controls preload="none" src="${use(src)}"></audio>
   </li>`;
 
@@ -353,7 +359,20 @@ const html = `<title>Piezas Productos Digitales</title>
 
   dialog.visor{border:0;padding:0;background:transparent;max-width:100vw;max-height:100vh;width:100%;height:100%;overflow:hidden}
   dialog.visor::backdrop{background:rgba(5,5,5,.95)}
-  .visor .caja{width:100%;height:100%;display:grid;place-items:center;padding:18px 14px 64px}
+  .visor .caja{width:100%;height:100%;display:grid;place-items:center;padding:18px 14px 124px}
+  .visor .acciones{position:fixed;left:0;right:0;bottom:calc(70px + env(safe-area-inset-bottom,0px));display:flex;
+    justify-content:center;gap:10px;padding-inline:14px}
+  .visor .acciones button,.visor .acciones a{font:600 14px var(--sans);border-radius:999px;padding:11px 18px;cursor:pointer;
+    text-decoration:none;white-space:nowrap}
+  .visor .guardar{color:#12171E;background:linear-gradient(140deg,var(--oro),var(--oro-hondo));border:0}
+  .visor .original{color:var(--oro);border:1px solid rgba(240,226,129,.4);background:rgba(14,14,14,.8)}
+  .descargas{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));margin-top:16px}
+  .descargas a{display:block;padding:16px 18px;border:1px solid var(--linea);border-radius:14px;background:var(--bg-2);
+    color:var(--papel);text-decoration:none}
+  .descargas a b{display:block;color:var(--oro);font-size:15.5px}
+  .descargas a span{display:block;margin-top:4px;font-size:13px;color:var(--apagado)}
+  .descargas a.zip{border-color:rgba(240,226,129,.45);background:linear-gradient(140deg,rgba(240,226,129,.12),rgba(163,123,60,.05))}
+  a.bajar{color:var(--oro)}
   .visor img,.visor video{max-width:min(1100px,96vw);max-height:84vh;width:auto;height:auto;border-radius:10px;
     border:1px solid rgba(240,226,129,.26);display:block;background:#000}
   .visor .alpha{background:repeating-conic-gradient(#2a2a2a 0 25%,#1c1c1c 0 50%) 0 0/28px 28px}
@@ -408,11 +427,25 @@ const html = `<title>Piezas Productos Digitales</title>
 </header>
 
 <nav class="sec" aria-label="Secciones"><div class="env">
-  <a href="#relatos">Relatos</a><a href="#clases">Clases</a><a href="#audiovisual">Audiovisual</a><a href="#kit">Kit de edición</a><a href="#iconos">Íconos</a><a href="#destacadas">Destacadas</a><a href="#sonido">Sonido</a><a href="#plan">Plan</a>
+  <a href="#descargas">Descargar</a><a href="#relatos">Relatos</a><a href="#clases">Clases</a><a href="#audiovisual">Audiovisual</a><a href="#kit">Kit de edición</a><a href="#iconos">Íconos</a><a href="#destacadas">Destacadas</a><a href="#sonido">Sonido</a><a href="#plan">Plan</a>
   <a href="#fijas">Piezas fijas</a><a href="#marca">De dónde sale</a>
 </div></nav>
 
 <main><div class="env">
+  <h2 id="descargas">Ver y descargar</h2>
+  <p class="bajada" style="font-size:15.5px;margin-top:14px">Tocá cualquier pieza para verla en grande; abajo del visor
+    está <b>Guardar en el celu</b> y <b>Original en alta</b>, que baja el archivo de entrega. También se puede bajar todo junto
+    o por carpeta.</p>
+  <div class="descargas">
+    <a class="zip" href="${ZIP}" target="_blank" rel="noopener"><b>Todo en un ZIP ↓</b><span>Todas las piezas en alta, el código y
+      los materiales de marca. Pesa cerca de 500 MB: mejor con wifi.</span></a>
+    <a href="${CARPETA('out/video/relatos')}" target="_blank" rel="noopener"><b>Relatos ↗</b><span>Los 8 Reels con historia, 1080 × 1920</span></a>
+    <a href="${CARPETA('out/video')}" target="_blank" rel="noopener"><b>Videos ↗</b><span>Reels, clases, logo, historias, portadas, loops y kit</span></a>
+    <a href="${CARPETA('out/carruseles')}" target="_blank" rel="noopener"><b>Carruseles ↗</b><span>PNG 1080 × 1350, listos para subir</span></a>
+    <a href="${CARPETA('out/iconos')}" target="_blank" rel="noopener"><b>Íconos ↗</b><span>SVG y PNG, en tinta y en oro</span></a>
+    <a href="${CARPETA('out')}" target="_blank" rel="noopener"><b>Todas las carpetas ↗</b><span>Historias, cuadradas, portadas, destacadas, audio y plan</span></a>
+  </div>
+
   <h2 id="relatos">Relatos: historias rápidas para alcance</h2>
   <p class="bajada" style="font-size:15.5px;margin-top:14px">Reels de 15 a 25 segundos con historia, en la versión 2 del
     lenguaje de movimiento: cada corte es un plano con su luz y su transición (barrido, zoom a través, iris hexagonal, franjas
@@ -524,6 +557,8 @@ const html = `<title>Piezas Productos Digitales</title>
 <dialog class="visor" aria-label="Visor">
   <button class="cerrar" aria-label="Cerrar">×</button>
   <div class="caja"></div>
+  <div class="acciones"><button class="guardar" hidden>Guardar en el celu</button>
+    <a class="original" target="_blank" rel="noopener">Original en alta ↗</a></div>
   <div class="barra"><button class="nav prev" aria-label="Anterior">‹</button><div class="pie"></div>
     <button class="nav next" aria-label="Siguiente">›</button></div>
 </dialog>
@@ -550,7 +585,30 @@ const html = `<title>Piezas Productos Digitales</title>
     caja.appendChild(el);
     if (el.play) el.play().catch(() => {});
     pie.innerHTML = b.dataset.cap.replace(/<[^>]+>/g, '') + '  ·  ' + (pos + 1) + ' de ' + lista.length;
+    orig.hidden = !b.dataset.orig;
+    if (b.dataset.orig) orig.href = b.dataset.orig;
+    guardar.textContent = 'Guardar en el celu';
   }
+
+  /* Guardar: baja lo que se está viendo (las fotos en JPG a tamaño completo; los videos tal cual, salvo
+     relatos y clases 16:9, que acá van en 720p). "Original en alta" abre el archivo de entrega en GitHub. */
+  const guardar = visor.querySelector('.guardar'), orig = visor.querySelector('.original');
+  let bajadas = null;
+  if (window.claude && window.claude.use) window.claude.use('downloads').then(d => { bajadas = d; guardar.hidden = !d; });
+  guardar.addEventListener('click', async () => {
+    const b = lista[pos];
+    if (!bajadas || !b) return;
+    const ruta = b.dataset.full;
+    const nombre = 'productos-digitales-' + ruta.replace('video/', '').split('/').join('-');
+    guardar.textContent = 'Preparando…';
+    try {
+      const blob = await (await fetch(ruta)).blob();
+      await bajadas.save({ filename: nombre, data: blob });
+      guardar.textContent = 'Listo';
+    } catch (e) {
+      guardar.textContent = e && e.code === 'declined' ? 'Guardar en el celu' : 'Usá "Original en alta"';
+    }
+  });
   function abrir(b) {
     const grupo = b.closest('.rejilla, .tira');
     lista = grupo ? [...grupo.querySelectorAll('.shot')] : shots();
